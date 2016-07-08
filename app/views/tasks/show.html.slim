@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @task.name
+p
+  strong Spent time:
+  = @task.spent_time
+p
+  strong Estimate time:
+  = @task.estimate_time
+p
+  strong Necessary time:
+  = @task.necessary_time
+
+= link_to 'Edit', edit_task_path(@task)
+'|
+= link_to 'Back', tasks_path
