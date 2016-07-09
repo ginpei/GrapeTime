@@ -10,7 +10,7 @@ div.task-item.js-taskItem
 			| Add
 
 	- unless task.children.empty?
-		div.task-children
+		div.task-item-children
 			- task.children.each do |child|
 				= render 'index_item', task: child
 
