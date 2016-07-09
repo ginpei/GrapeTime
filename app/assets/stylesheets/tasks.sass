@@ -1,9 +1,14 @@
-// Place all the styles related to the tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 .tasks
 	&-item
+		&-button
+			display: none
+			margin-right: 1em
+
+		&-body:hover > &-button
+			display: inline-block
+
+		&-name
+			margin-right: 1em
 
 	&-children
 		border-left: 1px solid #ccc

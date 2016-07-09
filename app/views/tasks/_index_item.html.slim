@@ -1,9 +1,9 @@
 div.tasks-item
-	span
-		= link_to task.name, task
-		= link_to '✍', edit_task_path(task)
-		= link_to '✘', task, data: {:confirm => 'Are you sure?'}, :method => :delete
-		= link_to '+', new_task_path(parent: task)
+	div.tasks-item-body
+		= link_to task.name, task, class: 'tasks-item-name'
+		= link_to '✍', edit_task_path(task), class: 'tasks-item-button tasks-item-edit'
+		= link_to '✘', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tasks-item-button tasks-item-delete'
+		= link_to '+', new_task_path(parent: task), class: 'tasks-item-button tasks-item-add'
 	- unless task.children.empty?
 		div.tasks-children
 			- task.children.each do |child|
