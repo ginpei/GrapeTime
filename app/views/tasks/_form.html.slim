@@ -1,4 +1,6 @@
 = form_for @task do |f|
+  = f.hidden_field :parent_id
+
   - if @task.errors.any?
     #error_explanation
       h2 = "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"

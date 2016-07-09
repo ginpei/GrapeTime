@@ -3,6 +3,7 @@ div.tasks-item
 		= link_to task.name, task
 		= link_to '✍', edit_task_path(task)
 		= link_to '✘', task, data: {:confirm => 'Are you sure?'}, :method => :delete
+		= link_to '+', new_task_path(parent: task)
 	- unless task.children.empty?
 		div.tasks-children
 			- task.children.each do |child|
