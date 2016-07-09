@@ -10,7 +10,7 @@ Task.create([
   },
   {
     id: 3,
-    name: 'task 1-2-1',
+    name: 'task 1-1-1',
     parent_id: 2,
   },
   {
