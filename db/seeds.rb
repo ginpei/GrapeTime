@@ -15,7 +15,16 @@ Task.create([
   },
   {
     id: 4,
+    name: 'task 1-1-2',
+    parent_id: 2,
+  },
+  {
+    id: 5,
     name: 'task 1-2',
     parent_id: 1,
+  },
+  {
+    id: 6,
+    name: 'task 3',
   },
 ])
