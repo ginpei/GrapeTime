@@ -1,23 +1,26 @@
-= form_for @task do |f|
-	= f.hidden_field :parent_id
+- parent = if task.parent_id then Task.find(task.parent_id) else nil end
+= form_for task do |f|
 
-	- if @task.errors.any?
-		#error_explanation
-			h2 = "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
-			ul
-				- @task.errors.full_messages.each do |message|
-					li = message
+	span
+		| Parent: 
+		- if parent.nil?
+			| (none)
+		- else
+			= parent.name
+	= f.hidden_field :parent_id
 
 	.field
 		= f.label :name
 		= f.text_field :name
-	.field
-		= f.label :spent_time
-		= f.number_field :spent_time
-	.field
-		= f.label :estimate_time
-		= f.number_field :estimate_time
-	.field
-		= f.label :necessary_time
-		= f.number_field :necessary_time
+	- if task.id
+		.field
+			= f.label :spent_time
+			= f.number_field :spent_time
+		.field
+			= f.label :necessary_time
+			= f.number_field :necessary_time
+	- else
+		.field
+			= f.label :estimate_time
+			= f.number_field :estimate_time
 	.actions = f.submit

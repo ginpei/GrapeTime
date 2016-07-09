@@ -1,6 +1,13 @@
 h1 Editing task
 
-== render 'form'
+- if @task.errors.any?
+	#error_explanation
+		h2 = "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+		ul
+			- @task.errors.full_messages.each do |message|
+				li = message
+
+= render 'form', task: @task
 
 = link_to 'Show', @task
 '|
