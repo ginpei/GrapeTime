@@ -1,10 +1,10 @@
-div.tasks-item
-	div.tasks-item-body
-		= link_to task.name, task, class: 'tasks-item-name'
-		= link_to '✍', edit_task_path(task), class: 'tasks-item-button tasks-item-edit'
-		= link_to '✘', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tasks-item-button tasks-item-delete'
-		= link_to '+', new_task_path(parent: task), class: 'tasks-item-button tasks-item-add'
+div.task-item
+	div.task-item-body
+		= link_to task.name, task, class: 'task-item-name'
+		= link_to '✍', edit_task_path(task), class: 'task-item-button task-item-edit'
+		= link_to '✘', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'task-item-button task-item-delete'
+		= link_to '+', new_task_path(parent: task), class: 'task-item-button task-item-add'
 	- unless task.children.empty?
-		div.tasks-children
+		div.task-children
 			- task.children.each do |child|
 				= render 'index_item', task: child
