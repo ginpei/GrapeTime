@@ -1,6 +1,6 @@
-div.task-item
+div.task-item.js-taskItem
 
-	div.task-item-body.js-taskBody
+	div.task-item-body
 		= link_to task.name, task, class: 'task-item-name'
 		span.task-item-times
 			= "(#{task.total_spent_time}/#{task.total_necessary_time}min)"
@@ -9,10 +9,10 @@ div.task-item
 		button.task-item-button.task-item-add.js-addTask
 			| Add
 
-		div.task-item-form
-			= render 'form', task: task.new
-
 	- unless task.children.empty?
 		div.task-children
 			- task.children.each do |child|
 				= render 'index_item', task: child
+
+	div.task-item-form
+		= render 'form', task: task.new
