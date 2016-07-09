@@ -1,0 +1,9 @@
+div.tasks-item
+	span
+		= link_to task.name, task
+		= link_to '✍', edit_task_path(task)
+		= link_to '✘', task, data: {:confirm => 'Are you sure?'}, :method => :delete
+	- unless task.children.empty?
+		div.tasks-children
+			- task.children.each do |child|
+				= render 'index_item', task: child

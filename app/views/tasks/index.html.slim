@@ -1,27 +1,9 @@
 h1 Listing tasks
 
-table
-  thead
-    tr
-      th Name
-      th Spent time
-      th Estimate time
-      th Necessary time
-      th
-      th
-      th
+p
+	= link_to 'New Task', new_task_path
 
-  tbody
-    - @tasks.each do |task|
-      tr
-        td = task.name
-        td = task.spent_time
-        td = task.estimate_time
-        td = task.necessary_time
-        td = link_to 'Show', task
-        td = link_to 'Edit', edit_task_path(task)
-        td = link_to 'Destroy', task, data: {:confirm => 'Are you sure?'}, :method => :delete
+div
+	- @tasks.each do |task|
+		= render 'index_item', task: task
 
-br
-
-= link_to 'New Task', new_task_path
