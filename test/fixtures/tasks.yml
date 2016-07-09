@@ -1,12 +1,29 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+task_1:
+  id: 1
   name: MyString
   spent_time: 1
   estimate_time: 1
   necessary_time: 1
 
-two:
+task_1_1:
+  id: 2
+  parent_id: 1
+  name: MyString
+  spent_time: 1
+  estimate_time: 1
+  necessary_time: 1
+
+task_1_1_1:
+  id: 3
+  parent_id: 2
+  name: MyString
+  spent_time: 1
+  estimate_time: 1
+  necessary_time: 1
+
+task_2:
   name: MyString
   spent_time: 1
   estimate_time: 1
