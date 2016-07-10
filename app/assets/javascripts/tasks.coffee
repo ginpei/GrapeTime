@@ -7,26 +7,22 @@ $(document).on 'click', '.js-task-edit', (event)->
 	$task = findEventElement(event)
 	$task.toggleClass('is-task-editingOwn')
 
-$(document).on 'ajax:complete', '.task-item-formEdit', (event, res, status)->
+$(document).on 'ajax:success', '.task-item-formEdit', (event, data, status, xhr)->
 	$task = findEventElement(event)
+	$body = $task.children('.js-task-body')
 
-	if status is 'success'
-		$body = $task.children('.js-task-body')
+	$updatedTask = $(data.html)
+	$updatedBody = $updatedTask.children('.js-task-body')
 
-		data = JSON.parse(res.responseText)
-		html = data.html
-		$updatedTask = $(html)
-		$updatedBody = $updatedTask.children('.js-task-body')
+	$body.replaceWith($updatedBody)
 
-		$body.replaceWith($updatedBody)
+	$task.removeClass('is-task-editingOwn')
 
-		$task.removeClass('is-task-editingOwn')
+$(document).on 'ajax:error', '.task-item-formEdit', (event, res, status, errorType)->
+	if res.status is Rails.http_status.unprocessable_entity
+		console.error res.responseJSON
 	else
-		if res.status is Rails.http_status.unprocessable_entity
-			data = JSON.parse(res.responseText)
-			console.error data
-		else
-			console.error res.responseText
+		console.error res.responseText
 
 $(document).on 'click', '.js-addChildTask', (event)->
 	$task = findEventElement(event)
