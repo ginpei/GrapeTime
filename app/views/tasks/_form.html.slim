@@ -1,5 +1,5 @@
 - parent = if task.parent_id then Task.find(task.parent_id) else nil end
-= form_for task do |f|
+= form_for task, remote: true do |f|
 
 	span
 		| Parent: 

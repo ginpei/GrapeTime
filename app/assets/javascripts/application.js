@@ -14,3 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+window.Rails = {
+	http_status: {
+		unprocessable_entity: 422,
+	},
+};

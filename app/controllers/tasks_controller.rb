@@ -41,6 +41,14 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    if @task.update(task_params)
+      html = render_to_string(:_index_item, layout: nil, locals: { task: @task } )
+      render json: { html: html }
+    else
+      render json: @task.errors, status: :unprocessable_entity
+    end
+
+    return
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
