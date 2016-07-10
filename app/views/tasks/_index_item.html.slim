@@ -4,7 +4,9 @@ div.task-item.js-taskItem
 		= link_to task.name, task, class: 'task-item-name'
 		span.task-item-times
 			= "(#{task.total_spent_time}/#{task.total_necessary_time}min)"
-		= link_to '✍', edit_task_path(task), class: 'task-item-button task-item-edit'
+		button.task-item-button.task-item-edit.js-task-edit
+			| Edit
+		/ = link_to '✍', edit_task_path(task), class: 'task-item-button task-item-edit'
 		= link_to '✘', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'task-item-button task-item-delete'
 		button.task-item-button.task-item-add.js-addChildTask
 			| Add
@@ -13,6 +15,9 @@ div.task-item.js-taskItem
 		div.task-item-children
 			- task.children.each do |child|
 				= render 'index_item', task: child
+
+	div.task-item-formEdit
+		= render 'form', task: task
 
 	div.task-item-formAddChild
 		= render 'form', task: task.new
