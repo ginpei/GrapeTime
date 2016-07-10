@@ -12,13 +12,13 @@ div.task-item.js-taskItem
 		button.task-item-button.task-item-add.js-addChildTask
 			| Add
 
+	div.task-item-formEdit
+		= render 'form', task: task
+
 	- unless task.children.empty?
 		div.task-item-children
 			- task.children.each do |child|
 				= render 'index_item', task: child
-
-	div.task-item-formEdit
-		= render 'form', task: task
 
 	div.task-item-formAddChild
 		= render 'form', task: task.new
