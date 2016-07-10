@@ -31,6 +31,6 @@ Task.create([
   },
   {
     id: 6,
-    name: 'task 3',
+    name: 'task 2',
   },
 ])
