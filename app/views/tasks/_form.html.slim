@@ -1,5 +1,10 @@
 - parent = if task.parent_id then Task.find(task.parent_id) else nil end
 = form_for task, remote: true do |f|
+	- unless task.id.nil?
+		div.pull-right
+			= link_to task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: ''
+				button
+					| Delete
 
 	span
 		| Parent: 

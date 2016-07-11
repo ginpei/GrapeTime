@@ -6,9 +6,6 @@ div.task-item.js-taskItem
 			= "(#{task.total_spent_time}/#{task.total_necessary_time}min)"
 		button.task-item-button.task-item-edit.js-task-edit
 			| Edit
-		= link_to task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'task-item-button task-item-delete'
-			button
-				| Delete
 		button.task-item-button.task-item-add.js-addChildTask
 			| Add
 
