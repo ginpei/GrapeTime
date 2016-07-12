@@ -7,8 +7,13 @@
 		&-body:hover &-button
 			display: inline-block
 
+		&:not(.is-task-opened) > &-body &-toggle-close,
+		&.is-task-opened > &-body &-toggle-open
+			display: none
+
 		&-name
 			margin-right: 0.5em
+			margin-left: 0.5em
 
 		&-times
 			font-size: 0.7em
@@ -25,5 +30,9 @@
 
 	&-item-children
 		border-left: 1px solid #ccc
-		margin-left: 1em
+		display: none
+		margin-left: 0.5em
 		padding-left: 1em
+
+	&-item.is-task-opened > &-item-children
+		display: block
