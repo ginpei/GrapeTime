@@ -4,10 +4,10 @@ div.task-item.js-taskItem
 		= link_to task.name, task, class: 'task-item-name'
 		span.task-item-times
 			= "(#{task.total_spent_time}/#{task.total_necessary_time}min)"
-		button.task-item-button.task-item-edit.js-task-edit
-			| Edit
-		button.task-item-button.task-item-add.js-addChildTask
-			| Add
+		button.btn-icon.task-item-button.task-item-edit.js-task-edit
+			= fa_icon 'pencil-square-o'
+		button.btn-icon.task-item-button.task-item-add.js-addChildTask
+			= fa_icon 'plus'
 
 	div.task-item-formEdit
 		= render 'form', task: task
