@@ -15,6 +15,12 @@
 			margin-right: 0.5em
 			margin-left: 0.5em
 
+		&-startIcon
+			visibility: hidden
+
+		&-body:hover &-startIcon
+			visibility: visible
+
 		&.is-working > &-body &-startIcon,
 		&:not(.is-working) > &-body &-stopIcon
 			display: none

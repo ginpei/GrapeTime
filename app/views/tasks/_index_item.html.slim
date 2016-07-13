@@ -6,8 +6,8 @@ div.task-item.js-taskItem.is-task-opened
 			= fa_icon 'minus-square-o', class: 'task-item-toggle-close'
 		span.btn-link.task-item-name.js-task-work
 			= task.name
-			= fa_icon 'play-circle', class: 'task-item-button task-item-startIcon'
-			= fa_icon 'stop-circle', class: 'task-item-button task-item-stopIcon'
+			= fa_icon 'play-circle', class: 'task-item-startIcon'
+			= fa_icon 'stop-circle', class: 'task-item-stopIcon'
 		= link_to task, class: 'task-item-times'
 			= "(#{task.total_spent_time}/#{task.total_necessary_time}min)"
 		button.btn-icon.task-item-button.task-item-edit.js-task-edit
