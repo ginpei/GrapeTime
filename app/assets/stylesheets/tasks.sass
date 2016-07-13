@@ -1,11 +1,11 @@
 .task
 	&-item
 		&-button
-			display: none
+			visibility: hidden
 			margin-right: 1em
 
 		&-body:hover &-button
-			display: inline-block
+			visibility: visible
 
 		&:not(.is-task-opened) > &-body &-toggle-close,
 		&.is-task-opened > &-body &-toggle-open
