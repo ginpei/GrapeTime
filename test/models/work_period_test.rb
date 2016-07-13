@@ -2,7 +2,17 @@ require 'test_helper'
 
 class WorkPeriodTest < ActiveSupport::TestCase
   test 'get duration as minutes' do
-    assert_equal 30.0, work_periods(:one).duration
+    p = work_periods(:one)
+
+    assert_equal 30.0, p.duration
+
+    p.finished_at = nil
+    travel_to DateTime.new(2000,01,01,01,00,00) do
+      assert_equal 60.0, p.duration
+    end
+
+    p.started_at = nil
+    assert_equal 0.0, p.duration
   end
 
   test 'start' do

@@ -3,7 +3,15 @@ class WorkPeriod < ActiveRecord::Base
 
   # Returns the difference as minutes.
   def duration
-    (finished_at - started_at) / 60
+    if started_at
+      if finished_at
+        (finished_at.to_i - started_at.to_i) / 60
+      else
+        (DateTime.current.to_i - started_at.to_i) / 60
+      end
+    else
+      0.0
+    end
   end
 
   def start
