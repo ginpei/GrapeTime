@@ -7,11 +7,11 @@ class WorkPeriod < ActiveRecord::Base
   end
 
   def start
-    self.started_at = DateTime.now
+    self.started_at = DateTime.current
   end
 
   def finish
-    self.finished_at = DateTime.now
+    self.finished_at = DateTime.current
   end
 
   def working?
