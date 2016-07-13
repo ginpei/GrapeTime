@@ -5,7 +5,7 @@ div.task-item.js-taskItem.is-task-opened
 			= fa_icon 'plus-square-o', class: 'task-item-toggle-open'
 			= fa_icon 'minus-square-o', class: 'task-item-toggle-close'
 		= link_to task.name, task, class: 'task-item-name'
-		span.task-item-times
+		= link_to task, class: 'task-item-times'
 			= "(#{task.total_spent_time}/#{task.total_necessary_time}min)"
 		button.btn-icon.task-item-button.task-item-edit.js-task-edit
 			= fa_icon 'pencil-square-o'
