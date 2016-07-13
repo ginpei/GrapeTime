@@ -16,4 +16,35 @@ class TaskTest < ActiveSupport::TestCase
       tasks(:task_1_1_1).necessary_time
     assert_equal sum, tasks(:task_1).total_necessary_time
   end
+
+  test 'start' do
+    t = tasks(:task_1)
+    t.start
+    assert_not_nil t.working_period
+    assert_equal 1, t.work_periods.length
+  end
+
+  test 'stop' do
+    t = tasks(:task_1)
+    t.start
+    t.stop
+    assert_nil t.working_period
+    assert_equal 1, t.work_periods.length
+  end
+
+  test 'working_period' do
+    t = tasks(:task_1)
+    t.start
+    assert_not_nil t.working_period
+    t.stop
+    assert_nil t.working_period
+  end
+
+  test 'working?' do
+    t = tasks(:task_1)
+    t.start
+    assert t.working?
+    t.stop
+    assert_not t.working?
+  end
 end

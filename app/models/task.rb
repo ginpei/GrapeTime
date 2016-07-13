@@ -24,4 +24,30 @@ class Task < ActiveRecord::Base
 
     necessary_time + other_time
   end
+
+  def start
+    period = work_periods.build
+    period.start
+    period.save
+  end
+
+  def stop
+    period = working_period
+    return unless period
+    period.finish
+    period.save
+  end
+
+  def working_period
+    period = work_periods.last
+    if period and period.working?
+      period
+    else
+      nil
+    end
+  end
+
+  def working?
+    !working_period.nil?
+  end
 end
