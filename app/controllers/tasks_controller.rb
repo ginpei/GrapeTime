@@ -70,6 +70,18 @@ class TasksController < ApplicationController
     end
   end
 
+  # POST /tasks/1/start
+  # POST /tasks/1/start.json
+  def start
+    render json: {}
+  end
+
+  # POST /tasks/1/stop
+  # POST /tasks/1/stop.json
+  def stop
+    render json: {}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task

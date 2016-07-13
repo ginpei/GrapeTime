@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   resources :work_periods
-  resources :tasks
+  resources :tasks do
+    member do
+      patch :start
+      patch :stop
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
