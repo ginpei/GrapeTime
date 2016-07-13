@@ -26,6 +26,8 @@ class Task < ActiveRecord::Base
   end
 
   def start
+    stop
+
     period = work_periods.build
     period.start
     period.save
