@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :start, :stop]
 
   # GET /tasks
   # GET /tasks.json
@@ -73,12 +73,14 @@ class TasksController < ApplicationController
   # POST /tasks/1/start
   # POST /tasks/1/start.json
   def start
+    @task.start
     render json: {}
   end
 
   # POST /tasks/1/stop
   # POST /tasks/1/stop.json
   def stop
+    @task.stop
     render json: {}
   end
 

@@ -46,4 +46,17 @@ class TasksControllerTest < ActionController::TestCase
 
     assert_redirected_to tasks_path
   end
+
+  test 'should start task' do
+    post :start, id: @task
+    assert @task.working?
+    assert_response :success
+  end
+
+  test 'should stop task' do
+    @task.start
+    patch :stop, id: @task
+    assert_not @task.working?
+    assert_response :success
+  end
 end
