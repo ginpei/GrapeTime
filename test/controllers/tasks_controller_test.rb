@@ -48,9 +48,19 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test 'should start task' do
-    post :start, id: @task
+    p = @task.work_periods.build
+    p.started_at = DateTime.new(2000,1,1, 0,0,0)
+    p.finished_at = DateTime.new(2000,1,1, 1,0,0)
+    p.save
+
+    @task.spent_time = 0
+    assert_difference('WorkPeriod.count') do
+      post :start, id: @task
+    end
+    @task = Task.find(@task.id)  # updated
     assert @task.working?
     assert_response :success
+    assert_equal 60.0, @task.spent_time, 'updates spent time'
   end
 
   test 'should stop task' do

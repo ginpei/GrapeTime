@@ -74,6 +74,7 @@ class TasksController < ApplicationController
   # POST /tasks/1/start.json
   def start
     @task.start
+    @task.update_spent_time
     render json: {}
   end
 
@@ -81,6 +82,7 @@ class TasksController < ApplicationController
   # POST /tasks/1/stop.json
   def stop
     @task.stop
+    @task.update_spent_time
     render json: {}
   end
 
