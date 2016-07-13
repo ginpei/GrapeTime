@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Started at:
+  = @work_period.started_at
+p
+  strong Finished at:
+  = @work_period.finished_at
+p
+  strong Note:
+  = @work_period.note
+p
+  strong Task:
+  = @work_period.task
+
+= link_to 'Edit', edit_work_period_path(@work_period)
+'|
+= link_to 'Back', work_periods_path

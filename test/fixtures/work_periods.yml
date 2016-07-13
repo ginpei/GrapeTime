@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  started_at: 2000-01-01 00:00:00
+  finished_at: 2000-01-01 00:30:00
+  note: MyString
+  task_id: 
+
+two:
+  started_at: 2016-07-12 17:11:23
+  finished_at: 2016-07-12 17:11:23
+  note: MyString
+  task_id: 

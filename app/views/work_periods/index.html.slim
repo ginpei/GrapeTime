@@ -1,0 +1,27 @@
+h1 Listing work_periods
+
+table
+  thead
+    tr
+      th Started at
+      th Finished at
+      th Note
+      th Task
+      th
+      th
+      th
+
+  tbody
+    - @work_periods.each do |work_period|
+      tr
+        td = work_period.started_at
+        td = work_period.finished_at
+        td = work_period.note
+        td = work_period.task
+        td = link_to 'Show', work_period
+        td = link_to 'Edit', edit_work_period_path(work_period)
+        td = link_to 'Destroy', work_period, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Work period', new_work_period_path

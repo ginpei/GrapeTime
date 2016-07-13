@@ -1,0 +1,21 @@
+= form_for @work_period do |f|
+  - if @work_period.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@work_period.errors.count, "error")} prohibited this work_period from being saved:"
+      ul
+        - @work_period.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :started_at
+    = f.datetime_select :started_at
+  .field
+    = f.label :finished_at
+    = f.datetime_select :finished_at
+  .field
+    = f.label :note
+    = f.text_field :note
+  .field
+    = f.label :task
+    = f.text_field :task
+  .actions = f.submit
