@@ -5,4 +5,16 @@ class WorkPeriod < ActiveRecord::Base
   def work_time
     (finished_at - started_at) / 60
   end
+
+  def start
+    self.started_at = DateTime.now
+  end
+
+  def finish
+    self.finished_at = DateTime.now
+  end
+
+  def working?
+    !self.started_at.nil? and self.finished_at.nil?
+  end
 end

@@ -6,8 +6,8 @@ one:
   note: MyString
   task_id: 
 
-two:
-  started_at: 2016-07-12 17:11:23
-  finished_at: 2016-07-12 17:11:23
+not_started:
+  started_at: nil
+  finished_at: nil
   note: MyString
   task_id: 
