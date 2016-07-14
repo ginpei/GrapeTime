@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require pug
+//= require jade/runtime
 //= require_tree .
 
 window.Rails = {
