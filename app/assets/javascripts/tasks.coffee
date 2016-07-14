@@ -64,6 +64,12 @@ $ ()->
 		name: 'task 0'
 		total_spent_time: 40
 		total_necessary_time: 60
+		children: [
+			{ name: 'task 0-1', children: [
+				{ name: 'task 0-1-1', children: [] }
+			] }
+			{ name: 'task 0-2', children: [] }
+		]
 	key = 'templates/tasks/item'
 	html = JST[key](task: task)
 	$('body').append(html)
