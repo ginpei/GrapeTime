@@ -60,6 +60,10 @@ $(document).on 'click', '.js-addChildTask', (event)->
 	$task.toggleClass('is-editing-addChild')
 
 $ ()->
+	task =
+		name: 'task 0'
+		total_spent_time: 40
+		total_necessary_time: 60
 	key = 'templates/tasks/item'
-	html = JST[key](name: 'Jade')
-	console.log html
+	html = JST[key](task: task)
+	$('body').append(html)

@@ -1,1 +1,20 @@
-h1 Hello #{name}
+mixin fa_icon(name, options)
+	- options = options || {}
+	i.fa(class="fa-#{name} #{options.class||''}")
+
+div.task-item.js-taskItem.is-task-opened(class="#{task.working ? 'is-working' : ''}")
+
+	div.task-item-body.js-task-body
+		button.btn-text.task-item-toggle.js-task-toggle
+			+fa_icon('plus-square-o', { class: 'task-item-toggle-open' })
+			+fa_icon('minus-square-o', { class: 'task-item-toggle-close' })
+		span.btn-link.task-item-name.js-task-work
+			= task.name
+			+fa_icon('play-circle', { class: 'task-item-startIcon'})
+			+fa_icon('stop-circle', { class: 'task-item-stopIcon'})
+		a.task-item-times(href="/tasks/#{task.id}")
+			| (#{task.total_spent_time}/#{task.total_necessary_time}min)
+		button.btn-icon.task-item-button.task-item-edit.js-task-edit
+			+fa_icon('pencil-square-o')
+		button.btn-icon.task-item-button.task-item-add.js-addChildTask
+			+fa_icon('plus')
