@@ -1,7 +1,12 @@
+//- @param {string} name Icon name.
+//- @param {string} [options.class] Class names separated by spaces.
+//- @see http://fontawesome.io/icons/
 mixin fa_icon(name, options)
 	- options = options || {}
 	i.fa(class="fa-#{name} #{options.class||''}")
 
+//- A task item which can include child tasks.
+//- @param {object} task A task data.
 mixin item(task)
 	div.task-item.js-taskItem.is-task-opened(class="#{task.working ? 'is-working' : ''}")
 
@@ -23,5 +28,7 @@ mixin item(task)
 		div.task-item-children
 			- each child in task.children
 				+item(child)
+
+//--------------------------------
 
 +item(task)
