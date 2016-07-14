@@ -14,7 +14,6 @@ div.task-item.js-taskItem.is-task-opened class="#{'is-working' if task.working?}
 			= fa_icon 'pencil-square-o'
 		button.btn-icon.task-item-button.task-item-add.js-addChildTask
 			= fa_icon 'plus'
-		= link_to 'Detail', task, class: 'task-item-button'
 
 	div.task-item-formEdit
 		= render 'form', task: task
