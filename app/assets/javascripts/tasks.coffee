@@ -58,3 +58,8 @@ $(document).on 'ajax:error', '.task-item-formEdit', (event, res, status, errorTy
 $(document).on 'click', '.js-addChildTask', (event)->
 	$task = findEventElement(event)
 	$task.toggleClass('is-editing-addChild')
+
+$ ()->
+	key = 'templates/tasks/item'
+	html = JST[key](name: 'Jade')
+	console.log html
