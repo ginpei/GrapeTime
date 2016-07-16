@@ -2,6 +2,21 @@
 
 $workingTask = null
 
+render = ()->
+	tasks_source = $('#data-tasks').prop('text')
+	tasks = JSON.parse(tasks_source)
+	html = render_items(tasks)
+	$('#task-list')
+		.empty()
+		.append(html)
+
+render_items = (tasks)->
+	tasks.map(render_item).join('')
+
+render_item = (task)->
+	f = JST['templates/tasks/item']
+	f(task: task)
+
 startWorking = ($task)->
 	stopWorking()
 
@@ -59,17 +74,5 @@ $(document).on 'click', '.js-addChildTask', (event)->
 	$task = findEventElement(event)
 	$task.toggleClass('is-editing-addChild')
 
-$ ()->
-	task =
-		name: 'task 0'
-		total_spent_time: 40
-		total_necessary_time: 60
-		children: [
-			{ name: 'task 0-1', children: [
-				{ name: 'task 0-1-1', children: [] }
-			] }
-			{ name: 'task 0-2', children: [] }
-		]
-	key = 'templates/tasks/item'
-	html = JST[key](task: task)
-	$('body').append(html)
+$(window).on 'turbolinks:load', (event)->
+	render()

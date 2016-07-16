@@ -15,16 +15,16 @@ div.task-item.js-taskItem.is-task-opened class="#{'is-working' if task.working?}
 		button.btn-icon.task-item-button.task-item-add.js-addChildTask
 			= fa_icon 'plus'
 
-	div.task-item-formEdit
+	/ div.task-item-formEdit
 		= render 'form', task: task
 
-	- unless task.children.empty?
-		div.task-item-children
+	div.task-item-children
+		- unless task.children.empty?
 			- task.children.each do |child|
 				= render 'index_item', task: child
 
-	div.task-item-formAddChild
+	/ div.task-item-formAddChild
 		= render 'form', task: task.new
 
-	= form_for task, url: start_task_path(task), html: { class: 'js-task-formStart' }, remote: true do |f|
-	= form_for task, url: stop_task_path(task), html: { class: 'js-task-formStop' }, remote: true do |f|
+	/ = form_for task, url: start_task_path(task), html: { class: 'js-task-formStart' }, remote: true do |f|
+	/ = form_for task, url: stop_task_path(task), html: { class: 'js-task-formStop' }, remote: true do |f|

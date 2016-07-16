@@ -5,6 +5,20 @@ class Task < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def to_family(options={})
+    {
+      id: id,
+      name: name,
+      total_spent_time: total_spent_time,
+      estimate_time: estimate_time,
+      total_necessary_time: total_necessary_time,
+      parent_id: parent_id,
+      children: children.map{|t|t.to_family},
+      created_at: created_at,
+      updated_at: updated_at,
+    }
+  end
+
   def new
     Task.new(parent_id: id)
   end

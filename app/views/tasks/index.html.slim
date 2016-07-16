@@ -1,11 +1,11 @@
 h1 Listing tasks
 
+script#data-tasks type="application/json"
+	= @tasks_json
+
 p#notice = notice
 
 p
 	= link_to 'New Task', new_task_path
 
-div
-	- @tasks.each do |task|
-		= render 'index_item', task: task
-
+div#task-list

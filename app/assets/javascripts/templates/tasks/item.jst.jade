@@ -25,9 +25,18 @@ mixin item(task)
 			button.btn-icon.task-item-button.task-item-add.js-addChildTask
 				+fa_icon('plus')
 
+		//- div.task-item-formEdit
+			= render 'form', task: task
+
 		div.task-item-children
 			- each child in task.children
 				+item(child)
+
+		//- div.task-item-formAddChild
+			= render 'form', task: task.new
+
+		//- = form_for task, url: start_task_path(task), html: { class: 'js-task-formStart' }, remote: true do |f|
+		//- = form_for task, url: stop_task_path(task), html: { class: 'js-task-formStop' }, remote: true do |f|
 
 //--------------------------------
 
