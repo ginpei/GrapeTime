@@ -1,10 +1,16 @@
 # $(document).on 'page:load', (event)->
 
+# --------------------------------
+# Vars
+
 ##
 # @type {jQuery}
 # @see #startWorking
 # @see #stopWorking
 $workingTask = null
+
+# --------------------------------
+# UIs
 
 ##
 # Render a form for new top task record.
@@ -32,6 +38,9 @@ render_item = (task)->
 	f = JST['templates/tasks/item']
 	f(task: task)
 
+# --------------------------------
+# Logics
+
 ##
 # Send a request to start working.
 # @param {jQuery} $task A task element.
@@ -56,6 +65,9 @@ stopWorking = ($task = $workingTask)->
 
 	$workingTask = null
 
+# --------------------------------
+# Elements
+
 ##
 # Find an element contains the element which the event fired.
 # @param {Event} event
@@ -71,6 +83,9 @@ findStartForm = ($task)->
 # @param {jQuery} $task A task element.
 findStopForm = ($task)->
 	$task.children('.js-task-formStop')
+
+# --------------------------------
+# Events
 
 ##
 # @param {Event} event
@@ -129,9 +144,9 @@ $(document).on 'click', '.js-addChildTask', (event)->
 	$task = findEventElement(event)
 	$task.toggleClass('is-editing-addChild')
 
-##
-# The entry point.
-# @param {Event} event
+# --------------------------------
+# Entry point
+
 $(window).on 'turbolinks:load', (event)->
 	render_new_form()
 	render_list()
