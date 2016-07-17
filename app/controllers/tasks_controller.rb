@@ -13,16 +13,6 @@ class TasksController < ApplicationController
   def show
   end
 
-  # GET /tasks/new
-  def new
-    @task = Task.new
-    @task.parent_id = params[:parent]
-  end
-
-  # GET /tasks/1/edit
-  def edit
-  end
-
   # POST /tasks
   # POST /tasks.json
   def create

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'misc#home'
 
   resources :work_periods
-  resources :tasks do
+  resources :tasks, except: [:new, :edit] do
     member do
       patch :start
       patch :stop
