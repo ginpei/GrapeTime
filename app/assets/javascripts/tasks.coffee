@@ -159,8 +159,8 @@ observe_events 'task',
 		return if $(event.target).closest('.js-task-delete').length > 0
 
 		$task = findEventElement(event)
-		$updatedTask = $(data.html)
-		$task.replaceWith($updatedTask)
+		html = render_item(data.data)
+		$task.replaceWith(html)
 
 	##
 	'ajax:error formEdit': (event, res, status, errorType)->

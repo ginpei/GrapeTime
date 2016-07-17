@@ -39,8 +39,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     if @task.update(task_params)
-      html = render_to_string(:_index_item, layout: nil, locals: { task: @task } )
-      render json: { html: html }
+      render json: { data: @task.to_family }
     else
       render json: @task.errors, status: :unprocessable_entity
     end
