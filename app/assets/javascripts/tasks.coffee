@@ -96,9 +96,40 @@ findStopForm = ($task)->
 # Events
 
 ##
-# @param {Event} event
-$(document).on 'click', '.js-task-new', (event)->
-	toggle_new_area()
+# @param {string} prefix Class name's prefix. (eg: "task"->".js-task-xxx")
+# @param {object} definitions Key as pair of event and name, value as listener.
+observe_events = (prefix, definitions)->
+	$document = $(document)
+	for key of definitions
+		{ type, name } = _destruct_event_key(key)
+		selector = ".js-#{prefix}-#{name}"
+		listener = definitions[key]
+		$document.on(type, selector, listener)
+
+##
+# Called from `observe_events()`.
+# @param {string} key
+# @returns {object}
+# @example
+# { type, name } _destruct_event_key('click name')
+# console.log type, name  # => "click", "name"
+_destruct_event_key = (key)->
+	DELIMITER = ' '
+	index = key.indexOf(DELIMITER)
+	{
+		type: key.slice(0, index)
+		name: key.slice(index + DELIMITER.length)
+	}
+
+observe_events 'task',
+	##
+	'click new': (event)->
+		toggle_new_area()
+
+# ##
+# # @param {Event} event
+# $(document).on 'click', '.js-task-new', (event)->
+# 	toggle_new_area()
 
 $(document).on 'ajax:success', '.js-task-newArea', (event, data, status, xhr)->
 	task = data.data
