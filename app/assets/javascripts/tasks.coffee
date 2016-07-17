@@ -27,11 +27,12 @@ render_new_form = ()->
 # Render a task list using data from server.
 render_list = ()->
 	tasks_source = $('#data-tasks').prop('text')
-	tasks = JSON.parse(tasks_source)
-	html = tasks.map(render_item).join('')
-	$('.js-task-list')
-		.empty()
-		.append(html)
+	if tasks_source
+		tasks = JSON.parse(tasks_source)
+		html = tasks.map(render_item).join('')
+		$('.js-task-list')
+			.empty()
+			.append(html)
 
 ##
 # Render one task record and its children recursively.
