@@ -67,7 +67,7 @@ mixin edit_form(task)
 		.field
 			label
 				| Name
-				input(type="text", name="task[name]", value=task.name)
+				input(type="text", name="task[name]", value=task.name, required=true)
 		.field
 			label
 				| Spent time

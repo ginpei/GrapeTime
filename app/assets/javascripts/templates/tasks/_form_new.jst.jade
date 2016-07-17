@@ -14,7 +14,7 @@ mixin new_form(parent_task)
 		.field
 			label
 				| Name
-				input(type="text", name="task[name]", value="")
+				input(type="text", name="task[name]", value="", required=true)
 		.field
 			label
 				| Estimate time
