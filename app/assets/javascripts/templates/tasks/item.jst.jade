@@ -35,8 +35,10 @@ mixin item(task)
 		//- div.task-item-formAddChild
 			= render 'form', task: task.new
 
-		//- = form_for task, url: start_task_path(task), html: { class: 'js-task-formStart' }, remote: true do |f|
-		//- = form_for task, url: stop_task_path(task), html: { class: 'js-task-formStop' }, remote: true do |f|
+		form.js-task-formStart(action="/tasks/#{task.id}/start", accept-charset="UTF-8", method="post", data-remote="true")
+			input(name="_method", value="patch", type="hidden")
+		form.js-task-formStop(action="/tasks/#{task.id}/stop", accept-charset="UTF-8", method="post", data-remote="true")
+			input(name="_method", value="patch", type="hidden")
 
 //--------------------------------
 

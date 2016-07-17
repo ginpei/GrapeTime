@@ -16,6 +16,7 @@ class Task < ActiveRecord::Base
       children: children.map{|t|t.to_family},
       created_at: created_at,
       updated_at: updated_at,
+      working: working?,
     }
   end
 
