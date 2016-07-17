@@ -19,7 +19,7 @@ $workingTask = null
 render_new_form = ()->
 	f = JST['templates/tasks/_form_new']
 	html = f({ task: null })
-	$('.js-task-newArea')
+	$('.js-task-new_area')
 		.empty()
 		.append(html)
 
@@ -43,8 +43,8 @@ render_item = (task)->
 ##
 # Toggle new task form area.
 toggle_new_area = ()->
-	$area = $('.js-task-newArea')
-	$area.toggleClass('is-task-newArea-opened')
+	$area = $('.js-task-new_area')
+	$area.toggleClass('is-task-new_area-opened')
 
 # --------------------------------
 # Logics
@@ -127,7 +127,7 @@ observe_events 'task',
 		toggle_new_area()
 
 	##
-	'ajax:success newArea': (event, data, status, xhr)->
+	'ajax:success new_area': (event, data, status, xhr)->
 		task = data.data
 		html = render_item(task)
 		$('.js-task-list')
