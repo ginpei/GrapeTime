@@ -6,7 +6,7 @@ render_list = ()->
 	tasks_source = $('#data-tasks').prop('text')
 	tasks = JSON.parse(tasks_source)
 	html = tasks.map(render_item).join('')
-	$('#task-list')
+	$('.js-task-list')
 		.empty()
 		.append(html)
 
