@@ -32,6 +32,11 @@ class Task < ActiveRecord::Base
       .inject(0){|s,n|s+n}
   end
 
+  def update_time_recursively
+    children.each{|t|t.update_time_recursively}
+    update_time
+  end
+
   def total_spent_time
     other_time = children
       .map{|c|c.total_spent_time}
