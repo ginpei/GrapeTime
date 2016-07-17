@@ -21,7 +21,7 @@ class TasksControllerTest < ActionController::TestCase
       post :create, task: { estimate_time: @task.estimate_time, name: @task.name, necessary_time: @task.necessary_time, spent_time: @task.spent_time }
     end
 
-    assert_redirected_to tasks_path
+    assert_response :success
   end
 
   test "should show task" do

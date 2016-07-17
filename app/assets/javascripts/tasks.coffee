@@ -40,6 +40,12 @@ render_item = (task)->
 	f = JST['templates/tasks/item']
 	f(task: task)
 
+##
+# Toggle new task form area.
+toggle_new_area = ()->
+	$area = $('.js-task-newArea')
+	$area.toggleClass('is-task-newArea-opened')
+
 # --------------------------------
 # Logics
 
@@ -92,8 +98,15 @@ findStopForm = ($task)->
 ##
 # @param {Event} event
 $(document).on 'click', '.js-task-new', (event)->
-	$area = $('.js-task-newArea')
-	$area.toggleClass('is-task-newArea-opened')
+	toggle_new_area()
+
+$(document).on 'ajax:success', '.js-task-newArea', (event, data, status, xhr)->
+	task = data.data
+	html = render_item(task)
+	$('.js-task-list')
+		.append(html)
+
+	toggle_new_area()
 
 ##
 # @param {Event} event
