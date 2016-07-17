@@ -126,69 +126,58 @@ observe_events 'task',
 	'click new': (event)->
 		toggle_new_area()
 
-# ##
-# # @param {Event} event
-# $(document).on 'click', '.js-task-new', (event)->
-# 	toggle_new_area()
+	##
+	'ajax:success newArea': (event, data, status, xhr)->
+		task = data.data
+		html = render_item(task)
+		$('.js-task-list')
+			.append(html)
 
-$(document).on 'ajax:success', '.js-task-newArea', (event, data, status, xhr)->
-	task = data.data
-	html = render_item(task)
-	$('.js-task-list')
-		.append(html)
+		toggle_new_area()
 
-	toggle_new_area()
+	##
+	'click toggle': (event)->
+		$task = findEventElement(event)
+		$task.toggleClass('is-task-opened')
 
-##
-# @param {Event} event
-$(document).on 'click', '.js-task-toggle', (event)->
-	$task = findEventElement(event)
-	$task.toggleClass('is-task-opened')
+	##
+	'click work': (event)->
+		$task = findEventElement(event)
+		if $task.hasClass('is-working')
+			stopWorking($task)
+		else
+			startWorking($task)
 
-##
-# @param {Event} event
-$(document).on 'click', '.js-task-work', (event)->
-	$task = findEventElement(event)
-	if $task.hasClass('is-working')
-		stopWorking($task)
-	else
-		startWorking($task)
+	##
+	'click edit': (event)->
+		$task = findEventElement(event)
+		$task.toggleClass('is-task-editingOwn')
 
-##
-# @param {Event} event
-$(document).on 'click', '.js-task-edit', (event)->
-	$task = findEventElement(event)
-	$task.toggleClass('is-task-editingOwn')
+	##
+	'ajax:success formEdit': (event, data, status, xhr)->
+		# do nothing if deleting
+		return if $(event.target).closest('.js-task-delete').length > 0
 
-##
-# @param {Event} event
-$(document).on 'ajax:success', '.task-item-formEdit', (event, data, status, xhr)->
-	# do nothing if deleting
-	return if $(event.target).closest('.js-task-delete').length > 0
+		$task = findEventElement(event)
+		$updatedTask = $(data.html)
+		$task.replaceWith($updatedTask)
 
-	$task = findEventElement(event)
-	$updatedTask = $(data.html)
-	$task.replaceWith($updatedTask)
+	##
+	'ajax:error formEdit': (event, res, status, errorType)->
+		if res.status is Rails.http_status.unprocessable_entity
+			console.error res.responseJSON
+		else
+			console.error res.responseText
 
-##
-# @param {Event} event
-$(document).on 'ajax:error', '.task-item-formEdit', (event, res, status, errorType)->
-	if res.status is Rails.http_status.unprocessable_entity
-		console.error res.responseJSON
-	else
-		console.error res.responseText
+	##
+	'ajax:complete delete': (event, data, status, xhr)->
+		$task = findEventElement(event)
+		$task.remove()
 
-##
-# @param {Event} event
-$(document).on 'ajax:complete', '.js-task-delete', (event, data, status, xhr)->
-	$task = findEventElement(event)
-	$task.remove()
-
-##
-# @param {Event} event
-$(document).on 'click', '.js-addChildTask', (event)->
-	$task = findEventElement(event)
-	$task.toggleClass('is-editing-addChild')
+	##
+	'click addChildTask': (event)->
+		$task = findEventElement(event)
+		$task.toggleClass('is-editing-addChild')
 
 # --------------------------------
 # Entry point

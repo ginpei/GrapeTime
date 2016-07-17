@@ -27,10 +27,10 @@ mixin item(task)
 				| (#{task.total_spent_time}/#{task.total_necessary_time}min)
 			button.btn-icon.task-item-button.task-item-edit.js-task-edit
 				+fa_icon('pencil-square-o')
-			button.btn-icon.task-item-button.task-item-add.js-addChildTask
+			button.btn-icon.task-item-button.task-item-add.js-task-addChildTask
 				+fa_icon('plus')
 
-		div.task-item-formEdit
+		div.task-item-formEdit.js-task-formEdit
 			div.pull-right
 				+delete_button(task)
 			+edit_form(task)
