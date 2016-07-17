@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'misc#home'
+
   resources :work_periods
   resources :tasks do
     member do
