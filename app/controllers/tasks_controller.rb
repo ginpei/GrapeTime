@@ -38,6 +38,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @task.update_time
     if @task.update(task_params)
       render json: { data: @task.to_family }
     else
