@@ -30,8 +30,44 @@ Task.create([
     parent_id: 100,
   },
   {
+    id: 121,
+    name: 'task 1-2-1',
+    parent_id: 120,
+  },
+  {
     id: 200,
     name: 'task 2',
+  },
+  {
+    id: 210,
+    name: 'task 2-1',
+    parent_id: 200,
+  },
+  {
+    id: 211,
+    name: 'task 2-1-1',
+    parent_id: 210,
+    spent_time: 30,
+    estimate_time: 30,
+    necessary_time: 30,
+  },
+  {
+    id: 212,
+    name: 'task 2-1-2',
+    parent_id: 210,
+    spent_time: 10,
+    estimate_time: 30,
+    necessary_time: 30,
+  },
+  {
+    id: 220,
+    name: 'task 2-2',
+    parent_id: 200,
+  },
+  {
+    id: 221,
+    name: 'task 2-2-1',
+    parent_id: 220,
   },
 ])
 
