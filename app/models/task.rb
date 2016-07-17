@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
   has_many :work_periods
 
   validates :name, presence: true
+  before_create :copy_estimate_to_necessary
 
   def to_family(options={})
     {
@@ -80,4 +81,12 @@ class Task < ActiveRecord::Base
   def working?
     !working_period.nil?
   end
+
+  private
+
+    def copy_estimate_to_necessary
+      if necessary_time == 0
+        self.necessary_time = estimate_time
+      end
+    end
 end
