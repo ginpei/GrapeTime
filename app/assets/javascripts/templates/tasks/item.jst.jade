@@ -27,8 +27,10 @@ mixin item(task)
 			button.btn-icon.task-item-button.task-item-add.js-addChildTask
 				+fa_icon('plus')
 
-		//- div.task-item-formEdit
-			= render 'form', task: task
+		div.task-item-formEdit
+			div.pull-right
+				+delete_button(task)
+			+edit_form(task)
 
 		div.task-item-children
 			- each child in task.children
@@ -53,6 +55,37 @@ mixin start_form(task)
 mixin stop_form(task)
 	form.js-task-formStop(action="/tasks/#{task.id}/stop", accept-charset="UTF-8", method="post", data-remote="true")
 		input(name="_method", value="patch", type="hidden")
+
+//--
+//- Edit Form
+//- @param {object} task A task data.
+mixin edit_form(task)
+	form(action="/tasks/#{task.id}", accept-charset="UTF-8", method='patch', data-remote="true")
+		.field
+			label
+				| Name
+				input(type="text", name="task[name]", value=task.name)
+		.field
+			label
+				| Spent time
+				input(type="number", name="task[spent_time]", value=task.spent_time)
+		.field
+			label
+				| Necessary time
+				input(type="number", name="task[necessary_time]", value=task.necessary_time)
+		.actions
+			button.submit Update Tasks
+
+//--
+//- Delete button.
+//- @param {object} task A task data.
+mixin delete_button(task, options)
+	- options = options || {}
+	- label = options.label || 'Delete'
+	- message = options.message || 'Are you sure?'
+	a(data-confirm=message, data-method="delete", data-remote="true", href="/tasks/#{task.id}")
+		button
+			= label
 
 //--------------------------------
 

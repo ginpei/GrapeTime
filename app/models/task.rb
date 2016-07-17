@@ -9,8 +9,10 @@ class Task < ActiveRecord::Base
     {
       id: id,
       name: name,
+      spent_time: spent_time,
       total_spent_time: total_spent_time,
       estimate_time: estimate_time,
+      necessary_time: necessary_time,
       total_necessary_time: total_necessary_time,
       parent_id: parent_id,
       children: children.map{|t|t.to_family},
