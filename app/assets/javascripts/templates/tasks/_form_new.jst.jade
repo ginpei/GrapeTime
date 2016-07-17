@@ -1,0 +1,30 @@
+//--
+//- New task form
+//- @param {object} parent_task A parent task data.
+mixin new_form(parent_task)
+	form(action="/tasks", accept-charset="UTF-8", method='post', data-remote="true")
+		.field
+			label
+				| Parent 
+				if parent_task
+					input(type="hidden", name="task[parent_id]", value=parent_task.id)
+					= parent_task.name
+				else
+					| (none)
+		.field
+			label
+				| Name
+				input(type="text", name="task[name]", value="")
+		.field
+			label
+				| Estimate time
+				input(type="number", name="task[estimate_time]", value="0")
+		.actions
+			button.submit
+				if parent_task
+					| Add Child Task
+				else
+					| Create Task
+
+//- Entry point
++new_form(task)
