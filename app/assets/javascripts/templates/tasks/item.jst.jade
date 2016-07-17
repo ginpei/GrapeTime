@@ -35,11 +35,11 @@ mixin item(task)
 				+delete_button(task)
 			+edit_form(task)
 
-		div.task-item-children
+		div.task-item-children.js-task-children
 			- each child in task.children
 				+item(child)
 
-		div.task-item-formAddChild
+		div.task-item-formAddChild.js-task-formAddChild
 			+new_form(task)
 
 		+start_form(task)

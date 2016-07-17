@@ -46,6 +46,13 @@ toggle_new_area = ()->
 	$area = $('.js-task-new_area')
 	$area.toggleClass('is-task-new_area-opened')
 
+##
+# Toggle add child task form area.
+toggle_add_child_area = ($task)->
+	$task.toggleClass('is-editing-addChild')
+	$form = $task.children('.js-task-formAddChild').find('form')
+	$form[0].reset()
+
 # --------------------------------
 # Logics
 
@@ -178,6 +185,15 @@ observe_events 'task',
 	'click addChildTask': (event)->
 		$task = findEventElement(event)
 		$task.toggleClass('is-editing-addChild')
+
+	##
+	'ajax:success formAddChild': (event, data, status, xhr)->
+		$task = findEventElement(event)
+		html = render_item(data.data)
+		$children = $task.children('.js-task-children')
+		$children.append(html)
+
+		toggle_add_child_area($task)
 
 # --------------------------------
 # Entry point
