@@ -18,7 +18,7 @@ Task.create([
   },
   {
     id: 112,
-    name: 'task 1-1-2',
+    name: 'task 1-1-2</script>',
     parent_id: 110,
     spent_time: 10,
     estimate_time: 30,
