@@ -26,7 +26,7 @@ class Task < ActiveRecord::Base
     Task.new(parent_id: id)
   end
 
-  def update_spent_time
+  def update_time
     self.spent_time = work_periods
       .map{|p|p.duration}
       .inject(0){|s,n|s+n}
