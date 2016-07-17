@@ -35,10 +35,22 @@ mixin item(task)
 		//- div.task-item-formAddChild
 			= render 'form', task: task.new
 
-		form.js-task-formStart(action="/tasks/#{task.id}/start", accept-charset="UTF-8", method="post", data-remote="true")
-			input(name="_method", value="patch", type="hidden")
-		form.js-task-formStop(action="/tasks/#{task.id}/stop", accept-charset="UTF-8", method="post", data-remote="true")
-			input(name="_method", value="patch", type="hidden")
+		+start_form(task)
+		+stop_form(task)
+
+//--
+//- Form to start working
+//- @param {object} task A task data.
+mixin start_form(task)
+	form.js-task-formStart(action="/tasks/#{task.id}/start", accept-charset="UTF-8", method="post", data-remote="true")
+		input(name="_method", value="patch", type="hidden")
+
+//--
+//- Form to start working
+//- @param {object} task A task data.
+mixin stop_form(task)
+	form.js-task-formStop(action="/tasks/#{task.id}/stop", accept-charset="UTF-8", method="post", data-remote="true")
+		input(name="_method", value="patch", type="hidden")
 
 //--------------------------------
 
