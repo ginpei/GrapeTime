@@ -3,6 +3,7 @@ Tasks
 ###
 
 initialize = ()->
+	initializeTasks()
 	render_new_form()
 	render_list()
 
@@ -10,6 +11,10 @@ finalize = ()->
 
 # --------------------------------
 # Vars
+
+##
+# @type {Array}
+tasks = null
 
 ##
 # @type {jQuery}
@@ -32,13 +37,10 @@ render_new_form = ()->
 ##
 # Render a task list using data from server.
 render_list = ()->
-	tasks_source = $('#data-tasks').prop('text')
-	if tasks_source
-		tasks = JSON.parse(tasks_source)
-		html = tasks.map(render_item).join('')
-		$('.js-task-list')
-			.empty()
-			.append(html)
+	html = tasks.map(render_item).join('')
+	$('.js-task-list')
+		.empty()
+		.append(html)
 
 ##
 # Render one task record and its children recursively.
@@ -62,6 +64,15 @@ toggle_add_child_area = ($task)->
 
 # --------------------------------
 # Logics
+
+##
+# @see #tasks
+initializeTasks = ()->
+	tasks_source = $('#data-tasks').prop('text')
+	if tasks_source
+		tasks = JSON.parse(tasks_source)
+	else
+		tasks = []
 
 ##
 # Send a request to start working.
