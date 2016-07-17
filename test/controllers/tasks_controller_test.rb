@@ -44,7 +44,7 @@ class TasksControllerTest < ActionController::TestCase
       delete :destroy, id: @task
     end
 
-    assert_redirected_to tasks_path
+    assert_response :success
   end
 
   test 'should start task' do

@@ -86,7 +86,7 @@ mixin delete_button(task, options)
 	- options = options || {}
 	- label = options.label || 'Delete'
 	- message = options.message || 'Are you sure?'
-	a(data-confirm=message, data-method="delete", data-remote="true", href="/tasks/#{task.id}")
+	a.js-task-delete(data-confirm=message, data-method="delete", data-remote="true", href="/tasks/#{task.id}")
 		button
 			= label
 

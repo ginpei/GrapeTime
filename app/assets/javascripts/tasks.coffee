@@ -68,6 +68,9 @@ $(document).on 'click', '.js-task-edit', (event)->
 	$task.toggleClass('is-task-editingOwn')
 
 $(document).on 'ajax:success', '.task-item-formEdit', (event, data, status, xhr)->
+	# do nothing if deleting
+	return if $(event.target).closest('.js-task-delete').length > 0
+
 	$task = findEventElement(event)
 	$updatedTask = $(data.html)
 	$task.replaceWith($updatedTask)
@@ -77,6 +80,10 @@ $(document).on 'ajax:error', '.task-item-formEdit', (event, res, status, errorTy
 		console.error res.responseJSON
 	else
 		console.error res.responseText
+
+$(document).on 'ajax:complete', '.js-task-delete', (event, data, status, xhr)->
+	$task = findEventElement(event)
+	$task.remove()
 
 $(document).on 'click', '.js-addChildTask', (event)->
 	$task = findEventElement(event)
