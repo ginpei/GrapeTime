@@ -2,6 +2,12 @@
 Tasks
 ###
 
+initialize = ()->
+	render_new_form()
+	render_list()
+
+finalize = ()->
+
 # --------------------------------
 # Vars
 
@@ -197,8 +203,10 @@ observe_events 'task',
 		toggle_add_child_area($task)
 
 # --------------------------------
-# Entry point
+# Page events
 
 $(window).on 'turbolinks:load', (event)->
-	render_new_form()
-	render_list()
+	initialize()
+
+$(window).on 'turbolinks:visit', (event)->
+	finalize()
