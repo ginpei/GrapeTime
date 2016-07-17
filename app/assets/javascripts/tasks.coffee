@@ -2,16 +2,13 @@
 
 $workingTask = null
 
-render = ()->
+render_list = ()->
 	tasks_source = $('#data-tasks').prop('text')
 	tasks = JSON.parse(tasks_source)
-	html = render_items(tasks)
+	html = tasks.map(render_item).join('')
 	$('#task-list')
 		.empty()
 		.append(html)
-
-render_items = (tasks)->
-	tasks.map(render_item).join('')
 
 render_item = (task)->
 	f = JST['templates/tasks/item']
@@ -75,4 +72,4 @@ $(document).on 'click', '.js-addChildTask', (event)->
 	$task.toggleClass('is-editing-addChild')
 
 $(window).on 'turbolinks:load', (event)->
-	render()
+	render_list()
