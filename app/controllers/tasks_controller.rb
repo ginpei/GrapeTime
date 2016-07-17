@@ -49,8 +49,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
-    html = ''
-    render json: { html: html }
+    render json: { old_task: @task }
   end
 
   # POST /tasks/1/start
