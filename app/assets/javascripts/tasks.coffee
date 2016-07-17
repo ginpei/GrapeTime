@@ -2,6 +2,13 @@
 
 $workingTask = null
 
+render_new_form = ()->
+	f = JST['templates/tasks/_form_new']
+	html = f({ task: null })
+	$('.js-task-newArea')
+		.empty()
+		.append(html)
+
 render_list = ()->
 	tasks_source = $('#data-tasks').prop('text')
 	tasks = JSON.parse(tasks_source)
@@ -41,6 +48,10 @@ findStartForm = ($task)->
 findStopForm = ($task)->
 	$task.children('.js-task-formStop')
 
+$(document).on 'click', '.js-task-new', (event)->
+	$area = $('.js-task-newArea')
+	$area.toggleClass('is-task-newArea-opened')
+
 $(document).on 'click', '.js-task-toggle', (event)->
 	$task = findEventElement(event)
 	$task.toggleClass('is-task-opened')
@@ -72,4 +83,5 @@ $(document).on 'click', '.js-addChildTask', (event)->
 	$task.toggleClass('is-editing-addChild')
 
 $(window).on 'turbolinks:load', (event)->
+	render_new_form()
 	render_list()

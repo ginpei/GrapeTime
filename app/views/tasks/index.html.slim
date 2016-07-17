@@ -6,7 +6,10 @@ script#data-tasks type="application/json"
 p#notice = notice
 
 p
-	= link_to 'New Task', new_task_path
+	button.js-task-new New Task
+
+div.task-newArea.js-task-newArea
+	//- Rendered by JS
 
 div#task-list.js-task-list
 	//- Rendered by JS
