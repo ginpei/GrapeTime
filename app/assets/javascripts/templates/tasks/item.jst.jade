@@ -1,5 +1,5 @@
 mixin new_form(task)
-	- JST['templates/tasks/_form_new']({ task: task })
+	!= JST['templates/tasks/_form_new']({ task: task })
 
 //--
 //- @param {string} name Icon name.
