@@ -10,6 +10,8 @@ class TaskList extends React.Component {
 				name={v.name}
 				progress={v.progress}
 				task={v.task}
+				total_necessary_time={v.total_necessary_time}
+				total_spent_time={v.total_spent_time}
 				working={v.working}
 			/>)
 		});

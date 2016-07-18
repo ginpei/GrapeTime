@@ -19,8 +19,8 @@ class TaskItem extends React.Component {
 						<Icon name="stop-circle" className="task-item-stopIcon"></Icon>
 					</span>
 					<a className="task-item-times" href="/tasks/#{task.id}">
-						{p.totalSpentTimeString}
-						+progress(task.progress)
+						{p.total_spent_time}
+						<TaskProgress value={p.total_spent_time} max={p.total_necessary_time} />
 					</a>
 					<button className="btn-icon task-item-button task-item-edit js-task-edit">
 						<Icon name="pencil-square-o"></Icon>
@@ -51,6 +51,8 @@ TaskItem.propTypes = {
   id: React.PropTypes.node,
   name: React.PropTypes.string,
   progress: React.PropTypes.number,
-  working: React.PropTypes.bool,
   task: React.PropTypes.instanceOf(Object),
+  total_necessary_time: React.PropTypes.number,
+  total_spent_time: React.PropTypes.number,
+  working: React.PropTypes.bool,
 };
