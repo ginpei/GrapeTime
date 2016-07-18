@@ -70,7 +70,7 @@ toggle_add_child_area = ($task)->
 initializeTasks = ()->
 	tasks_source = $('#data-tasks').prop('text')
 	if tasks_source
-		tasks = JSON.parse(tasks_source)
+		tasks = JSON.parse(tasks_source).map((v)=>new Task(v))
 	else
 		tasks = []
 
