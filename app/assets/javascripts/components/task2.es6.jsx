@@ -6,14 +6,6 @@ class Task2 extends React.Component {
 		if (p.working) {
 			itemClassName += ' is-working';
 		}
-
-		var children = (p.children||[]).map((v)=>{
-			return (<Task2
-				name={v.name}
-				children={v.children || []}
-			/>)
-		});
-
     return (
 			<div className={itemClassName}>
 				<div className="task-item-body js-task-body">
@@ -43,9 +35,7 @@ class Task2 extends React.Component {
 					</div>
 					+edit_form(task)
 				</div>
-				<div className="task-item-children js-task-children">
-					{children}
-				</div>
+				<TaskList className="task-item-children js-task-children" tasks={p.children} />
 				<div className="task-item-formAddChild js-task-formAddChild">
 					+new_form(task)
 				</div>
@@ -63,4 +53,37 @@ Task2.propTypes = {
   progress: React.PropTypes.number,
   working: React.PropTypes.bool,
   task: React.PropTypes.instanceOf(Object),
+};
+
+class TaskList extends React.Component {
+	render() {
+		var className = `task-list ${this.props.className || ''}`;
+
+		var children = this.props.tasks.map((v)=>{
+			return (<Task2
+				children={v.children || []}
+				id={v.id}
+				key={v.id}
+				name={v.name}
+				progress={v.progress}
+				task={v.task}
+				working={v.working}
+			/>)
+		});
+
+		return (
+			<div className={className}>
+				{children}
+			</div>
+		);
+	}
+
+	get defaultProps() {
+		return {
+			tasks: [],
+		};
+	}
+}
+TaskList.propTypes = {
+  tasks: React.PropTypes.instanceOf(Array),
 };
