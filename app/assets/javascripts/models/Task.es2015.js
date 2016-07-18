@@ -23,6 +23,34 @@
 				this.children = [];
 			}
 		}
+
+		/**
+		 * @param {number} all Time length as seconds.
+		 * @returns {string} "hh:mm:ss"
+		 */
+		toTimeString(all) {
+			var sec = all % 60;
+			var min = Math.floor((all - sec) / 60) % 60;
+			var hr = Math.floor((all - sec - min * 60) / 60 / 60);
+			var s = `${hr}:${this.toDoubleDecimal(min)}:${this.toDoubleDecimal(sec)}`;
+			return s;
+		}
+
+		toDoubleDecimal(n) {
+			return `0${n}`.slice(-2);
+		}
+
+		get totalSpentTimeString() {
+			return this.toTimeString(this.total_spent_time);
+		}
+
+		get totalNecessaryTimeString() {
+			return this.toTimeString(this.total_necessary_time);
+		}
+
+		get progress() {
+			return (this.total_spent_time / this.total_necessary_time);
+		}
 	}
 
 	window.Task = Task;
