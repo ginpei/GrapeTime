@@ -1,4 +1,4 @@
-class Task2 extends React.Component {
+class TaskItem extends React.Component {
   render() {
 		var p = this.props;
 
@@ -46,7 +46,7 @@ class Task2 extends React.Component {
   }
 }
 
-Task2.propTypes = {
+TaskItem.propTypes = {
   children: React.PropTypes.instanceOf(Array),
   id: React.PropTypes.node,
   name: React.PropTypes.string,
@@ -60,7 +60,7 @@ class TaskList extends React.Component {
 		var className = `task-list ${this.props.className || ''}`;
 
 		var children = this.props.tasks.map((v)=>{
-			return (<Task2
+			return (<TaskItem
 				children={v.children || []}
 				id={v.id}
 				key={v.id}
