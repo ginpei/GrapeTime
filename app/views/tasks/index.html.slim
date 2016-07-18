@@ -1,6 +1,6 @@
 h1 Listing tasks
 
-= react_component('TaskList', tasks: [ { name: 'John', children: [ { name:'Jonson' } ] } ])
+= react_component('TaskList', tasks: @tasks_data)
 
 script#data-tasks type="application/json"
 	= @tasks_json

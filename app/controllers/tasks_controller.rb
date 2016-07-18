@@ -5,7 +5,8 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.where(parent_id: nil)
-    @tasks_json = @tasks.map{|t|t.to_family}.to_json.html_safe
+    @tasks_data = @tasks.map{|t|t.to_family}
+    @tasks_json = @tasks_data.to_json.html_safe
   end
 
   # GET /tasks/1
