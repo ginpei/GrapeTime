@@ -49,7 +49,14 @@
 		}
 
 		get progress() {
-			return (this.total_spent_time / this.total_necessary_time);
+			var rate;
+			if (this.total_necessary_time) {
+				rate = (this.total_spent_time / this.total_necessary_time);
+			}
+			else {
+				rate = 0;
+			}
+			return rate;
 		}
 	}
 

@@ -24,7 +24,8 @@ mixin item(task)
 				+fa_icon('play-circle', { class: 'task-item-startIcon'})
 				+fa_icon('stop-circle', { class: 'task-item-stopIcon'})
 			a.task-item-times(href="/tasks/#{task.id}")
-				| (#{task.totalSpentTimeString}/#{Math.floor(task.progress*100)}%)
+				| (#{task.totalSpentTimeString})
+				+progress(task.progress)
 			button.btn-icon.task-item-button.task-item-edit.js-task-edit
 				+fa_icon('pencil-square-o')
 			button.btn-icon.task-item-button.task-item-add.js-task-addChildTask
@@ -89,6 +90,13 @@ mixin delete_button(task, options)
 	a.js-task-delete(data-confirm=message, data-method="delete", data-remote="true", href="/tasks/#{task.id}")
 		button
 			= label
+
+//--
+//- Progress bar.
+//- @param {number} progress `0` to `1`.
+mixin progress(progress)
+	span.task-item-progress
+		span.task-item-progress-bar(style="width:#{progress*100}%")
 
 //--------------------------------
 
