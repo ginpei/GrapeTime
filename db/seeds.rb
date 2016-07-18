@@ -12,14 +12,14 @@ Task.create([
     id: 111,
     name: 'task 1-1-1',
     parent_id: 110,
-    spent_time: 30,
-    estimate_time: 30,
+    spent_time: 1800,
+    estimate_time: 1800,
   },
   {
     id: 112,
     name: 'task 1-1-2</script>',
     parent_id: 110,
-    estimate_time: 30,
+    estimate_time: 1800,
   },
   {
     id: 120,
@@ -44,13 +44,13 @@ Task.create([
     id: 211,
     name: 'task 2-1-1',
     parent_id: 210,
-    estimate_time: 30,
+    estimate_time: 1800,
   },
   {
     id: 212,
     name: 'task 2-1-2',
     parent_id: 210,
-    estimate_time: 30,
+    estimate_time: 1800,
   },
   {
     id: 220,
