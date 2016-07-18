@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jade/runtime
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
 
 window.Rails = {
