@@ -47,12 +47,12 @@ class TaskItem extends React.Component {
 }
 
 TaskItem.propTypes = {
-  children: React.PropTypes.instanceOf(Array),
-  id: React.PropTypes.node,
-  name: React.PropTypes.string,
-  progress: React.PropTypes.number,
-  task: React.PropTypes.instanceOf(Object),
-  total_necessary_time: React.PropTypes.number,
-  total_spent_time: React.PropTypes.number,
-  working: React.PropTypes.bool,
+	children: React.PropTypes.instanceOf(Array),
+	id: React.PropTypes.node,
+	name: React.PropTypes.string,
+	progress: React.PropTypes.number,
+	task: React.PropTypes.instanceOf(Object),
+	total_necessary_time: React.PropTypes.number,
+	total_spent_time: React.PropTypes.number,
+	working: React.PropTypes.bool,
 };
