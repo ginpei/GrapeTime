@@ -8,7 +8,9 @@ class TaskList extends React.Component {
 				id={v.id}
 				key={v.id}
 				name={v.name}
+				necessary_time={v.necessary_time}
 				progress={v.progress}
+				spent_time={v.spent_time}
 				task={v.task}
 				total_necessary_time={v.total_necessary_time}
 				total_spent_time={v.total_spent_time}

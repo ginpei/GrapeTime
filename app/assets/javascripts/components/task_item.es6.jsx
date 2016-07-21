@@ -33,14 +33,16 @@ class TaskItem extends React.Component {
 					<div className="pull-right">
 						<a className="js-task-delete" data-confirm="Are you sure?" data-method="delete"><button>Delete</button></a>
 					</div>
-					+edit_form(task)
+					<TaskEditForm id={p.id} name={p.name} necessary_time={p.necessary_time} />
 				</div>
 				<TaskList className="task-item-children js-task-children" tasks={p.children} />
 				<div className="task-item-formAddChild js-task-formAddChild">
 					+new_form(task)
 				</div>
+				{/*
 				+start_form(task)
 				+stop_form(task)
+				*/}
 			</div>
     );
   }
@@ -50,7 +52,9 @@ TaskItem.propTypes = {
 	children: React.PropTypes.instanceOf(Array),
 	id: React.PropTypes.node,
 	name: React.PropTypes.string,
+	necessary_time: React.PropTypes.number,
 	progress: React.PropTypes.number,
+	spent_time: React.PropTypes.number,
 	task: React.PropTypes.instanceOf(Object),
 	total_necessary_time: React.PropTypes.number,
 	total_spent_time: React.PropTypes.number,
