@@ -19,7 +19,7 @@ class TaskItem extends React.Component {
 						<Icon name="stop-circle" className="task-item-stopIcon"></Icon>
 					</span>
 					<a className="task-item-times" href="/tasks/#{task.id}">
-						{p.total_spent_time}
+						({this.toHMS(p.total_spent_time)})
 						<TaskProgress value={p.total_spent_time} max={p.total_necessary_time} />
 					</a>
 					<button className="btn-icon task-item-button task-item-edit js-task-edit">
@@ -46,6 +46,29 @@ class TaskItem extends React.Component {
 			</div>
     );
   }
+
+	/**
+	 * @param {number} total
+	 * @returns {string} "h:mm:ss"
+	 */
+	toHMS(total) {
+		var sec = total % 60;
+		var min = Math.floor((total - sec) / 60) % 60;
+		var hr = Math.floor((total - sec - min * 60) / 60 / 60);
+		var s = `${hr}:${this.toDoubleDecimal(min)}:${this.toDoubleDecimal(sec)}`;
+		return s;
+	}
+
+	/**
+	 * @param {number} n
+	 * @returns {string}
+	 * @example
+	 * console.log(this.toDoubleDecimal(9));  // => "09"
+	 * console.log(this.toDoubleDecimal(10));  // => "10"
+	 */
+	toDoubleDecimal(n) {
+		return `0${n}`.slice(-2);
+	}
 }
 
 TaskItem.propTypes = {
