@@ -192,7 +192,7 @@ observe_events 'task',
 		if res.status is Rails.http_status.unprocessable_entity
 			console.error res.responseJSON
 		else
-			console.error res.responseText
+			console.error 'wow', res.responseText
 
 	##
 	'ajax:complete delete': (event, data, status, xhr)->

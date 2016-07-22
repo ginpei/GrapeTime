@@ -33,7 +33,7 @@ class TaskItem extends React.Component {
 					<div className="pull-right">
 						<a className="js-task-delete" data-confirm="Are you sure?" data-method="delete"><button>Delete</button></a>
 					</div>
-					<TaskEditForm id={p.id} name={p.name} necessary_time={p.necessary_time} />
+					<TaskEditForm id={p.id} name={p.name} necessary_time={p.necessary_time} spent_time={p.spent_time} />
 				</div>
 				<TaskList className="task-item-children js-task-children" tasks={p.children} />
 				<div className="task-item-formAddChild js-task-formAddChild">
