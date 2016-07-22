@@ -5,6 +5,7 @@ Tasks
 initialize = ()->
 	initializeTasks()
 	render_new_form()
+	render_list()
 
 finalize = ()->
 
@@ -30,6 +31,14 @@ render_new_form = ()->
 	f = JST['templates/tasks/_form_new']
 	html = f({ task: null })
 	$('.js-task-new_area')
+		.empty()
+		.append(html)
+
+##
+# Render a task list using data from server.
+render_list = ()->
+	html = tasks.map(render_item).join('')
+	$('.js-task-list')
 		.empty()
 		.append(html)
 
