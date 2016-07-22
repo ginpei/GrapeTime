@@ -1,7 +1,5 @@
 h1 Listing tasks
 
-= react_component('TaskList', tasks: @tasks_data)
-
 script#data-tasks type="application/json"
 	= @tasks_json
 
@@ -14,4 +12,4 @@ div.task-new_area.js-task-new_area
 	//- Rendered by JS
 
 div#task-list.js-task-list
-	//- Rendered by JS
+	= react_component('TaskList', tasks: @tasks_data)
