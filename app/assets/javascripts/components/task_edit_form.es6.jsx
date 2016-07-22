@@ -1,11 +1,11 @@
 class TaskEditForm extends React.Component {
-  render() {
+	render() {
 		var p = this.props;
 		var s = this.state;
 
 		var url = `/tasks/${p.id}`;
 
-    return (
+		return (
 			<form onSubmit={this.form_onSubmit.bind(this)} action={url}>
 				<div class="field" method="patch" data-remote="true">
 					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="tasks[name]" value={s.name} /></label>
@@ -18,7 +18,7 @@ class TaskEditForm extends React.Component {
 				</div>
 			</form>
 		);
-  }
+	}
 
 	constructor(props) {
 		super(props);
@@ -49,7 +49,7 @@ class TaskEditForm extends React.Component {
 // };
 
 TaskEditForm.propTypes = {
-  id: React.PropTypes.number,
-  name: React.PropTypes.string,
-  necessary_time: React.PropTypes.number,
+	id: React.PropTypes.number,
+	name: React.PropTypes.string,
+	necessary_time: React.PropTypes.number,
 };
