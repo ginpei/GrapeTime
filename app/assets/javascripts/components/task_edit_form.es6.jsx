@@ -7,7 +7,7 @@ class TaskEditForm extends React.Component {
 
 		return (
 			<form onSubmit={this.form_onSubmit.bind(this)} action={url} method="patch" data-remote="true">
-				<div class="field" method="patch" data-remote="true">
+				<div class="field">
 					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="task[name]" value={s.name} /></label>
 				</div>
 				<div class="field">
