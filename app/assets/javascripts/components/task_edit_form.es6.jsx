@@ -39,7 +39,9 @@ class TaskEditForm extends React.Component {
 				console.log('error');
 			}
 			else {
-				console.log(JSON.parse(xhr.responseText));
+				let responseData = JSON.parse(xhr.responseText);
+				let task = responseData.data;
+				this.props.onSave(task);
 			}
 		});
 	}

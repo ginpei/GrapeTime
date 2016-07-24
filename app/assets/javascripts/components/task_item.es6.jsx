@@ -1,6 +1,6 @@
 class TaskItem extends React.Component {
 	render() {
-		let task = this.props.task;
+		let task = this.state.task;
 
 		let itemClassName = this._getItemClassName();
 
@@ -11,7 +11,7 @@ class TaskItem extends React.Component {
 					<div className="pull-right">
 						<a className="js-task-delete" data-confirm="Are you sure?" data-method="delete"><button>Delete</button></a>
 					</div>
-					<TaskEditForm task={task} />
+					<TaskEditForm onSave={this.taskEditForm_onSave.bind(this)} task={task} />
 				</div>
 				<TaskList className="task-item-children js-task-children" tasks={task.children} />
 				<div className="task-item-formAddChild js-task-formAddChild">
@@ -52,6 +52,7 @@ class TaskItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			task: props.task,
 			opened: true,
 			editing: false,
 			editingChild: false,
@@ -85,6 +86,13 @@ class TaskItem extends React.Component {
 		var nextState = {};
 		nextState[type] = !this.state[type];
 		this.setState(nextState);
+	}
+
+	taskEditForm_onSave(task) {
+		this.setState({
+			editing: false,
+			task: task,
+		});
 	}
 }
 
