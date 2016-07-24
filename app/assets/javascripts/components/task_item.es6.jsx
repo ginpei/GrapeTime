@@ -1,10 +1,10 @@
 class TaskItem extends React.Component {
-  render() {
+	render() {
 		let task = this.props.task;
 
 		let itemClassName = this._getItemClassName();
 
-    return (
+		return (
 			<div className={itemClassName}>
 				<div className="task-item-body js-task-body">
 					<button onClick={this.toggle_onClick.bind(this)} className="btn-text task-item-toggle">
@@ -42,8 +42,8 @@ class TaskItem extends React.Component {
 				+stop_form(task)
 				*/}
 			</div>
-    );
-  }
+		);
+	}
 
 	_getItemClassName() {
 		let p = this.props;
