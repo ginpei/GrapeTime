@@ -76,5 +76,6 @@ class TaskEditForm extends React.Component {
 // };
 
 TaskEditForm.propTypes = {
+	onSave: React.PropTypes.func,
 	task: React.PropTypes.object,
 };
