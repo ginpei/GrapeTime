@@ -34,7 +34,7 @@ class TaskEditForm extends React.Component {
 	}
 
 	post() {
-		this.sendRemoteForm(this.refs.form, (xhr, event)=>{
+		window.Rails.post(this.refs.form, (xhr, event)=>{
 			if (event.type === 'error' || xhr.status !== 200) {
 				console.log('error');
 			}
@@ -42,34 +42,6 @@ class TaskEditForm extends React.Component {
 				console.log(JSON.parse(xhr.responseText));
 			}
 		});
-	}
-
-	sendRemoteForm(elForm, callback=()=>{}) {
-		let { url, method, data } = this.getFormData(elForm);
-
-		let xhr = new XMLHttpRequest();
-		xhr.onload = function(event) {
-			callback(xhr, event);
-		};
-		xhr.onerror = function(event) {
-			callback(xhr, event);
-		};
-		xhr.open(method, url);
-		xhr.setRequestHeader('X-CSRF-Token', this.getCSRFToken());
-		xhr.send(data);
-	}
-
-	getFormData(elForm) {
-		let url = this.refs.form.getAttribute('action');
-		let method = this.refs.form.getAttribute('method').toUpperCase();
-		let data = new FormData(elForm);
-		return { url, method, data };
-	}
-
-	getCSRFToken() {
-		let el = document.querySelector('meta[name=csrf-token]');
-		let token = el.getAttribute('content');
-		return token;
 	}
 
 	name_onChange(event) {
