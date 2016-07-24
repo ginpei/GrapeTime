@@ -38,7 +38,9 @@ class TaskItemNewChildForm extends React.Component {
 				console.log('error');
 			}
 			else {
-				console.log(JSON.parse(xhr.responseText));
+				let responseData = JSON.parse(xhr.responseText);
+				let task = responseData.data;
+				this.props.onSave(task);
 			}
 		});
 	}
@@ -62,5 +64,6 @@ class TaskItemNewChildForm extends React.Component {
 }
 
 TaskItemNewChildForm.propTypes = {
+	onSave: React.PropTypes.func,
 	parentTask: React.PropTypes.object,
 };
