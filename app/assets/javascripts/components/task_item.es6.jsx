@@ -1,6 +1,6 @@
 class TaskItem extends React.Component {
   render() {
-		let p = this.props;
+		let task = this.props.task;
 
 		let itemClassName = this._getItemClassName();
 
@@ -12,13 +12,13 @@ class TaskItem extends React.Component {
 						<Icon name="minus-square-o" className="task-item-toggle-close"></Icon>
 					</button>
 					<span className="btn-link task-item-name js-task-work">
-						{p.name}
+						{task.name}
 						<Icon name="play-circle" className="task-item-startIcon"></Icon>
 						<Icon name="stop-circle" className="task-item-stopIcon"></Icon>
 					</span>
 					<a className="task-item-times" href="/tasks/#{task.id}">
-						({this.toHMS(p.total_spent_time)})
-						<TaskProgress value={p.total_spent_time} max={p.total_necessary_time} />
+						({this.toHMS(task.total_spent_time)})
+						<TaskProgress value={task.total_spent_time} max={task.total_necessary_time} />
 					</a>
 					<button onClick={this.toggleEditForm_onClick.bind(this)} className="btn-icon task-item-button task-item-edit">
 						<Icon name="pencil-square-o"></Icon>
@@ -31,9 +31,9 @@ class TaskItem extends React.Component {
 					<div className="pull-right">
 						<a className="js-task-delete" data-confirm="Are you sure?" data-method="delete"><button>Delete</button></a>
 					</div>
-					<TaskEditForm id={p.id} name={p.name} necessary_time={p.necessary_time} spent_time={p.spent_time} />
+					<TaskEditForm task={task} />
 				</div>
-				<TaskList className="task-item-children js-task-children" tasks={p.children} />
+				<TaskList className="task-item-children js-task-children" tasks={task.children} />
 				<div className="task-item-formAddChild js-task-formAddChild">
 					+new_form(task)
 				</div>
@@ -115,14 +115,5 @@ class TaskItem extends React.Component {
 }
 
 TaskItem.propTypes = {
-	children: React.PropTypes.instanceOf(Array),
-	id: React.PropTypes.node,
-	name: React.PropTypes.string,
-	necessary_time: React.PropTypes.number,
-	progress: React.PropTypes.number,
-	spent_time: React.PropTypes.number,
-	task: React.PropTypes.instanceOf(Object),
-	total_necessary_time: React.PropTypes.number,
-	total_spent_time: React.PropTypes.number,
-	working: React.PropTypes.bool,
+	task: React.PropTypes.object,
 };
