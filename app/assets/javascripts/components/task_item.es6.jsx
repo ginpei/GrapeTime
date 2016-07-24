@@ -1,15 +1,9 @@
 class TaskItem extends React.Component {
   render() {
 		let p = this.props;
-		let s = this.state;
 
-		let itemClassName = `task-item js-taskItem`;
-		if (s.opened) {
-			itemClassName += ' is-task-opened';
-		}
-		if (p.working) {
-			itemClassName += ' is-working';
-		}
+		let itemClassName = this._getItemClassName();
+
     return (
 			<div className={itemClassName}>
 				<div className="task-item-body js-task-body">
@@ -50,6 +44,22 @@ class TaskItem extends React.Component {
 			</div>
     );
   }
+
+	_getItemClassName() {
+		let p = this.props;
+		let s = this.state;
+		let itemClassName = `task-item js-taskItem`;
+
+		if (s.opened) {
+			itemClassName += ' is-task-opened';
+		}
+
+		if (p.working) {
+			itemClassName += ' is-working';
+		}
+
+		return itemClassName;
+	}
 
 	constructor(props) {
 		super(props);
