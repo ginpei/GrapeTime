@@ -23,7 +23,7 @@ class TaskItem extends React.Component {
 					<button onClick={this.toggleEditForm_onClick.bind(this)} className="btn-icon task-item-button task-item-edit">
 						<Icon name="pencil-square-o"></Icon>
 					</button>
-					<button className="btn-icon task-item-button task-item-add js-task-addChildTask">
+					<button onClick={this.toggleChildForm_onClick.bind(this)} className="btn-icon task-item-button task-item-add">
 						<Icon name="plus"></Icon>
 					</button>
 				</div>
@@ -58,6 +58,10 @@ class TaskItem extends React.Component {
 			itemClassName += ' is-task-editingOwn';
 		}
 
+		if (s.editingChild) {
+			itemClassName += ' is-editing-addChild';
+		}
+
 		if (p.working) {
 			itemClassName += ' is-working';
 		}
@@ -70,6 +74,7 @@ class TaskItem extends React.Component {
 		this.state = {
 			opened: true,
 			editing: false,
+			editingChild: false,
 		};
 	}
 
@@ -102,6 +107,10 @@ class TaskItem extends React.Component {
 
 	toggleEditForm_onClick(event) {
 		this.setState({ editing: !this.state.editing });
+	}
+
+	toggleChildForm_onClick(event) {
+		this.setState({ editingChild: !this.state.editingChild });
 	}
 }
 

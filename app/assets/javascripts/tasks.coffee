@@ -174,11 +174,6 @@ observe_events 'task',
 		$task.remove()
 
 	##
-	'click addChildTask': (event)->
-		$task = findEventElement(event)
-		$task.toggleClass('is-editing-addChild')
-
-	##
 	'ajax:success formAddChild': (event, data, status, xhr)->
 		$task = findEventElement(event)
 		html = render_item(data.data)
