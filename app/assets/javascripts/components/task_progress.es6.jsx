@@ -1,8 +1,8 @@
 class TaskProgress extends React.Component {
 	render () {
-		var p = this.props;
-		var percentage = p.value / p.max * 100;
-		var style = {
+		let p = this.props;
+		let percentage = p.value / p.max * 100;
+		let style = {
 			width: `${percentage}%`,
 		};
 		return (

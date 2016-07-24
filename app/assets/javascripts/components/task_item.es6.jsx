@@ -1,8 +1,8 @@
 class TaskItem extends React.Component {
   render() {
-		var p = this.props;
+		let p = this.props;
 
-		var itemClassName = `task-item js-taskItem is-task-opened`;
+		let itemClassName = `task-item js-taskItem is-task-opened`;
 		if (p.working) {
 			itemClassName += ' is-working';
 		}
@@ -52,10 +52,10 @@ class TaskItem extends React.Component {
 	 * @returns {string} "h:mm:ss"
 	 */
 	toHMS(total) {
-		var sec = total % 60;
-		var min = Math.floor((total - sec) / 60) % 60;
-		var hr = Math.floor((total - sec - min * 60) / 60 / 60);
-		var s = `${hr}:${this.toDoubleDecimal(min)}:${this.toDoubleDecimal(sec)}`;
+		let sec = total % 60;
+		let min = Math.floor((total - sec) / 60) % 60;
+		let hr = Math.floor((total - sec - min * 60) / 60 / 60);
+		let s = `${hr}:${this.toDoubleDecimal(min)}:${this.toDoubleDecimal(sec)}`;
 		return s;
 	}
 

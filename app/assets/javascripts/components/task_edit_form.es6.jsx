@@ -1,9 +1,9 @@
 class TaskEditForm extends React.Component {
 	render() {
-		var p = this.props;
-		var s = this.state;
+		let p = this.props;
+		let s = this.state;
 
-		var url = `/tasks/${p.id}`;
+		let url = `/tasks/${p.id}`;
 
 		return (
 			<form ref="form" onSubmit={this.form_onSubmit.bind(this)} action={url} method="patch">
@@ -40,9 +40,9 @@ class TaskEditForm extends React.Component {
 	}
 
 	sendRemoteForm(elForm, callback=()=>{}) {
-		var { url, method, data } = this.getFormData(elForm);
+		let { url, method, data } = this.getFormData(elForm);
 
-		var xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.onload = function(event) {
 			callback(xhr, event);
 		};
@@ -55,15 +55,15 @@ class TaskEditForm extends React.Component {
 	}
 
 	getFormData(elForm) {
-		var url = this.refs.form.getAttribute('action');
-		var method = this.refs.form.getAttribute('method').toUpperCase();
-		var data = new FormData(elForm);
+		let url = this.refs.form.getAttribute('action');
+		let method = this.refs.form.getAttribute('method').toUpperCase();
+		let data = new FormData(elForm);
 		return { url, method, data };
 	}
 
 	getCSRFToken() {
-		var el = document.querySelector('meta[name=csrf-token]');
-		var token = el.getAttribute('content');
+		let el = document.querySelector('meta[name=csrf-token]');
+		let token = el.getAttribute('content');
 		return token;
 	}
 
