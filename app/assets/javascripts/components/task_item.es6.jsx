@@ -1,15 +1,19 @@
 class TaskItem extends React.Component {
   render() {
 		let p = this.props;
+		let s = this.state;
 
-		let itemClassName = `task-item js-taskItem is-task-opened`;
+		let itemClassName = `task-item js-taskItem`;
+		if (s.opened) {
+			itemClassName += ' is-task-opened';
+		}
 		if (p.working) {
 			itemClassName += ' is-working';
 		}
     return (
 			<div className={itemClassName}>
 				<div className="task-item-body js-task-body">
-					<button className="btn-text task-item-toggle js-task-toggle">
+					<button onClick={this.toggle_onClick.bind(this)} className="btn-text task-item-toggle">
 						<Icon name="plus-square-o" className="task-item-toggle-open"></Icon>
 						<Icon name="minus-square-o" className="task-item-toggle-close"></Icon>
 					</button>
@@ -47,6 +51,13 @@ class TaskItem extends React.Component {
     );
   }
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			opened: true,
+		};
+	}
+
 	/**
 	 * @param {number} total
 	 * @returns {string} "h:mm:ss"
@@ -68,6 +79,10 @@ class TaskItem extends React.Component {
 	 */
 	toDoubleDecimal(n) {
 		return `0${n}`.slice(-2);
+	}
+
+	toggle_onClick(event) {
+		this.setState({ opened: !this.state.opened });
 	}
 }
 

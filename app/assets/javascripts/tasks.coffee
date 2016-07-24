@@ -161,11 +161,6 @@ observe_events 'task',
 		toggle_new_area()
 
 	##
-	'click toggle': (event)->
-		$task = findEventElement(event)
-		$task.toggleClass('is-task-opened')
-
-	##
 	'click work': (event)->
 		$task = findEventElement(event)
 		if $task.hasClass('is-working')
