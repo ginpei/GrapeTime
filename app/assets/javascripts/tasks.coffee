@@ -169,11 +169,6 @@ observe_events 'task',
 			startWorking($task)
 
 	##
-	'click edit': (event)->
-		$task = findEventElement(event)
-		$task.toggleClass('is-task-editingOwn')
-
-	##
 	'ajax:complete delete': (event, data, status, xhr)->
 		$task = findEventElement(event)
 		$task.remove()

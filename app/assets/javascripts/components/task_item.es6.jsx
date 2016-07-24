@@ -20,7 +20,7 @@ class TaskItem extends React.Component {
 						({this.toHMS(p.total_spent_time)})
 						<TaskProgress value={p.total_spent_time} max={p.total_necessary_time} />
 					</a>
-					<button className="btn-icon task-item-button task-item-edit js-task-edit">
+					<button onClick={this.toggleEditForm_onClick.bind(this)} className="btn-icon task-item-button task-item-edit">
 						<Icon name="pencil-square-o"></Icon>
 					</button>
 					<button className="btn-icon task-item-button task-item-add js-task-addChildTask">
@@ -54,6 +54,10 @@ class TaskItem extends React.Component {
 			itemClassName += ' is-task-opened';
 		}
 
+		if (s.editing) {
+			itemClassName += ' is-task-editingOwn';
+		}
+
 		if (p.working) {
 			itemClassName += ' is-working';
 		}
@@ -65,6 +69,7 @@ class TaskItem extends React.Component {
 		super(props);
 		this.state = {
 			opened: true,
+			editing: false,
 		};
 	}
 
@@ -93,6 +98,10 @@ class TaskItem extends React.Component {
 
 	toggle_onClick(event) {
 		this.setState({ opened: !this.state.opened });
+	}
+
+	toggleEditForm_onClick(event) {
+		this.setState({ editing: !this.state.editing });
 	}
 }
 
