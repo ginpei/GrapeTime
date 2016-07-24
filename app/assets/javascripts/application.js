@@ -44,18 +44,36 @@ window.Rails = {
 	 * @returns {XMLHttpRequest}
 	 */
 	sendRemoteForm: function(elForm, callback=()=>{}) {
-		let { url, method, data } = this.getFormData(elForm);
+		let options = this.getFormData(elForm);
+		options.callback = callback;
+
+		let xhr = this.sendRequest(options);
+		return xhr;
+	},
+
+	/**
+	 * @param {string} options.method `"POST"`, `"PATCH"`, ...
+	 * @param {string} options.url
+	 * @param {object} [options.data]
+	 * @param {function} [options.callback]
+	 */
+	sendRequest: function(options) {
+		if (!options.callback) {
+			options.callback = ()=>{};
+		}
 
 		let xhr = new XMLHttpRequest();
+
 		xhr.onload = function(event) {
-			callback(xhr, event);
+			options.callback(xhr, event);
 		};
 		xhr.onerror = function(event) {
-			callback(xhr, event);
+			options.callback(xhr, event);
 		};
-		xhr.open(method, url);
+
+		xhr.open(options.method, options.url);
 		xhr.setRequestHeader('X-CSRF-Token', this.getCSRFToken());
-		xhr.send(data);
+		xhr.send(options.data);
 
 		return xhr;
 	},
