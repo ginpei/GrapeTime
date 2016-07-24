@@ -173,15 +173,6 @@ observe_events 'task',
 		$task = findEventElement(event)
 		$task.remove()
 
-	##
-	'ajax:success formAddChild': (event, data, status, xhr)->
-		$task = findEventElement(event)
-		html = render_item(data.data)
-		$children = $task.children('.js-task-children')
-		$children.append(html)
-
-		toggle_add_child_area($task)
-
 # --------------------------------
 # Page events
 
