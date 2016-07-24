@@ -6,27 +6,7 @@ class TaskItem extends React.Component {
 
 		return (
 			<div className={itemClassName}>
-				<div className="task-item-body js-task-body">
-					<button onClick={this.toggle_onClick.bind(this)} className="btn-text task-item-toggle">
-						<Icon name="plus-square-o" className="task-item-toggle-open"></Icon>
-						<Icon name="minus-square-o" className="task-item-toggle-close"></Icon>
-					</button>
-					<span className="btn-link task-item-name js-task-work">
-						{task.name}
-						<Icon name="play-circle" className="task-item-startIcon"></Icon>
-						<Icon name="stop-circle" className="task-item-stopIcon"></Icon>
-					</span>
-					<a className="task-item-times" href="/tasks/#{task.id}">
-						({this.toHMS(task.total_spent_time)})
-						<TaskProgress value={task.total_spent_time} max={task.total_necessary_time} />
-					</a>
-					<button onClick={this.toggleEditForm_onClick.bind(this)} className="btn-icon task-item-button task-item-edit">
-						<Icon name="pencil-square-o"></Icon>
-					</button>
-					<button onClick={this.toggleChildForm_onClick.bind(this)} className="btn-icon task-item-button task-item-add">
-						<Icon name="plus"></Icon>
-					</button>
-				</div>
+				<TaskItemBody onToggle={this.itemBody_onToggle.bind(this)} task={task} />
 				<div className="task-item-formEdit js-task-formEdit">
 					<div className="pull-right">
 						<a className="js-task-delete" data-confirm="Are you sure?" data-method="delete"><button>Delete</button></a>
@@ -101,16 +81,10 @@ class TaskItem extends React.Component {
 		return `0${n}`.slice(-2);
 	}
 
-	toggle_onClick(event) {
-		this.setState({ opened: !this.state.opened });
-	}
-
-	toggleEditForm_onClick(event) {
-		this.setState({ editing: !this.state.editing });
-	}
-
-	toggleChildForm_onClick(event) {
-		this.setState({ editingChild: !this.state.editingChild });
+	itemBody_onToggle(type) {
+		var nextState = {};
+		nextState[type] = !this.state[type];
+		this.setState(nextState);
 	}
 }
 
