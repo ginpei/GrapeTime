@@ -179,22 +179,6 @@ observe_events 'task',
 		$task.toggleClass('is-task-editingOwn')
 
 	##
-	'ajax:success formEdit': (event, data, status, xhr)->
-		# do nothing if deleting
-		return if $(event.target).closest('.js-task-delete').length > 0
-
-		$task = findEventElement(event)
-		html = render_item(data.data)
-		$task.replaceWith(html)
-
-	##
-	'ajax:error formEdit': (event, res, status, errorType)->
-		if res.status is Rails.http_status.unprocessable_entity
-			console.error res.responseJSON
-		else
-			console.error 'wow', res.responseText
-
-	##
 	'ajax:complete delete': (event, data, status, xhr)->
 		$task = findEventElement(event)
 		$task.remove()

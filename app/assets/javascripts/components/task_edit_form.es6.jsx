@@ -6,7 +6,7 @@ class TaskEditForm extends React.Component {
 		var url = `/tasks/${p.id}`;
 
 		return (
-			<form onSubmit={this.form_onSubmit.bind(this)} action={url} method="patch" data-remote="true">
+			<form ref="form" onSubmit={this.form_onSubmit.bind(this)} action={url} method="patch">
 				<div class="field">
 					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="task[name]" value={s.name} /></label>
 				</div>
@@ -28,6 +28,45 @@ class TaskEditForm extends React.Component {
 		this.state = Object.assign({}, this.props);
 	}
 
+	post() {
+		this.sendRemoteForm(this.refs.form, (xhr, event)=>{
+			if (event.type === 'error' || xhr.status !== 200) {
+				console.log('error');
+			}
+			else {
+				console.log(JSON.parse(xhr.responseText));
+			}
+		});
+	}
+
+	sendRemoteForm(elForm, callback=()=>{}) {
+		var { url, method, data } = this.getFormData(elForm);
+
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function(event) {
+			callback(xhr, event);
+		};
+		xhr.onerror = function(event) {
+			callback(xhr, event);
+		};
+		xhr.open(method, url);
+		xhr.setRequestHeader('X-CSRF-Token', this.getCSRFToken());
+		xhr.send(data);
+	}
+
+	getFormData(elForm) {
+		var url = this.refs.form.getAttribute('action');
+		var method = this.refs.form.getAttribute('method').toUpperCase();
+		var data = new FormData(elForm);
+		return { url, method, data };
+	}
+
+	getCSRFToken() {
+		var el = document.querySelector('meta[name=csrf-token]');
+		var token = el.getAttribute('content');
+		return token;
+	}
+
 	name_onChange(event) {
 		this.setState({
 			name: event.target.value,
@@ -47,8 +86,8 @@ class TaskEditForm extends React.Component {
 	}
 
 	form_onSubmit(event) {
-		// event.preventDefault();
-		console.log(this.state);
+		event.preventDefault();
+		this.post();
 	}
 }
 
