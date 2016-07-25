@@ -8,9 +8,7 @@ class TaskItem extends React.Component {
 			<div className={itemClassName}>
 				<TaskItemBody onToggle={this.itemBody_onToggle.bind(this)} task={task} />
 				<div className="task-item-formEdit js-task-formEdit">
-					<div className="pull-right">
-						<a className="js-task-delete" data-confirm="Are you sure?" data-method="delete"><button>Delete</button></a>
-					</div>
+					<TaskItemDeleteButton onSave={this.taskItemDeleteButton_onSave.bind(this)} task={task} />
 					<TaskEditForm onSave={this.taskEditForm_onSave.bind(this)} task={task} />
 				</div>
 				<TaskList className="task-item-children js-task-children" tasks={task.children} />
@@ -86,6 +84,10 @@ class TaskItem extends React.Component {
 		var nextState = {};
 		nextState[type] = !this.state[type];
 		this.setState(nextState);
+	}
+
+	taskItemDeleteButton_onSave(task) {
+		this.props.onDestroy(task);
 	}
 
 	taskEditForm_onSave(task) {
