@@ -36,7 +36,7 @@ class TaskEditForm extends React.Component {
 	post() {
 		window.Rails.post(this.refs.form, (xhr, event)=>{
 			if (event.type === 'error' || xhr.status !== 200) {
-				console.log('error');
+				console.error('error', event);
 			}
 			else {
 				let responseData = JSON.parse(xhr.responseText);

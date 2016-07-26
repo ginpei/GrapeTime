@@ -20,7 +20,6 @@ class TaskList extends React.Component {
 
 	item_onDestroy(task) {
 		let updatedTasks = this.state.tasks.filter(v=>v!==task);
-		console.log(this.state.tasks, updatedTasks);
 		this.setState({
 			tasks: updatedTasks,
 		});
