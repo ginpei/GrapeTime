@@ -5,12 +5,23 @@ class TaskItemNewChildForm extends React.Component {
 
 		let url = `/tasks/`;
 
-		return (
-			<form ref="form" onSubmit={this.form_onSubmit.bind(this)} action={url} method="post">
-				<input type="hidden" name="task[parent_id]" value={this.props.parentTask.id} />
+		let parentIdField;
+		let parentNameField;
+		if (parentTask) {
+			parentIdField = (
+				<input type="hidden" name="task[parent_id]" value={parentTask.id} />
+			);
+			parentNameField = (
 				<div class="field">
 					Parent: {parentTask.name}
 				</div>
+			);
+		}
+
+		return (
+			<form ref="form" onSubmit={this.form_onSubmit.bind(this)} action={url} method="post">
+				{parentIdField}
+				{parentNameField}
 				<div class="field">
 					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="task[name]" value={s.name} /></label>
 				</div>
