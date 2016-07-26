@@ -148,30 +148,12 @@ _destruct_event_key = (key)->
 
 observe_events 'task',
 	##
-	'click new': (event)->
-		toggle_new_area()
-
-	##
-	'ajax:success new_area': (event, data, status, xhr)->
-		task = data.data
-		html = render_item(task)
-		$('.js-task-list')
-			.append(html)
-
-		toggle_new_area()
-
-	##
 	'click work': (event)->
 		$task = findEventElement(event)
 		if $task.hasClass('is-working')
 			stopWorking($task)
 		else
 			startWorking($task)
-
-	##
-	'ajax:complete delete': (event, data, status, xhr)->
-		$task = findEventElement(event)
-		$task.remove()
 
 # --------------------------------
 # Page events
