@@ -56,6 +56,11 @@ class TaskItemNewChildForm extends React.Component {
 		});
 	}
 
+	reset() {
+		// estimate time becomes empty...
+		this.refs.form.reset();
+	}
+
 	name_onChange(event) {
 		this.setState({
 			name: event.target.value,

@@ -15,7 +15,7 @@ class TaskNewItemFormArea extends React.Component {
 					<button onClick={this.openForm_onClick.bind(this)}>New Task</button>
 				</p>
 				<div className={formWrapperClassName}>
-					<TaskItemNewChildForm onSave={this.form_onSave.bind(this)} />
+					<TaskItemNewChildForm ref="form" onSave={this.form_onSave.bind(this)} />
 				</div>
 			</div>
 		);
@@ -28,14 +28,20 @@ class TaskNewItemFormArea extends React.Component {
 		};
 	}
 
+	reset() {
+		this.refs.form.reset();
+	}
+
 	openForm_onClick(event) {
 		this.setState({ opening: !this.state.opening });
 	}
 
 	form_onSave(task) {
-		console.log(task);
+		this.reset();
+		this.props.onSave(task);
 	}
 }
 
 TaskNewItemFormArea.propTypes = {
+	onSave: React.PropTypes.func,
 };
