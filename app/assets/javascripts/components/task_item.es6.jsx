@@ -6,7 +6,7 @@ class TaskItem extends React.Component {
 
 		return (
 			<div className={itemClassName}>
-				<TaskItemBody onToggle={this.itemBody_onToggle.bind(this)} task={task} />
+				<TaskItemBody onToggle={this.itemBody_onToggle.bind(this)} onToggleWorking={this.itemBody_onToggleWorking.bind(this)} task={task} />
 				<div className="task-item-formEdit js-task-formEdit">
 					<TaskItemDeleteButton onSave={this.taskItemDeleteButton_onSave.bind(this)} task={task} />
 					<TaskEditForm onSave={this.taskEditForm_onSave.bind(this)} task={task} />
@@ -40,7 +40,7 @@ class TaskItem extends React.Component {
 			itemClassName += ' is-editing-addChild';
 		}
 
-		if (p.working) {
+		if (s.task.working) {
 			itemClassName += ' is-working';
 		}
 
@@ -84,6 +84,11 @@ class TaskItem extends React.Component {
 		var nextState = {};
 		nextState[type] = !this.state[type];
 		this.setState(nextState);
+	}
+
+	itemBody_onToggleWorking(event, task) {
+		task.working = !task.working;
+		this.setState({ task: task });
 	}
 
 	taskItemDeleteButton_onSave(task) {

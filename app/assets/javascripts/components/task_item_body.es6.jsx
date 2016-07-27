@@ -8,11 +8,7 @@ class TaskItemBody extends React.Component {
 					<Icon name="plus-square-o" className="task-item-toggle-open"></Icon>
 					<Icon name="minus-square-o" className="task-item-toggle-close"></Icon>
 				</button>
-				<span className="btn-link task-item-name js-task-work">
-					{task.name}
-					<Icon name="play-circle" className="task-item-startIcon"></Icon>
-					<Icon name="stop-circle" className="task-item-stopIcon"></Icon>
-				</span>
+				<TaskItemWorkButton onToggle={this.playButton_onToggle.bind(this)} task={task} />
 				<a className="task-item-times" href="/tasks/#{task.id}">
 					({this.toHMS(task.total_spent_time)})
 					<TaskProgress value={task.total_spent_time} max={task.total_necessary_time} />
@@ -54,6 +50,10 @@ class TaskItemBody extends React.Component {
 		this.props.onToggle('opened');
 	}
 
+	playButton_onToggle(event, task) {
+		this.props.onToggleWorking(event, task);
+	}
+
 	toggleEditForm_onClick(event) {
 		this.props.onToggle('editing');
 	}
@@ -65,5 +65,6 @@ class TaskItemBody extends React.Component {
 
 TaskItem.propTypes = {
 	onToggle: React.PropTypes.func,
+	onToggleWorking: React.PropTypes.func,
 	task: React.PropTypes.object,
 };
