@@ -49,8 +49,14 @@ class TaskItem extends React.Component {
 
 	constructor(props) {
 		super(props);
+
+		let task = props.task;
+		if (!(task instanceof Task)) {
+			task = new Task(task);
+		}
+
 		this.state = {
-			task: props.task,
+			task: task,
 			opened: true,
 			editing: false,
 			editingChild: false,
