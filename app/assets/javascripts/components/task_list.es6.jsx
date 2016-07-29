@@ -33,5 +33,5 @@ class TaskList extends React.Component {
 }
 
 TaskList.propTypes = {
-	tasks: React.PropTypes.instanceOf(Array),
+	tasks: React.PropTypes.array,
 };
