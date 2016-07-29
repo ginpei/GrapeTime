@@ -9,7 +9,7 @@ class TaskItemNewChildForm extends React.Component {
 		let parentNameField;
 		if (parentTask) {
 			parentIdField = (
-				<input type="hidden" name="task[parent_id]" value={parentTask.id} />
+				<input type="hidden" name="parent_id" value={parentTask.id} />
 			);
 			parentNameField = (
 				<div class="field">
@@ -23,10 +23,10 @@ class TaskItemNewChildForm extends React.Component {
 				{parentIdField}
 				{parentNameField}
 				<div class="field">
-					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="task[name]" value={s.name} /></label>
+					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="name" value={s.name} /></label>
 				</div>
 				<div class="field">
-					<label>Estimate time: <input onChange={this.estimateTime_onChange.bind(this)} type="number" name="task[estimate_time]" value={s.estimate_time} /></label>
+					<label>Estimate time: <input onChange={this.estimateTime_onChange.bind(this)} type="number" name="estimate_time" value={s.estimate_time} /></label>
 				</div>
 				<div class="field">
 					<button roll="submit">Submit</button>
@@ -43,17 +43,21 @@ class TaskItemNewChildForm extends React.Component {
 		};
 	}
 
-	post() {
-		window.Rails.post(this.refs.form, (xhr, event)=>{
-			if (event.type === 'error' || xhr.status !== 200) {
-				console.error('error', event);
-			}
-			else {
-				let responseData = JSON.parse(xhr.responseText);
-				let task = responseData.data;
-				this.props.onSave(task);
+	save(callback) {
+		let attributes = Task.createAttributesFromForm(this.refs.form);
+		let task = new Task(attributes);
+		task.save((xhr, event)=>{
+			let responseData = JSON.parse(xhr.responseText);
+			let taskData = responseData.data;
+			task.id = taskData.id;
+			if (callback) {
+				callback(task);
 			}
 		});
+
+		this.reset();
+
+		return task;
 	}
 
 	reset() {
@@ -75,7 +79,9 @@ class TaskItemNewChildForm extends React.Component {
 
 	form_onSubmit(event) {
 		event.preventDefault();
-		this.post();
+		this.save((task)=>{
+			this.props.onSave(event, task);
+		});
 	}
 }
 

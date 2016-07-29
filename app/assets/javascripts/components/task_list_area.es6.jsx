@@ -15,7 +15,7 @@ class TaskListArea extends React.Component {
 		};
 	}
 
-	newItemFormArea_onSave(task) {
+	newItemFormArea_onSave(event, task) {
 		let taskData = this.state.taskData;
 		taskData.push(task);
 		this.setState({ taskData: taskData });

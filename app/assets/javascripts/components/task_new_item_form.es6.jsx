@@ -36,9 +36,9 @@ class TaskNewItemFormArea extends React.Component {
 		this.setState({ opening: !this.state.opening });
 	}
 
-	form_onSave(task) {
+	form_onSave(event, task) {
 		this.reset();
-		this.props.onSave(task);
+		this.props.onSave(event, task);
 	}
 }
 
