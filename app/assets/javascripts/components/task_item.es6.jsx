@@ -13,7 +13,7 @@ class TaskItem extends React.Component {
 				</div>
 				<TaskList className="task-item-children js-task-children" tasks={task.children} />
 				<div className="task-item-formAddChild js-task-formAddChild">
-					<TaskItemNewChildForm onSave={this.taskNewChildForm_onSave.bind(this)} parentTask={task} />
+					<TaskItemNewForm onSave={this.taskNewChildForm_onSave.bind(this)} parentTask={task} />
 				</div>
 				{/*
 				+start_form(task)

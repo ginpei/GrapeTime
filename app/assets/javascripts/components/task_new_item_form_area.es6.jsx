@@ -15,7 +15,7 @@ class TaskNewItemFormArea extends React.Component {
 					<button onClick={this.openForm_onClick.bind(this)}>New Task</button>
 				</p>
 				<div className={formWrapperClassName}>
-					<TaskItemNewChildForm ref="form" onSave={this.form_onSave.bind(this)} />
+					<TaskItemNewForm ref="form" onSave={this.form_onSave.bind(this)} />
 				</div>
 			</div>
 		);

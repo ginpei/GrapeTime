@@ -1,4 +1,4 @@
-class TaskItemNewChildForm extends React.Component {
+class TaskItemNewForm extends React.Component {
 	render() {
 		let s = this.state;
 		let parentTask = this.props.parentTask;
@@ -85,7 +85,7 @@ class TaskItemNewChildForm extends React.Component {
 	}
 }
 
-TaskItemNewChildForm.propTypes = {
+TaskItemNewForm.propTypes = {
 	onSave: React.PropTypes.func,
 	parentTask: React.PropTypes.object,
 };
