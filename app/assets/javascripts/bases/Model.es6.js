@@ -20,9 +20,20 @@ class Model {
 	_importAllAttributes(attributes) {
 		this.attributes = {};
 		for (let name in attributes) {
-			this[name] = attributes[name];
-			this.attributes[name] = attributes[name];  // FIXME
+			this.attributes[name] = attributes[name];
+
+			let getter = function(name) {
+				return this.attributes[name];
+			}.bind(this, name);
+			Object.defineProperty(this, name, { get: getter });
 		}
+	}
+
+	/**
+	 * TODO: events
+	 */
+	set(name, value) {
+		this.attributes[name] = value;
 	}
 
 	/**

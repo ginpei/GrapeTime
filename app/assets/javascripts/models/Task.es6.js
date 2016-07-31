@@ -11,12 +11,14 @@ class Task extends Model {
 	 * @see #children
 	 */
 	_prepareChildren() {
+		let children;
 		if (this.children) {
-			this.children = this.children.map((v)=>new Task(v));
+			children = this.children.map((v)=>new Task(v));
 		}
 		else {
-			this.children = [];
+			children = [];
 		}
+		this.set('children', children);
 	}
 
 	/**
