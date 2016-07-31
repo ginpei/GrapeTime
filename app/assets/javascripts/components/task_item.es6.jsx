@@ -9,7 +9,7 @@ class TaskItem extends React.Component {
 				<TaskItemBody onToggle={this.itemBody_onToggle.bind(this)} onToggleWorking={this.itemBody_onToggleWorking.bind(this)} task={task} />
 				<div className="task-item-formEdit js-task-formEdit">
 					<TaskItemDeleteButton onSave={this.taskItemDeleteButton_onSave.bind(this)} task={task} />
-					<TaskEditForm onSave={this.taskEditForm_onSave.bind(this)} task={task} />
+					<TaskItemEditForm onSave={this.taskEditForm_onSave.bind(this)} task={task} />
 				</div>
 				<TaskList className="task-item-children js-task-children" tasks={task.children} />
 				<div className="task-item-formAddChild js-task-formAddChild">

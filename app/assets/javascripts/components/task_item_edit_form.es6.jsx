@@ -1,4 +1,4 @@
-class TaskEditForm extends React.Component {
+class TaskItemEditForm extends React.Component {
 	render() {
 		let task = this.props.task;
 		let s = this.state;
@@ -70,12 +70,12 @@ class TaskEditForm extends React.Component {
 	}
 }
 
-// TaskEditForm.defaultProps = {
+// TaskItemEditForm.defaultProps = {
 // 	name: '',
 // 	necessary_time: 0,
 // };
 
-TaskEditForm.propTypes = {
+TaskItemEditForm.propTypes = {
 	onSave: React.PropTypes.func,
 	task: React.PropTypes.object,
 };
