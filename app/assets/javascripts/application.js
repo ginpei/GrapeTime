@@ -17,6 +17,7 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require_tree ./bases
 //= require_tree .
 
 window.Rails = {
