@@ -25,7 +25,7 @@ class TaskItemEditForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		var task = props.task;
+		let task = props.task;
 		this.state = {
 			name: task.name,
 			necessary_time: task.necessary_time,

@@ -37,7 +37,7 @@ class Task extends Model {
 	// }
 
 	// get progress() {
-	// 	var rate;
+	// 	let rate;
 	// 	if (this.total_necessary_time) {
 	// 		rate = (this.total_spent_time / this.total_necessary_time);
 	// 	}

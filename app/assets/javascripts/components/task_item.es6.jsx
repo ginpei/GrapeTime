@@ -87,7 +87,7 @@ class TaskItem extends React.Component {
 	}
 
 	itemBody_onToggle(type) {
-		var nextState = {};
+		let nextState = {};
 		nextState[type] = !this.state[type];
 		this.setState(nextState);
 	}

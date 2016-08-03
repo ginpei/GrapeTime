@@ -40,7 +40,7 @@ class Model {
 	 * @param {function} [callback]
 	 */
 	save(callback) {
-		var options = {
+		let options = {
 			callback: callback,
 			data: { task: this.attributes },
 			method: (this.id ? 'PATCH' : 'POST'),

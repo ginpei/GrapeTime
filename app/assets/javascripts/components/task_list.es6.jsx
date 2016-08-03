@@ -1,7 +1,7 @@
 class TaskList extends React.Component {
 	render() {
-		var className = `task-list ${this.props.className || ''}`;
-		var children = this.state.tasks.map(v=>{
+		let className = `task-list ${this.props.className || ''}`;
+		let children = this.state.tasks.map(v=>{
 			return <TaskItem onDestroy={this.item_onDestroy.bind(this)} key={v.id} task={v} />;
 		});
 		return (

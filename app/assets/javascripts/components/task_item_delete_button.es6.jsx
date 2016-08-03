@@ -14,7 +14,7 @@ class TaskItemDeleteButton extends React.Component {
 	}
 
 	confirm() {
-		var p = new Promise((resolve, reject)=>{
+		let p = new Promise((resolve, reject)=>{
 			let result = window.confirm('Are you sure?');
 			if (result) {
 				resolve();

@@ -1,10 +1,10 @@
 class TaskNewItemFormArea extends React.Component {
 	render() {
-		var s = this.state;
+		let s = this.state;
 
-		var url = '/tasks/';
+		let url = '/tasks/';
 
-		var formWrapperClassName = 'task-new_area';
+		let formWrapperClassName = 'task-new_area';
 		if (s.opening) {
 			formWrapperClassName += ' is-task-new_area-opened';
 		}
