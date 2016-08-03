@@ -1,0 +1,13 @@
+{
+  "private": "true",
+  "scripts": {
+    "test": "mocha front_test/**/**.test.es6.js --compilers js:babel-register"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.0.0"
+  }
+}

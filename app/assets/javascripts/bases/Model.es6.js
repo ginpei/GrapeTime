@@ -104,3 +104,7 @@ class Model {
 		throw new Error(message);
 	}
 }
+
+if (typeof module !== 'undefined') {
+	module.exports = Model;
+}
