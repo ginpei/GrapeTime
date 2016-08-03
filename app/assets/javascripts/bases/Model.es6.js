@@ -1,7 +1,7 @@
 /**
  * @example
  * class Item extends Model {
- *   get urlBase() {
+ *   get baseUrl() {
  *   	return '/items';
  *   }
  * }
@@ -89,7 +89,7 @@ class Model {
 	 * @returns {string}
 	 */
 	get url() {
-		let url = this.urlBase;
+		let url = this.baseUrl;
 		if (this.id) {
 			url += `/${this.id}`;
 		}
@@ -99,8 +99,8 @@ class Model {
 	/**
 	 * @returns {string}
 	 */
-	get urlBase() {
-		let message = '`urlBase` needs to be implemented.';
+	get baseUrl() {
+		let message = '`baseUrl` needs to be implemented.';
 		throw new Error(message);
 	}
 }

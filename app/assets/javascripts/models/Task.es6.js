@@ -24,7 +24,7 @@ class Task extends Model {
 	/**
 	 * @returns {string}
 	 */
-	get urlBase() {
+	get baseUrl() {
 		return '/tasks';
 	}
 
