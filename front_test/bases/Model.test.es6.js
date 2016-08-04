@@ -54,7 +54,55 @@ describe('bases/Model', ()=>{
 	});
 
 	describe('save()', ()=>{
-		it('works properly');
+		describe('for new options', ()=>{
+			let options;
+			let callback;
+
+			beforeEach(()=>{
+				callback = function(){};
+				model.set('id', null);
+				model._sendRequest = (o)=>{
+					options = o;
+				};
+
+				model.save(callback);
+			});
+
+			it('sets the specified callback', ()=>{
+				expect(options.callback).to.equal(callback);
+			});
+			it('sets model data', ()=>{
+				let data = {};
+				data.task = model.attributes;
+				expect(options.data).to.eql(data);
+			});
+			it('sets proper method for new model', ()=>{
+				expect(options.method).to.equal('POST');
+			});
+			it('sets url', ()=>{
+				expect(options.url).to.equal('/test_models');
+			});
+		});
+
+		describe('for existing options', ()=>{
+			let options;
+
+			beforeEach(()=>{
+				model.set('id', 123);
+				model._sendRequest = (o)=>{
+					options = o;
+				};
+				model.save();
+			});
+
+			it('sets proper method for existing model', ()=>{
+				expect(options.method).to.equal('PATCH');
+			});
+
+			it('sets url', ()=>{
+				expect(options.url).to.equal('/test_models/123');
+			});
+		});
 	});
 
 	describe('url', ()=>{

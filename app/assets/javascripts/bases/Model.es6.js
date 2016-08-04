@@ -88,6 +88,13 @@ class Model {
 	/**
 	 * @returns {string}
 	 */
+	get id() {
+		return this.attributes.id;
+	}
+
+	/**
+	 * @returns {string}
+	 */
 	get url() {
 		let url = this.baseUrl;
 		if (this.id) {
