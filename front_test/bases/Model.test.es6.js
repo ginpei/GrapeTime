@@ -20,7 +20,7 @@ describe('bases/Model', ()=>{
 		let attr;
 
 		beforeEach(()=>{
-			attr = { obj: obj };
+			attr = { obj: obj, save: 123 };
 			model = new TestModel(attr);
 		});
 
@@ -36,7 +36,9 @@ describe('bases/Model', ()=>{
 			expect(model.obj).to.equal(obj);
 		});
 
-		it('does not create accessors if the name exists');
+		it('does not create accessors if the name exists', ()=>{
+			expect(typeof model.save).to.equal('function');
+		});
 	});
 
 	describe('set(name, value)', ()=>{

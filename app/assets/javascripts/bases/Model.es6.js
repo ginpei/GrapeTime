@@ -25,7 +25,10 @@ class Model {
 			let getter = function(name) {
 				return this.attributes[name];
 			}.bind(this, name);
-			Object.defineProperty(this, name, { get: getter });
+
+			if (!(name in this)) {
+				Object.defineProperty(this, name, { get: getter });
+			}
 		}
 	}
 
