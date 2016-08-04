@@ -40,13 +40,23 @@ class Model {
 	 * @param {function} [callback]
 	 */
 	save(callback) {
+		let options = this._createSaveOptions(callback);
+		this._sendRequest(options);
+	}
+
+	/**
+	 * @param {function} callback
+	 * @returns {object}
+	 */
+	_createSaveOptions(callback) {
 		let options = {
 			callback: callback,
 			data: { task: this.attributes },  // FIXME
 			method: (this.id ? 'PATCH' : 'POST'),
 			url: this.url,
 		};
-		this._sendRequest(options);
+
+		return options;
 	}
 
 	/**
@@ -61,7 +71,7 @@ class Model {
 			options.callback = ()=>{};
 		}
 
-		let xhr = new XMLHttpRequest();
+		let xhr = this._createXhr();
 
 		xhr.onload = function(event) {
 			options.callback(xhr, event);
@@ -76,6 +86,13 @@ class Model {
 		xhr.send(JSON.stringify(options.data));
 
 		return xhr;
+	}
+
+	/**
+	 * @returns {XMLHttpRequest}
+	 */
+	_createXhr() {
+		return new XMLHttpRequest();
 	}
 
 	/**
