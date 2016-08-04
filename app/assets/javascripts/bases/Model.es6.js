@@ -42,7 +42,7 @@ class Model {
 	save(callback) {
 		let options = {
 			callback: callback,
-			data: { task: this.attributes },
+			data: { task: this.attributes },  // FIXME
 			method: (this.id ? 'PATCH' : 'POST'),
 			url: this.url,
 		};
