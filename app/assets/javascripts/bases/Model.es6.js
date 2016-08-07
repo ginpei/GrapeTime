@@ -42,9 +42,31 @@ class Model {
 
 	/**
 	 * TODO: events
+	 * @param {string} name
+	 * @param {any} value
+	 * @example
+	 * model.set('foo', 123);
+	 * console.log(model.attributes.foo);  // => 123
+	 * console.log(model.get('foo'));  // => 123
+	 * @example
+	 * model.set({
+	 *   foo: 123,
+	 *   bar: 234,
+	 * });
+	 * console.log(model.get('foo'));  // => 123
+	 * console.log(model.get('bar'));  // => 234
 	 */
 	set(name, value) {
-		this.attributes[name] = value;
+		if (typeof name === 'string') {
+			this.attributes[name] = value;
+		}
+		else {
+			let attributes = name;
+			for (let name in attributes) {
+				let value = attributes[name];
+				this.set(name, value);
+			}
+		}
 	}
 
 	/**

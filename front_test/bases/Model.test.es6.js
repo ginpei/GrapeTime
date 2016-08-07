@@ -55,6 +55,20 @@ describe('bases/Model', ()=>{
 		});
 	});
 
+	describe('set(attributes)', ()=>{
+		beforeEach(()=>{
+			model.set({
+				num: 100,
+				str: 'foo',
+			});
+		});
+
+		it('stores values', ()=>{
+			expect(model.attributes.num).to.equal(100);
+			expect(model.attributes.str).to.equal('foo');
+		});
+	});
+
 	describe('get(name)', ()=>{
 		beforeEach(()=>{
 			model.set('num', 100);
