@@ -33,6 +33,14 @@ class Model {
 	}
 
 	/**
+	 * @params {string} name
+	 * @retutns {any}
+	 */
+	get(name) {
+		return this.attributes[name];
+	}
+
+	/**
 	 * TODO: events
 	 */
 	set(name, value) {

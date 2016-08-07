@@ -55,6 +55,18 @@ describe('bases/Model', ()=>{
 		});
 	});
 
+	describe('get(name)', ()=>{
+		beforeEach(()=>{
+			model.set('num', 100);
+			model.attributes.str = 'foo';
+		});
+
+		it('returns the value', ()=>{
+			expect(model.get('num')).to.equal(100);
+			expect(model.get('str')).to.equal('foo');
+		});
+	});
+
 	describe('save()', ()=>{
 		describe('for new options', ()=>{
 			let options;
