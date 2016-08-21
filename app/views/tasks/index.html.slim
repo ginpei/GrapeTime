@@ -1,17 +1,8 @@
 h1 Listing tasks
 
+p#notice = notice
+
 = react_component('TaskListArea', taskData: @tasks_data)
 
 script#data-tasks type="application/json"
 	= @tasks_json
-
-p#notice = notice
-
-p
-	button.js-task-new New Task
-
-div.task-new_area.js-task-new_area
-	//- Rendered by JS
-
-div#task-list.js-task-list
-	//- Rendered by JS
