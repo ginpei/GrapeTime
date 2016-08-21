@@ -24,13 +24,11 @@ class TaskList extends React.Component {
 			tasks: updatedTasks,
 		});
 	}
-
-	get defaultProps() {
-		return {
-			tasks: [],
-		};
-	}
 }
+
+TaskList.defaultProps = {
+	tasks: [],
+};
 
 TaskList.propTypes = {
 	tasks: React.PropTypes.array,
