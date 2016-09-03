@@ -26,6 +26,12 @@ TestModel.attributeTypes = {
 		return message;
 	},
 };
+class StrictAttributesModel extends Model {
+}
+StrictAttributesModel.attributeTypes = {
+	'validNumber': Model.AttributeTypes.number,
+};
+StrictAttributesModel.allowUndefinedAttributes = false;
 
 describe('bases/Model', ()=>{
 	let model;
@@ -191,13 +197,6 @@ describe('bases/Model', ()=>{
 
 	describe('checkValidation()', ()=>{
 		describe('for types', ()=>{
-			it('accepts any values when the type is not defined', ()=>{
-				expect(()=>{
-					model.checkValidation('undefinedValue', 123);
-					model.checkValidation('undefinedValue', 'foo');
-				}).to.not.throw();
-			});
-
 			it('accepts any values when the specified type is any', ()=>{
 				expect(()=>{
 					model.checkValidation('validAnything', 123);
@@ -279,6 +278,33 @@ describe('bases/Model', ()=>{
 				expect(()=>{
 					model.checkValidation('validDate', Date.now());
 				}).to.throw(/The value \d+ of validDate has to be a Date./);
+			});
+		});
+
+		describe('allowUndefinedAttributes', ()=>{
+			let strictModel;
+
+			beforeEach(()=>{
+				strictModel = new StrictAttributesModel();
+			});
+
+			it('accepts any undefined values if the flag is off', ()=>{
+				expect(()=>{
+					model.checkValidation('undefinedValue', 123);
+					model.checkValidation('undefinedValue', 'foo');
+				}).to.not.throw();
+			});
+
+			it('accepts a defined value if the flag is on', ()=>{
+				expect(()=>{
+					strictModel.checkValidation('validNumber', 123);
+				}).to.not.throw();
+			});
+
+			it('rejects any undefined values if the flag is on', ()=>{
+				expect(()=>{
+					strictModel.checkValidation('undefinedValue', 123);
+				}).to.throw('The value of undefinedValue has to be defined in attributeTypes at the constructor.');
 			});
 		});
 	});

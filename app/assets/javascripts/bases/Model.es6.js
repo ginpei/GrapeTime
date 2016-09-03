@@ -84,7 +84,7 @@ class Model {
 
 		let definition = definitions[name];
 		if (!definition) {
-			return;
+			this._checkUndefinedAttributeValidation(name, value);
 		}
 		else if (definition === types.bool) {
 			this._checkTypeValidation(name, value, 'boolean');
@@ -103,6 +103,12 @@ class Model {
 		}
 		else if (definition instanceof types.InstanceOf) {
 			this._checkConstructorValidation(name, value, definition);
+		}
+	}
+
+	_checkUndefinedAttributeValidation(name, value) {
+		if (this.constructor.allowUndefinedAttributes === false) {
+			throw new Error(`The value of ${name} has to be defined in attributeTypes at the constructor.`);
 		}
 	}
 
