@@ -190,21 +190,21 @@ describe('bases/Model', ()=>{
 	});
 
 	describe('checkValidation()', ()=>{
-		it('accepts any values when the type is not defined', ()=>{
-			expect(()=>{
-				model.checkValidation('undefinedValue', 123);
-				model.checkValidation('undefinedValue', 'foo');
-			}).to.not.throw();
-		});
-
-		it('accepts any values when the specified type is any', ()=>{
-			expect(()=>{
-				model.checkValidation('validAnything', 123);
-				model.checkValidation('validAnything', 'foo');
-			}).to.not.throw();
-		});
-
 		describe('for types', ()=>{
+			it('accepts any values when the type is not defined', ()=>{
+				expect(()=>{
+					model.checkValidation('undefinedValue', 123);
+					model.checkValidation('undefinedValue', 'foo');
+				}).to.not.throw();
+			});
+
+			it('accepts any values when the specified type is any', ()=>{
+				expect(()=>{
+					model.checkValidation('validAnything', 123);
+					model.checkValidation('validAnything', 'foo');
+				}).to.not.throw();
+			});
+
 			it('accepts a value which is a bool', ()=>{
 				expect(()=>{
 					model.checkValidation('validBool', true);
