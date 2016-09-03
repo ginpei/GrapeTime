@@ -76,6 +76,7 @@ class Model {
 	 * @param {any} value
 	 */
 	checkValidation(name, value) {
+		let types = Model.AttributeTypes;
 		let definitions = this.constructor.attributeTypes;
 		if (!definitions) {
 			return;
@@ -85,10 +86,10 @@ class Model {
 		if (!definition) {
 			return;
 		}
-		else if (typeof definition === 'string') {
-			this._checkTypeValidation(name, value, definition);
+		else if (definition === types.string) {
+			this._checkTypeValidation(name, value, 'string');
 		}
-		else if (typeof definition === 'function') {
+		else if (definition instanceof types.InstanceOf) {
 			this._checkConstructorValidation(name, value, definition);
 		}
 	}
@@ -99,7 +100,8 @@ class Model {
 		}
 	}
 
-	_checkConstructorValidation(name, value, constructor) {
+	_checkConstructorValidation(name, value, instanceOf) {
+		let constructor = instanceOf.typeConstructor;
 		if (!(value instanceof constructor)) {
 			throw new Error(`The value ${value} of ${name} has to be a ${constructor.name}.`);
 		}
@@ -201,6 +203,18 @@ class Model {
 		throw new Error(message);
 	}
 }
+
+Model.AttributeTypes = {
+	any: {},
+	string: {},
+	number: {},
+	instanceOf: function(constructor) {
+		return new Model.AttributeTypes.InstanceOf(constructor);
+	},
+	InstanceOf: function InstanceOf(constructor) {
+		this.typeConstructor = constructor;
+	},
+};
 
 if (typeof module !== 'undefined') {
 	module.exports = Model;

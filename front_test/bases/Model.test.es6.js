@@ -8,10 +8,10 @@ class TestModel extends Model {
 	}
 }
 TestModel.attributeTypes = {
-	'validAnything': '',
-	'validString': 'string',
-	'validDate': Date,
-	'validOneLetter': function(value) {
+	'validAnything': Model.AttributeTypes.any,
+	'validString': Model.AttributeTypes.string,
+	'validDate': Model.AttributeTypes.instanceOf(Date),
+	'validOneLetter': function(AttributeTypes, name, value) {
 		let message = null;
 		if (typeof value !== 'string') {
 			message = 'has to be a string';
