@@ -74,7 +74,11 @@ class Model {
 	 */
 	save(callback) {
 		let options = this._createSaveOptions(callback);
-		this._sendRequest(options);
+		let xhr = this._sendRequest(options);
+		xhr.addEventListener('load', (event)=>{
+			let attr = JSON.parse(xhr.responseText).data;
+			this.set(attr);
+		});
 	}
 
 	/**

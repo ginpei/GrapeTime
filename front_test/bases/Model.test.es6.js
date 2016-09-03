@@ -91,6 +91,11 @@ describe('bases/Model', ()=>{
 				model.set('id', null);
 				model._sendRequest = (o)=>{
 					options = o;
+					let xhr = {
+						addEventListener: function(type, listener) {
+						},
+					};
+					return xhr;
 				};
 
 				model.save(callback);
@@ -99,7 +104,7 @@ describe('bases/Model', ()=>{
 			it('sets the specified callback', ()=>{
 				expect(options.callback).to.equal(callback);
 			});
-			it('sets model data', ()=>{
+			it('sets model data as parameters', ()=>{
 				let data = {};
 				data.task = model.attributes;
 				expect(options.data).to.eql(data);
@@ -119,6 +124,11 @@ describe('bases/Model', ()=>{
 				model.set('id', 123);
 				model._sendRequest = (o)=>{
 					options = o;
+					let xhr = {
+						addEventListener: function(type, listener) {
+						},
+					};
+					return xhr;
 				};
 				model.save();
 			});
@@ -129,6 +139,33 @@ describe('bases/Model', ()=>{
 
 			it('sets url', ()=>{
 				expect(options.url).to.equal('/test_models/123');
+			});
+		});
+
+		describe('data', ()=>{
+			beforeEach(()=>{
+				model._sendRequest = (o)=>{
+					let xhr = {
+						addEventListener: function(type, listener) {
+							xhr.responseText = JSON.stringify({
+								data: {
+									id: 123,
+									name: 'foo',
+								},
+							});
+
+							let event = {};
+							listener(event);
+						},
+					};
+					return xhr;
+				};
+				model.save();
+			});
+
+			it('updates model attributes according to the response', ()=>{
+				expect(model.attributes.id).to.equal(123);
+				expect(model.attributes.name).to.equal('foo');
 			});
 		});
 	});
