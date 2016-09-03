@@ -197,7 +197,7 @@ describe('bases/Model', ()=>{
 			}).to.not.throw();
 		});
 
-		it('accepts any values when the specified type is empty', ()=>{
+		it('accepts any values when the specified type is any', ()=>{
 			expect(()=>{
 				model.checkValidation('validAnything', 123);
 				model.checkValidation('validAnything', 'foo');
