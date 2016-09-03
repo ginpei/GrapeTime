@@ -9,8 +9,12 @@ class TestModel extends Model {
 }
 TestModel.attributeTypes = {
 	'validAnything': Model.AttributeTypes.any,
-	'validString': Model.AttributeTypes.string,
+	'validBool': Model.AttributeTypes.bool,
 	'validDate': Model.AttributeTypes.instanceOf(Date),
+	'validFunction': Model.AttributeTypes.func,
+	'validNumber': Model.AttributeTypes.number,
+	'validObject': Model.AttributeTypes.object,
+	'validString': Model.AttributeTypes.string,
 	'validOneLetter': function(AttributeTypes, name, value) {
 		let message = null;
 		if (typeof value !== 'string') {
@@ -200,16 +204,68 @@ describe('bases/Model', ()=>{
 			}).to.not.throw();
 		});
 
-		it('accepts a value which is a specified type', ()=>{
-			expect(()=>{
-				model.checkValidation('validString', 'foo');
-			}).to.not.throw();
-		});
+		describe('for types', ()=>{
+			it('accepts a value which is a bool', ()=>{
+				expect(()=>{
+					model.checkValidation('validBool', true);
+				}).to.not.throw();
+			});
 
-		it('rejects a value which is not a specified type', ()=>{
-			expect(()=>{
-				model.checkValidation('validString', 123);
-			}).to.throw('The value 123 of validString has to be a string.');
+			it('rejects a value which is not a bool', ()=>{
+				expect(()=>{
+					model.checkValidation('validBool', 123);
+				}).to.throw('The value 123 of validBool has to be a boolean.');
+			});
+
+			it('accepts a value which is a function', ()=>{
+				expect(()=>{
+					model.checkValidation('validFunction', function(){});
+				}).to.not.throw();
+			});
+
+			it('rejects a value which is not a function', ()=>{
+				expect(()=>{
+					model.checkValidation('validFunction', 123);
+				}).to.throw('The value 123 of validFunction has to be a function.');
+			});
+
+			it('accepts a value which is a number', ()=>{
+				expect(()=>{
+					model.checkValidation('validNumber', 123);
+				}).to.not.throw();
+			});
+
+			it('rejects a value which is not a number', ()=>{
+				expect(()=>{
+					model.checkValidation('validNumber', 'foo');
+				}).to.throw('The value foo of validNumber has to be a number.');
+			});
+
+			it('accepts a value which is a object', ()=>{
+				expect(()=>{
+					model.checkValidation('validObject', {});
+					model.checkValidation('validObject', []);
+					model.checkValidation('validObject', new Date);
+				}).to.not.throw();
+			});
+
+			it('rejects a value which is not a object', ()=>{
+				expect(()=>{
+					model.checkValidation('validObject', 123);
+				}).to.throw('The value 123 of validObject has to be a object.');
+			});
+
+			it('accepts a value which is a string', ()=>{
+				expect(()=>{
+					model.checkValidation('validString', 'foo');
+				}).to.not.throw();
+			});
+
+			it('rejects a value which is not a string', ()=>{
+				expect(()=>{
+					model.checkValidation('validString', 123);
+				}).to.throw('The value 123 of validString has to be a string.');
+			});
 		});
 
 		it('accepts a value which is a specified instance', ()=>{
