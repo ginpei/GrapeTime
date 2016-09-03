@@ -268,16 +268,18 @@ describe('bases/Model', ()=>{
 			});
 		});
 
-		it('accepts a value which is a specified instance', ()=>{
-			expect(()=>{
-				model.checkValidation('validDate', new Date());
-			}).to.not.throw();
-		});
+		describe('InstanceOf', ()=>{
+			it('accepts a value which is a specified instance', ()=>{
+				expect(()=>{
+					model.checkValidation('validDate', new Date());
+				}).to.not.throw();
+			});
 
-		it('rejects a value which is not a specified instance', ()=>{
-			expect(()=>{
-				model.checkValidation('validDate', Date.now());
-			}).to.throw(/The value \d+ of validDate has to be a Date./);
+			it('rejects a value which is not a specified instance', ()=>{
+				expect(()=>{
+					model.checkValidation('validDate', Date.now());
+				}).to.throw(/The value \d+ of validDate has to be a Date./);
+			});
 		});
 	});
 
