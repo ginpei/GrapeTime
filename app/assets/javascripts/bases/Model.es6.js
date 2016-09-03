@@ -19,17 +19,7 @@ class Model {
 	 */
 	_importAllAttributes(attributes) {
 		this.attributes = {};
-		for (let name in attributes) {
-			this.attributes[name] = attributes[name];
-
-			let getter = function(name) {
-				return this.attributes[name];
-			}.bind(this, name);
-
-			if (!(name in this)) {
-				Object.defineProperty(this, name, { get: getter });
-			}
-		}
+		this.set(attributes);
 	}
 
 	/**
