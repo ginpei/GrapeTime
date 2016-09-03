@@ -11,6 +11,7 @@ class Model {
 	 * @param {object} [attributes]
 	 */
 	constructor(attributes={}) {
+		this.attributes = {};
 		this._importAllAttributes(attributes);
 	}
 
@@ -18,7 +19,6 @@ class Model {
 	 * @param {object} [attributes]
 	 */
 	_importAllAttributes(attributes) {
-		this.attributes = {};
 		this.set(attributes);
 	}
 
