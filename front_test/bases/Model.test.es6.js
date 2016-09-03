@@ -213,7 +213,7 @@ describe('bases/Model', ()=>{
 			it('rejects a value which is not a bool', ()=>{
 				expect(()=>{
 					model.checkValidation('validBool', 123);
-				}).to.throw('The value 123 of validBool has to be a boolean.');
+				}).to.throw('The value 123 of validBool has to be a boolean, not a number.');
 			});
 
 			it('accepts a value which is a function', ()=>{
@@ -225,7 +225,7 @@ describe('bases/Model', ()=>{
 			it('rejects a value which is not a function', ()=>{
 				expect(()=>{
 					model.checkValidation('validFunction', 123);
-				}).to.throw('The value 123 of validFunction has to be a function.');
+				}).to.throw('The value 123 of validFunction has to be a function, not a number.');
 			});
 
 			it('accepts a value which is a number', ()=>{
@@ -237,7 +237,7 @@ describe('bases/Model', ()=>{
 			it('rejects a value which is not a number', ()=>{
 				expect(()=>{
 					model.checkValidation('validNumber', 'foo');
-				}).to.throw('The value foo of validNumber has to be a number.');
+				}).to.throw('The value foo of validNumber has to be a number, not a string.');
 			});
 
 			it('accepts a value which is a object', ()=>{
@@ -251,7 +251,7 @@ describe('bases/Model', ()=>{
 			it('rejects a value which is not a object', ()=>{
 				expect(()=>{
 					model.checkValidation('validObject', 123);
-				}).to.throw('The value 123 of validObject has to be a object.');
+				}).to.throw('The value 123 of validObject has to be a object, not a number.');
 			});
 
 			it('accepts a value which is a string', ()=>{
@@ -263,7 +263,7 @@ describe('bases/Model', ()=>{
 			it('rejects a value which is not a string', ()=>{
 				expect(()=>{
 					model.checkValidation('validString', 123);
-				}).to.throw('The value 123 of validString has to be a string.');
+				}).to.throw('The value 123 of validString has to be a string, not a number.');
 			});
 		});
 
@@ -277,7 +277,7 @@ describe('bases/Model', ()=>{
 			it('rejects a value which is not a specified instance', ()=>{
 				expect(()=>{
 					model.checkValidation('validDate', Date.now());
-				}).to.throw(/The value \d+ of validDate has to be a Date./);
+				}).to.throw(/The value \d+ of validDate has to be a Date, not a Number\./);
 			});
 		});
 

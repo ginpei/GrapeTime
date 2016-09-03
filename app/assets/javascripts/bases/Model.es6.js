@@ -114,14 +114,14 @@ class Model {
 
 	_checkTypeValidation(name, value, type) {
 		if (typeof value !== type) {
-			throw new Error(`The value ${value} of ${name} has to be a ${type}.`);
+			throw new Error(`The value ${value} of ${name} has to be a ${type}, not a ${typeof value}.`);
 		}
 	}
 
 	_checkConstructorValidation(name, value, instanceOf) {
 		let constructor = instanceOf.typeConstructor;
 		if (!(value instanceof constructor)) {
-			throw new Error(`The value ${value} of ${name} has to be a ${constructor.name}.`);
+			throw new Error(`The value ${value} of ${name} has to be a ${constructor.name}, not a ${value.constructor.name}.`);
 		}
 	}
 
