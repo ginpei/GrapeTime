@@ -82,7 +82,7 @@ describe('bases/Model', ()=>{
 	});
 
 	describe('save()', ()=>{
-		describe('for new options', ()=>{
+		describe('options for a new record', ()=>{
 			let options;
 			let callback;
 
@@ -112,7 +112,7 @@ describe('bases/Model', ()=>{
 			});
 		});
 
-		describe('for existing options', ()=>{
+		describe('options for an existing record', ()=>{
 			let options;
 
 			beforeEach(()=>{
