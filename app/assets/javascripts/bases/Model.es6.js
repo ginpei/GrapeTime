@@ -58,6 +58,7 @@ class Model {
 	 */
 	set(name, value) {
 		if (typeof name === 'string') {
+			this.checkValidation(name, value);
 			this.attributes[name] = value;
 		}
 		else {
@@ -66,6 +67,41 @@ class Model {
 				let value = attributes[name];
 				this.set(name, value);
 			}
+		}
+	}
+
+	/**
+	 * Throw an error when the value is not valid as the specified attribute.
+	 * @param {string} name
+	 * @param {any} value
+	 */
+	checkValidation(name, value) {
+		let definitions = this.constructor.attributeTypes;
+		if (!definitions) {
+			return;
+		}
+
+		let definition = definitions[name];
+		if (!definition) {
+			return;
+		}
+		else if (typeof definition === 'string') {
+			this._checkTypeValidation(name, value, definition);
+		}
+		else if (typeof definition === 'function') {
+			this._checkConstructorValidation(name, value, definition);
+		}
+	}
+
+	_checkTypeValidation(name, value, type) {
+		if (typeof value !== type) {
+			throw new Error(`The value ${value} of ${name} has to be a ${type}.`);
+		}
+	}
+
+	_checkConstructorValidation(name, value, constructor) {
+		if (!(value instanceof constructor)) {
+			throw new Error(`The value ${value} of ${name} has to be a ${constructor.name}.`);
 		}
 	}
 

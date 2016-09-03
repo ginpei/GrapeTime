@@ -7,6 +7,21 @@ class TestModel extends Model {
 		return '/test_models';
 	}
 }
+TestModel.attributeTypes = {
+	'validAnything': '',
+	'validString': 'string',
+	'validDate': Date,
+	'validOneLetter': function(value) {
+		let message = null;
+		if (typeof value !== 'string') {
+			message = 'has to be a string';
+		}
+		else if (value.length !== 1) {
+			message = 'has to be one letter';
+		}
+		return message;
+	},
+};
 
 describe('bases/Model', ()=>{
 	let model;
@@ -167,6 +182,46 @@ describe('bases/Model', ()=>{
 				expect(model.attributes.id).to.equal(123);
 				expect(model.attributes.name).to.equal('foo');
 			});
+		});
+	});
+
+	describe('checkValidation()', ()=>{
+		it('accepts any values when the type is not defined', ()=>{
+			expect(()=>{
+				model.checkValidation('undefinedValue', 123);
+				model.checkValidation('undefinedValue', 'foo');
+			}).to.not.throw();
+		});
+
+		it('accepts any values when the specified type is empty', ()=>{
+			expect(()=>{
+				model.checkValidation('validAnything', 123);
+				model.checkValidation('validAnything', 'foo');
+			}).to.not.throw();
+		});
+
+		it('accepts a value which is a specified type', ()=>{
+			expect(()=>{
+				model.checkValidation('validString', 'foo');
+			}).to.not.throw();
+		});
+
+		it('rejects a value which is not a specified type', ()=>{
+			expect(()=>{
+				model.checkValidation('validString', 123);
+			}).to.throw('The value 123 of validString has to be a string.');
+		});
+
+		it('accepts a value which is a specified instance', ()=>{
+			expect(()=>{
+				model.checkValidation('validDate', new Date());
+			}).to.not.throw();
+		});
+
+		it('rejects a value which is not a specified instance', ()=>{
+			expect(()=>{
+				model.checkValidation('validDate', Date.now());
+			}).to.throw(/The value \d+ of validDate has to be a Date./);
 		});
 	});
 
