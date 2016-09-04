@@ -4,20 +4,55 @@ class Task extends Model {
 	 */
 	constructor(attributes={}) {
 		super(attributes);
-		this._prepareChildren();
+		this.attributes.children = [];
+
+		// create getters
+		// TODO: implement at Model according to attributeTypes
+		[
+			'children',
+			'created_at',
+			'estimate_time',
+			'id',
+			'name',
+			'necessary_time',
+			'parent_id',
+			'spent_time',
+			'total_necessary_time',
+			'total_spent_time',
+			'updated_at',
+			'working',
+		].forEach((name)=>{
+			let getter = function(name) {
+				return this.get(name);
+			}.bind(this, name);
+
+			Object.defineProperty(this, name, { get: getter });
+		});
+
+		this._prepareChildren(attributes);
+	}
+
+	/**
+	 * @see Model#_importAllAttributes
+	 */
+	_importAllAttributes(attributes) {
+		if (typeof attributes.created_at === 'string') {
+			attributes.created_at = new Date(attributes.created_at);
+		}
+
+		if (typeof attributes.updated_at === 'string') {
+			attributes.updated_at = new Date(attributes.updated_at);
+		}
+
+		this.set(attributes);
 	}
 
 	/**
 	 * @see #children
 	 */
-	_prepareChildren() {
+	_prepareChildren(attributes) {
 		let children;
-		if (this.children) {
-			children = this.children.map((v)=>new Task(v));
-		}
-		else {
-			children = [];
-		}
+		children = attributes.children.map((v)=>new Task(v));
 		this.set('children', children);
 	}
 
@@ -47,6 +82,23 @@ class Task extends Model {
 	// 	return rate;
 	// }
 }
+
+Task.attributeTypes = {
+	children: Model.AttributeTypes.instanceOf(Array),
+	created_at: Model.AttributeTypes.instanceOf(Date),
+	estimate_time: Model.AttributeTypes.number,
+	id: Model.AttributeTypes.number,
+	name: Model.AttributeTypes.string,
+	necessary_time: Model.AttributeTypes.number,
+	parent_id: Model.AttributeTypes.any,  // FIXME: to accept undefined or number
+	spent_time: Model.AttributeTypes.number,
+	total_necessary_time: Model.AttributeTypes.number,
+	total_spent_time: Model.AttributeTypes.number,
+	updated_at: Model.AttributeTypes.instanceOf(Date),
+	working: Model.AttributeTypes.bool,
+};
+
+Task.allowUndefinedAttributes = false;
 
 /**
  * @param {HTMLFormElement} elForm
