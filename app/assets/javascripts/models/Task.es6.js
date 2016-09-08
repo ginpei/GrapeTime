@@ -33,9 +33,9 @@ class Task extends Model {
 	}
 
 	/**
-	 * @see Model#_importAllAttributes
+	 * @see Model#_importAttributes
 	 */
-	_importAllAttributes(attributes) {
+	_importAttributes(attributes) {
 		if (typeof attributes.created_at === 'string') {
 			attributes.created_at = new Date(attributes.created_at);
 		}

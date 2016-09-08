@@ -12,13 +12,13 @@ class Model {
 	 */
 	constructor(attributes={}) {
 		this.attributes = {};
-		this._importAllAttributes(attributes);
+		this._importAttributes(attributes);
 	}
 
 	/**
 	 * @param {object} [attributes]
 	 */
-	_importAllAttributes(attributes) {
+	_importAttributes(attributes) {
 		this.set(attributes);
 	}
 
