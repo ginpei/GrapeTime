@@ -3,6 +3,17 @@ let expect = require('chai').expect;
 import Model from '../../app/assets/javascripts/bases/Model.es6.js';
 
 class TestModel extends Model {
+	_convertSetValue(name, value) {
+		var result;
+		if (name === 'validNumeric') {
+			result = Number(value);
+		}
+		else {
+			result = value;
+		}
+		return result;
+	}
+
 	get baseUrl() {
 		return '/test_models';
 	}
@@ -15,6 +26,7 @@ TestModel.attributeTypes = {
 	'validNumber': Model.AttributeTypes.number,
 	'validObject': Model.AttributeTypes.object,
 	'validString': Model.AttributeTypes.string,
+	'validNumeric': Model.AttributeTypes.number,
 	'validOneLetter': function(AttributeTypes, name, value) {
 		let message = null;
 		if (typeof value !== 'string') {
@@ -49,10 +61,6 @@ describe('bases/Model', ()=>{
 			model = new TestModel(attr);
 		});
 
-		it('imports attributes', ()=>{
-			expect(model.attributes.obj).to.equal(obj);
-		});
-
 		it('copies attributes object', ()=>{
 			expect(model.attributes).not.to.equal(attr);
 		});
@@ -64,6 +72,11 @@ describe('bases/Model', ()=>{
 			model.set('num', 100);
 			model.set('num', 200);
 			model.set('str', 'foo');
+			model.set('validNumeric', '101');
+		});
+
+		it('converts set value', ()=>{
+			expect(model.attributes.validNumeric).to.equal(101);
 		});
 
 		it('stores values', ()=>{

@@ -12,13 +12,6 @@ class Model {
 	 */
 	constructor(attributes={}) {
 		this.attributes = {};
-		this._importAttributes(attributes);
-	}
-
-	/**
-	 * @param {object} [attributes]
-	 */
-	_importAttributes(attributes) {
 		this.set(attributes);
 	}
 
@@ -48,8 +41,9 @@ class Model {
 	 */
 	set(name, value) {
 		if (typeof name === 'string') {
-			this.checkValidation(name, value);
-			this.attributes[name] = value;
+			let converted = this._convertSetValue(name, value);
+			this.checkValidation(name, converted);
+			this.attributes[name] = converted;
 		}
 		else {
 			let attributes = name;
@@ -58,6 +52,15 @@ class Model {
 				this.set(name, value);
 			}
 		}
+	}
+
+	/**
+	 * @param {string} name
+	 * @param {any} value
+	 * @returns {any}
+	 */
+	_convertSetValue(name, value) {
+		return value;
 	}
 
 	/**
