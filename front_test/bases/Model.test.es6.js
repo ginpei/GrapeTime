@@ -41,9 +41,10 @@ TestModel.attributeTypes = {
 class StrictAttributesModel extends Model {
 }
 StrictAttributesModel.attributeTypes = {
-	'validNumber': Model.AttributeTypes.number,
+	'validAny': Model.AttributeTypes.any,
 };
 StrictAttributesModel.allowUndefinedAttributes = false;
+StrictAttributesModel.allowOmittingAttributes = false;
 
 describe('bases/Model', ()=>{
 	let model;
@@ -290,7 +291,9 @@ describe('bases/Model', ()=>{
 			let strictModel;
 
 			beforeEach(()=>{
-				strictModel = new StrictAttributesModel();
+				strictModel = new StrictAttributesModel({
+					validAny: 123,
+				});
 			});
 
 			it('accepts any undefined values if the flag is off', ()=>{
@@ -302,7 +305,7 @@ describe('bases/Model', ()=>{
 
 			it('accepts a defined value if the flag is on', ()=>{
 				expect(()=>{
-					strictModel.checkValidation('validNumber', 123);
+					strictModel.checkValidation('validAny', 123);
 				}).to.not.throw();
 			});
 
@@ -310,6 +313,33 @@ describe('bases/Model', ()=>{
 				expect(()=>{
 					strictModel.checkValidation('undefinedValue', 123);
 				}).to.throw('The value of undefinedValue has to be defined in attributeTypes at the constructor.');
+			});
+		});
+
+		describe('allowOmittingAttributes', ()=>{
+			let strictModel;
+
+			it('allows to create an instance with defined attributes', ()=>{
+				expect(()=>{
+					strictModel = new StrictAttributesModel({
+						validAny: 123,
+					});
+				}).to.not.throw();
+			});
+
+			it('accepts undefined value', ()=>{
+				expect(()=>{
+					strictModel = new StrictAttributesModel({
+						validAny: undefined,
+					});
+				}).to.not.throw();
+			});
+
+			it('denies to create an instance without defined attributes', ()=>{
+				expect(()=>{
+					strictModel = new StrictAttributesModel({
+					});
+				}).to.throw('The value of validAny is required.');
 			});
 		});
 	});

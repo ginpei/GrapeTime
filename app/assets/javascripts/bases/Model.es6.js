@@ -12,6 +12,7 @@ class Model {
 	 */
 	constructor(attributes={}) {
 		this.attributes = {};
+		this._validateRequiredAttributes(attributes);
 		this.set(attributes);
 	}
 
@@ -61,6 +62,22 @@ class Model {
 	 */
 	_convertSetValue(name, value) {
 		return value;
+	}
+
+	/**
+	 * @param {object} [attributes]
+	 */
+	_validateRequiredAttributes(attributes) {
+		if (this.constructor.allowOmittingAttributes !== false) {
+			return;
+		}
+
+		let requiredNames = Object.keys(this.constructor.attributeTypes);
+		requiredNames.forEach((requiredName)=>{
+			if (!(requiredName in attributes)) {
+				throw new Error(`The value of ${requiredName} is required.`);
+			}
+		});
 	}
 
 	/**
