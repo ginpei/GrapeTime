@@ -11,11 +11,6 @@ class TasksControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tasks)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
   test "should create task" do
     assert_difference('Task.count') do
       post :create, task: { estimate_time: @task.estimate_time, name: @task.name, necessary_time: @task.necessary_time, spent_time: @task.spent_time }
@@ -26,11 +21,6 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should show task" do
     get :show, id: @task
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @task
     assert_response :success
   end
 
