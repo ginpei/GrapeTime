@@ -30,22 +30,23 @@ class Task extends Model {
 	}
 
 	/**
-	 * @see Model#_importAttributes
+	 * @see Model#_convertSetValue
 	 */
-	_importAttributes(attributes) {
-		if (typeof attributes.estimate_time === 'string') {
-			attributes.estimate_time = Number(attributes.estimate_time);
+	_convertSetValue(name, value) {
+		var result;
+		if (name === 'estimate_time' && typeof value === 'string') {
+			result = Number(value);
 		}
-
-		if (typeof attributes.created_at === 'string') {
-			attributes.created_at = new Date(attributes.created_at);
+		else if (name === 'created_at' && typeof value === 'string') {
+			result = new Date(value);
 		}
-
-		if (typeof attributes.updated_at === 'string') {
-			attributes.updated_at = new Date(attributes.updated_at);
+		else if (name === 'updated_at' && typeof value === 'string') {
+			result = new Date(value);
 		}
-
-		this.set(attributes);
+		else {
+			result = value;
+		}
+		return result;
 	}
 
 	/**
