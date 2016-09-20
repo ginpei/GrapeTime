@@ -52,9 +52,10 @@ class Task extends Model {
 	 * @see #children
 	 */
 	_prepareChildren(attributes) {
-		let children;
-		children = attributes.children.map((v)=>new Task(v));
-		this.set('children', children);
+		if (attributes.children) {
+			let children = this.get('children');
+			attributes.children.map((v)=>children.push(new Task(v)));
+		}
 	}
 
 	/**
