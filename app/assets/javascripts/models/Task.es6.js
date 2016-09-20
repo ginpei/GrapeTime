@@ -17,8 +17,6 @@ class Task extends Model {
 			'necessary_time',
 			'parent_id',
 			'spent_time',
-			'total_necessary_time',
-			'total_spent_time',
 			'updated_at',
 			'working',
 		].forEach((name)=>{
@@ -61,6 +59,22 @@ class Task extends Model {
 	 */
 	get baseUrl() {
 		return '/tasks';
+	}
+
+	get total_spent_time() {
+		let time = this.get('spent_time');
+		this.children.forEach((child)=>{
+			time += child.total_spent_time;
+		});
+		return time;
+	}
+
+	get total_necessary_time() {
+		let time = this.get('necessary_time');
+		this.children.forEach((child)=>{
+			time += child.total_necessary_time;
+		});
+		return time;
 	}
 
 	// get totalSpentTimeString() {

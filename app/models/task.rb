@@ -7,20 +7,9 @@ class Task < ActiveRecord::Base
   before_create :copy_estimate_to_necessary
 
   def to_family(options={})
-    {
-      children: children.map{|t|t.to_family},
-      created_at: created_at,
-      estimate_time: estimate_time,
-      id: id,
-      name: name,
-      necessary_time: necessary_time,
-      parent_id: parent_id,
-      spent_time: spent_time,
-      total_necessary_time: total_necessary_time,
-      total_spent_time: total_spent_time,
-      updated_at: updated_at,
-      working: working?,
-    }
+    hash = serializable_hash
+    hash[:children] = children.map{|t| t.to_family }
+    hash
   end
 
   def new
@@ -36,22 +25,6 @@ class Task < ActiveRecord::Base
   def update_time_recursively
     children.each{|t|t.update_time_recursively}
     update_time
-  end
-
-  def total_spent_time
-    other_time = children
-      .map{|c|c.total_spent_time}
-      .inject(0){|s,n|s+n}
-
-    spent_time + other_time
-  end
-
-  def total_necessary_time
-    other_time = children
-      .map{|c|c.total_necessary_time}
-      .inject(0){|s,n|s+n}
-
-    necessary_time + other_time
   end
 
   def start
