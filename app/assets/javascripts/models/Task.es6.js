@@ -34,6 +34,10 @@ class Task extends Model {
 	 * @see Model#_importAttributes
 	 */
 	_importAttributes(attributes) {
+		if (typeof attributes.estimate_time === 'string') {
+			attributes.estimate_time = Number(attributes.estimate_time);
+		}
+
 		if (typeof attributes.created_at === 'string') {
 			attributes.created_at = new Date(attributes.created_at);
 		}
