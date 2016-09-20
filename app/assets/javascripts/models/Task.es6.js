@@ -9,7 +9,6 @@ class Task extends Model {
 		// create getters
 		// TODO: implement at Model according to attributeTypes
 		[
-			'children',
 			'created_at',
 			'estimate_time',
 			'id',
@@ -63,6 +62,10 @@ class Task extends Model {
 	 */
 	get baseUrl() {
 		return '/tasks';
+	}
+
+	get children() {
+		return this.get('children');
 	}
 
 	get total_spent_time() {
