@@ -39,9 +39,15 @@ TestModel.attributeTypes = {
 	},
 };
 class StrictAttributesModel extends Model {
+	get defaults() {
+		return {
+			valueWithDefault: 123,
+		};
+	}
 }
 StrictAttributesModel.attributeTypes = {
 	'validAny': Model.AttributeTypes.any,
+	'valueWithDefault': Model.AttributeTypes.number,
 };
 StrictAttributesModel.allowUndefinedAttributes = false;
 StrictAttributesModel.allowOmittingAttributes = false;
@@ -340,6 +346,14 @@ describe('bases/Model', ()=>{
 					strictModel = new StrictAttributesModel({
 					});
 				}).to.throw('The value of validAny is required.');
+			});
+
+			it('allows to create an instance without defined attributes if it is defined in defaults', ()=>{
+				expect(()=>{
+					strictModel = new StrictAttributesModel({
+						validAny: undefined,
+					});
+				}).to.not.throw();
 			});
 		});
 	});

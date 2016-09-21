@@ -11,7 +11,8 @@ class Model {
 	 * @param {object} [attributes]
 	 */
 	constructor(attributes={}) {
-		this.attributes = {};
+		this.attributes = {};  // FIXME: remove
+		attributes = Object.assign(this.defaults, attributes);  // defaults is a new instance
 		this._validateRequiredAttributes(attributes);
 		this.set(attributes);
 	}
@@ -203,6 +204,13 @@ class Model {
 	 */
 	getCSRFToken() {
 		return window.Rails.getCSRFToken();
+	}
+
+	/**
+	 * @returns {object}
+	 */
+	get defaults() {
+		return {};
 	}
 
 	/**
