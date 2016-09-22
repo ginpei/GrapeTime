@@ -97,6 +97,9 @@ class Model {
 		if (!definition) {
 			this._checkUndefinedAttributeValidation(name, value);
 		}
+		else if (definition === types.any) {
+			// accepts any types
+		}
 		else if (definition === types.bool) {
 			this._checkTypeValidation(name, value, 'boolean');
 		}
