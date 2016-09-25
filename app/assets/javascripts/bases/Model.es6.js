@@ -118,6 +118,9 @@ class Model {
 		else if (definition instanceof types.InstanceOf) {
 			this._checkConstructorValidation(name, value, definition);
 		}
+		else {
+			throw new Error(`Unknown definition. Make sure you use proper type definitions.`);
+		}
 	}
 
 	_checkUndefinedAttributeValidation(name, value) {
