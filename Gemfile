@@ -48,4 +48,4 @@ end
 gem 'slim-rails'
 gem 'font-awesome-rails'
 gem 'jader'
-gem 'react-rails'
+gem 'browserify-rails'

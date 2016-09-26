@@ -2,4 +2,9 @@ h1 Listing tasks
 
 p#notice = notice
 
-= react_component('TaskListArea', taskData: @tasks_data)
+div#TaskListArea
+
+script#tasks_data(type="text/x-json")
+	= @tasks_json.html_safe
+script
+	| window.Rails.tasks.index();

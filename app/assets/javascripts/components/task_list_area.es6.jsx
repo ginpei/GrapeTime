@@ -1,17 +1,24 @@
+let React = require('react');
+let Task = require('../models/Task.es6.js');
+
 class TaskListArea extends React.Component {
 	render() {
+		let items = this.state.taskData.map(v=><li key={v.id}>{v.name}</li>);
 		return (
-			<div>
-				<TaskNewItemFormArea onSave={this.newItemFormArea_onSave.bind(this)} />
-				<TaskList tasks={this.state.taskData} />
-			</div>
+			<ul>{items}</ul>
 		);
+		// return (
+		// 	<div>
+		// 		<TaskNewItemFormArea onSave={this.newItemFormArea_onSave.bind(this)} />
+		// 		<TaskList tasks={this.state.taskData} />
+		// 	</div>
+		// );
 	}
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			taskData: props.taskData, 
+			taskData: props.taskData.map(v=>new Task(v)),
 		};
 	}
 
@@ -25,3 +32,5 @@ class TaskListArea extends React.Component {
 TaskListArea.propTypes = {
 	taskData: React.PropTypes.array,
 };
+
+module.exports = TaskListArea;

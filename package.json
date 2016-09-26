@@ -4,7 +4,15 @@
     "test_watch": "chokidar app/assets/javascripts/* front_test/* -c 'npm run test'",
     "test": "mocha front_test/**/**.test.es6.js --compilers js:babel-register"
   },
-  "dependencies": {},
+  "dependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "browserify-incremental": "^3.1.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
   "devDependencies": {
     "babel-core": "^6.11.4",
     "babel-preset-es2015": "^6.9.0",
