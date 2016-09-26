@@ -114,9 +114,9 @@ class Model {
 		else {
 			let matched = false;
 			Object.keys(typeMap).forEach((id)=>{
-				if (definition === types[id]) {
+				if (definition === types[id] || definition === types[id].optional) {
 					matched = true;
-					this._checkTypeValidation(name, value, typeMap[id].name);
+					this._checkTypeValidation(name, value, typeMap[id].name, definition === types[id].optional);
 				}
 			});
 
@@ -132,8 +132,11 @@ class Model {
 		}
 	}
 
-	_checkTypeValidation(name, value, type) {
-		if (typeof value !== type) {
+	_checkTypeValidation(name, value, type, optional) {
+		if (optional && (value === null || value === undefined)) {
+			// it's OK
+		}
+		else if (typeof value !== type) {
 			throw new Error(`The value ${value} of ${name} has to be a ${type}, not a ${typeof value}.`);
 		}
 	}
@@ -251,11 +254,11 @@ class Model {
 
 Model.AttributeTypes = {
 	any: {},
-	bool: {},
-	func: {},
-	number: {},
-	object: {},
-	string: {},
+	bool: { optional: {} },
+	func: { optional: {} },
+	number: { optional: {} },
+	object: { optional: {} },
+	string: { optional: {} },
 	instanceOf: function(constructor) {
 		return new Model.AttributeTypes.InstanceOf(constructor);
 	},

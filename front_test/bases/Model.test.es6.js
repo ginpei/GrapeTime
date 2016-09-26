@@ -21,6 +21,7 @@ class TestModel extends Model {
 TestModel.attributeTypes = {
 	'validAnything': Model.AttributeTypes.any,
 	'validBool': Model.AttributeTypes.bool,
+	'validBoolOptional': Model.AttributeTypes.bool.optional,
 	'validDate': Model.AttributeTypes.instanceOf(Date),
 	'validFunction': Model.AttributeTypes.func,
 	'validNumber': Model.AttributeTypes.number,
@@ -276,6 +277,38 @@ describe('bases/Model', ()=>{
 				expect(()=>{
 					model.checkValidation('validString', 123);
 				}).to.throw('The value 123 of validString has to be a string, not a number.');
+			});
+		});
+
+		describe('for optionals', ()=>{
+			it('accepts a proper value which is a optional bool', ()=>{
+				expect(()=>{
+					model.checkValidation('validBoolOptional', true);
+				}).to.not.throw();
+			});
+
+			it('accepts null which is a optional bool', ()=>{
+				expect(()=>{
+					model.checkValidation('validBoolOptional', null);
+				}).to.not.throw();
+			});
+
+			it('accepts undefined which is a optional bool', ()=>{
+				expect(()=>{
+					model.checkValidation('validBoolOptional', undefined);
+				}).to.not.throw();
+			});
+
+			it('rejects null which is a required bool', ()=>{
+				expect(()=>{
+					model.checkValidation('validBool', null);
+				}).to.throw('The value null of validBool has to be a boolean, not a object.');
+			});
+
+			it('rejects undefined which is a required bool', ()=>{
+				expect(()=>{
+					model.checkValidation('validBool', undefined);
+				}).to.throw('The value undefined of validBool has to be a boolean, not a undefined.');
 			});
 		});
 
