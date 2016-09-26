@@ -37,6 +37,9 @@ class Task extends Model {
 		if (name === 'estimate_time' && typeof value === 'string') {
 			result = Number(value);
 		}
+		else if (name === 'necessary_time' && typeof value === 'string') {
+			result = Number(value);
+		}
 		else if (name === 'created_at' && typeof value === 'string') {
 			result = new Date(value);
 		}
@@ -56,6 +59,14 @@ class Task extends Model {
 		if (attributes.children) {
 			let children = this.get('children');
 			attributes.children.map((v)=>children.push(new Task(v)));
+		}
+	}
+
+	get defaults() {
+		return {
+			children: [],
+			parent_id: null,
+			spent_time: 0,
 		}
 	}
 
@@ -108,20 +119,18 @@ class Task extends Model {
 
 Task.attributeTypes = {
 	children: Model.AttributeTypes.instanceOf(Array),
-	created_at: Model.AttributeTypes.instanceOf(Date),
+	created_at: Model.AttributeTypes.instanceOf(Date, { optional: true }),
 	estimate_time: Model.AttributeTypes.number,
-	id: Model.AttributeTypes.number,
+	id: Model.AttributeTypes.number.optional,
 	name: Model.AttributeTypes.string,
 	necessary_time: Model.AttributeTypes.number,
 	parent_id: Model.AttributeTypes.any,  // FIXME: to accept undefined or number
 	spent_time: Model.AttributeTypes.number,
-	total_necessary_time: Model.AttributeTypes.number,
-	total_spent_time: Model.AttributeTypes.number,
-	updated_at: Model.AttributeTypes.instanceOf(Date),
-	working: Model.AttributeTypes.bool,
+	updated_at: Model.AttributeTypes.instanceOf(Date, { optional: true }),
 };
 
 Task.allowUndefinedAttributes = false;
+Task.allowOmittingAttributes = false;
 
 /**
  * @param {HTMLFormElement} elForm
@@ -135,5 +144,6 @@ Task.createAttributesFromForm = function(elForm) {
 		let value = i[1];
 		attributes[name] = value;
 	}
+	attributes.necessary_time = attributes.estimate_time;
 	return attributes;
 };
