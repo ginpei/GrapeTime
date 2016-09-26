@@ -21,7 +21,6 @@ class TestModel extends Model {
 TestModel.attributeTypes = {
 	'validAnything': Model.AttributeTypes.any,
 	'validBool': Model.AttributeTypes.bool,
-	'validBoolOptional': Model.AttributeTypes.bool.optional,
 	'validDate': Model.AttributeTypes.instanceOf(Date),
 	'validFunction': Model.AttributeTypes.func,
 	'validNumber': Model.AttributeTypes.number,
@@ -48,6 +47,7 @@ class StrictAttributesModel extends Model {
 }
 StrictAttributesModel.attributeTypes = {
 	'validAny': Model.AttributeTypes.any,
+	'validBool': Model.AttributeTypes.bool,
 	'validBoolOptional': Model.AttributeTypes.bool.optional,
 	'valueWithDefault': Model.AttributeTypes.number,
 };
@@ -282,6 +282,13 @@ describe('bases/Model', ()=>{
 		});
 
 		describe('for optionals', ()=>{
+			beforeEach(()=>{
+				model = new StrictAttributesModel({
+					validAny: 123,
+					validBool: true,
+				});
+			});
+
 			it('accepts a proper value which is a optional bool', ()=>{
 				expect(()=>{
 					model.checkValidation('validBoolOptional', true);
@@ -351,6 +358,7 @@ describe('bases/Model', ()=>{
 			beforeEach(()=>{
 				strictModel = new StrictAttributesModel({
 					validAny: 123,
+					validBool: true,
 				});
 			});
 
@@ -387,6 +395,7 @@ describe('bases/Model', ()=>{
 				expect(()=>{
 					strictModel = new StrictAttributesModel({
 						validAny: 123,
+						validBool: true,
 					});
 				}).to.not.throw();
 			});
@@ -395,6 +404,7 @@ describe('bases/Model', ()=>{
 				expect(()=>{
 					strictModel = new StrictAttributesModel({
 						validAny: undefined,
+						validBool: true,
 					});
 				}).to.not.throw();
 			});
@@ -410,6 +420,7 @@ describe('bases/Model', ()=>{
 				expect(()=>{
 					strictModel = new StrictAttributesModel({
 						validAny: undefined,
+						validBool: true,
 					});
 				}).to.not.throw();
 			});
