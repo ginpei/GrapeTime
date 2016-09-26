@@ -330,7 +330,7 @@ describe('bases/Model', ()=>{
 			it('rejects a value which is not a specified instance', ()=>{
 				expect(()=>{
 					model.checkValidation('validDate', new RegExp('foo'));
-				}).to.throw(/The value \/foo\/ of validDate has to be a Date, not a RegExp\./);
+				}).to.throw('The value /foo/ of validDate has to be a Date, not a RegExp.');
 			});
 
 			it('rejects a null with a proper message', ()=>{
