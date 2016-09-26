@@ -80,7 +80,13 @@ class Model {
 
 		let requiredNames = specifiedNames.filter((name)=>{
 			let definition = specifiedTypes[name];
-			let optional = definedTypeNames.some(v=>definition===AttributeTypes[v].optional);
+			let optional;
+			if (definition instanceof Model.AttributeTypes.InstanceOf) {
+				optional = definition.optional;
+			}
+			else {
+				optional = definedTypeNames.some(v=>definition===AttributeTypes[v].optional);
+			}
 			return !optional;
 		});
 
@@ -154,7 +160,10 @@ class Model {
 
 	_checkConstructorValidation(name, value, definition) {
 		let constructor = definition.typeConstructor;
-		if (!(value instanceof constructor)) {
+		if (definition.optional && (value === null || value === undefined)) {
+			// it's OK
+		}
+		else if (!(value instanceof constructor)) {
 			let valueConstructorName;
 			if (value === null) {
 				valueConstructorName = 'null';
@@ -280,11 +289,12 @@ Model.AttributeTypes = {
 	number: { optional: {} },
 	object: { optional: {} },
 	string: { optional: {} },
-	instanceOf: function(constructor) {
-		return new Model.AttributeTypes.InstanceOf(constructor);
+	instanceOf: function(constructor, options) {
+		return new Model.AttributeTypes.InstanceOf(constructor, options);
 	},
-	InstanceOf: function InstanceOf(constructor) {
+	InstanceOf: function InstanceOf(constructor, options={}) {
 		this.typeConstructor = constructor;
+		this.optional = (options.optional===true);
 	},
 };
 

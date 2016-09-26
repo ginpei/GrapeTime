@@ -49,6 +49,7 @@ StrictAttributesModel.attributeTypes = {
 	'validAny': Model.AttributeTypes.any,
 	'validBool': Model.AttributeTypes.bool,
 	'validBoolOptional': Model.AttributeTypes.bool.optional,
+	'validDateOptional': Model.AttributeTypes.instanceOf(Date, { optional: true }),
 	'valueWithDefault': Model.AttributeTypes.number,
 };
 StrictAttributesModel.allowUndefinedAttributes = false;
@@ -317,6 +318,24 @@ describe('bases/Model', ()=>{
 				expect(()=>{
 					model.checkValidation('validBool', undefined);
 				}).to.throw('The value undefined of validBool has to be a boolean, not a undefined.');
+			});
+
+			it('accepts a proper value which is a required instance', ()=>{
+				expect(()=>{
+					model.checkValidation('validDateOptional', new Date());
+				}).to.not.throw();
+			});
+
+			it('accepts null which is a required instance', ()=>{
+				expect(()=>{
+					model.checkValidation('validDateOptional', null);
+				}).to.not.throw();
+			});
+
+			it('rejects an improper value which is a required instance', ()=>{
+				expect(()=>{
+					model.checkValidation('validDateOptional', new RegExp('foo'));
+				}).to.throw('The value /foo/ of validDateOptional has to be a Date, not a RegExp.');
 			});
 		});
 
