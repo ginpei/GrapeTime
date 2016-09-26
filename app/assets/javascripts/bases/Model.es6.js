@@ -155,7 +155,17 @@ class Model {
 	_checkConstructorValidation(name, value, instanceOf) {
 		let constructor = instanceOf.typeConstructor;
 		if (!(value instanceof constructor)) {
-			throw new Error(`The value ${value} of ${name} has to be a ${constructor.name}, not a ${value.constructor.name}.`);
+			let valueConstructorName;
+			if (value === null) {
+				valueConstructorName = 'null';
+			}
+			else if (value !== undefined) {
+				valueConstructorName = value.constructor.name;
+			}
+			else {
+				valueConstructorName = value;
+			}
+			throw new Error(`The value ${value} of ${name} has to be a ${constructor.name}, not a ${valueConstructorName}.`);
 		}
 	}
 

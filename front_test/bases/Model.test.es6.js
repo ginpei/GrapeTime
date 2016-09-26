@@ -325,6 +325,24 @@ describe('bases/Model', ()=>{
 					model.checkValidation('validDate', new RegExp('foo'));
 				}).to.throw(/The value \/foo\/ of validDate has to be a Date, not a RegExp\./);
 			});
+
+			it('rejects a null with a proper message', ()=>{
+				expect(()=>{
+					model.checkValidation('validDate', null);
+				}).to.throw('The value null of validDate has to be a Date, not a null.');
+			});
+
+			it('rejects an undefined with a proper message', ()=>{
+				expect(()=>{
+					model.checkValidation('validDate', undefined);
+				}).to.throw('The value undefined of validDate has to be a Date, not a undefined.');
+			});
+
+			it('rejects a number with a proper message', ()=>{
+				expect(()=>{
+					model.checkValidation('validDate', 123);
+				}).to.throw('The value 123 of validDate has to be a Date, not a Number.');
+			});
 		});
 
 		describe('allowUndefinedAttributes', ()=>{
