@@ -87,6 +87,14 @@ class Model {
 	 * @param {any} value
 	 */
 	checkValidation(name, value) {
+		const typeMap = {
+			bool: { name: 'boolean' },
+			func: { name: 'function' },
+			number: { name: 'number' },
+			object: { name: 'object' },
+			string: { name: 'string' },
+		};
+
 		let types = Model.AttributeTypes;
 		let definitions = this.constructor.attributeTypes;
 		if (!definitions) {
@@ -100,26 +108,21 @@ class Model {
 		else if (definition === types.any) {
 			// accepts any types
 		}
-		else if (definition === types.bool) {
-			this._checkTypeValidation(name, value, 'boolean');
-		}
-		else if (definition === types.func) {
-			this._checkTypeValidation(name, value, 'function');
-		}
-		else if (definition === types.number) {
-			this._checkTypeValidation(name, value, 'number');
-		}
-		else if (definition === types.object) {
-			this._checkTypeValidation(name, value, 'object');
-		}
-		else if (definition === types.string) {
-			this._checkTypeValidation(name, value, 'string');
-		}
 		else if (definition instanceof types.InstanceOf) {
 			this._checkConstructorValidation(name, value, definition);
 		}
 		else {
-			throw new Error(`Unknown definition. Make sure you use proper type definitions.`);
+			let matched = false;
+			Object.keys(typeMap).forEach((id)=>{
+				if (definition === types[id]) {
+					matched = true;
+					this._checkTypeValidation(name, value, typeMap[id].name);
+				}
+			});
+
+			if (!matched) {
+				throw new Error(`Unknown definition. Make sure you use proper type definitions.`);
+			}
 		}
 	}
 
