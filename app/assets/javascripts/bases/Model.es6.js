@@ -73,10 +73,20 @@ class Model {
 			return;
 		}
 
-		let requiredNames = Object.keys(this.constructor.attributeTypes);
-		requiredNames.forEach((requiredName)=>{
-			if (!(requiredName in attributes)) {
-				throw new Error(`The value of ${requiredName} is required.`);
+		let AttributeTypes = Model.AttributeTypes;
+		let definedTypeNames = Object.keys(AttributeTypes);
+		let specifiedTypes = this.constructor.attributeTypes;
+		let specifiedNames = Object.keys(specifiedTypes);
+
+		let requiredNames = specifiedNames.filter((name)=>{
+			let definition = specifiedTypes[name];
+			let optional = definedTypeNames.some(v=>definition===AttributeTypes[v].optional);
+			return !optional;
+		});
+
+		requiredNames.forEach((name)=>{
+			if (!(name in attributes)) {
+				throw new Error(`The value of ${name} is required.`);
 			}
 		});
 	}

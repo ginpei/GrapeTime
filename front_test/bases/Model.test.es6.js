@@ -48,6 +48,7 @@ class StrictAttributesModel extends Model {
 }
 StrictAttributesModel.attributeTypes = {
 	'validAny': Model.AttributeTypes.any,
+	'validBoolOptional': Model.AttributeTypes.bool.optional,
 	'valueWithDefault': Model.AttributeTypes.number,
 };
 StrictAttributesModel.allowUndefinedAttributes = false;
@@ -345,6 +346,12 @@ describe('bases/Model', ()=>{
 			it('accepts a defined value if the flag is on', ()=>{
 				expect(()=>{
 					strictModel.checkValidation('validAny', 123);
+				}).to.not.throw();
+			});
+
+			it('allows to omit optional values', ()=>{
+				expect(()=>{
+					// validBoolOptional is an optional value
 				}).to.not.throw();
 			});
 
