@@ -16,5 +16,6 @@
 !/log/.keep
 /tmp
 
-# Ignore node modules
+# Ignore node files
 /node_modules
+npm-debug.log
