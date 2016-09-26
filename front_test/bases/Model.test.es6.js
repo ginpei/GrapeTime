@@ -302,7 +302,7 @@ describe('bases/Model', ()=>{
 			it('rejects null which is a required bool', ()=>{
 				expect(()=>{
 					model.checkValidation('validBool', null);
-				}).to.throw('The value null of validBool has to be a boolean, not a object.');
+				}).to.throw('The value null of validBool has to be a boolean, not a null.');
 			});
 
 			it('rejects undefined which is a required bool', ()=>{

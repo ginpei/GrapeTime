@@ -137,7 +137,8 @@ class Model {
 			// it's OK
 		}
 		else if (typeof value !== type) {
-			throw new Error(`The value ${value} of ${name} has to be a ${type}, not a ${typeof value}.`);
+			let actualType = (value === null ? 'null' : typeof value);
+			throw new Error(`The value ${value} of ${name} has to be a ${type}, not a ${actualType}.`);
 		}
 	}
 
