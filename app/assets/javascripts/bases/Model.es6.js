@@ -152,8 +152,8 @@ class Model {
 		}
 	}
 
-	_checkConstructorValidation(name, value, instanceOf) {
-		let constructor = instanceOf.typeConstructor;
+	_checkConstructorValidation(name, value, definition) {
+		let constructor = definition.typeConstructor;
 		if (!(value instanceof constructor)) {
 			let valueConstructorName;
 			if (value === null) {
