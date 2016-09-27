@@ -1,3 +1,6 @@
+let React = require('react');
+let TaskItemNewForm = require('./task_item_new_form.es6.jsx');
+
 class TaskNewItemFormArea extends React.Component {
 	render() {
 		let s = this.state;
@@ -45,3 +48,5 @@ class TaskNewItemFormArea extends React.Component {
 TaskNewItemFormArea.propTypes = {
 	onSave: React.PropTypes.func,
 };
+
+module.exports = TaskNewItemFormArea;

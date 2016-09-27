@@ -1,3 +1,6 @@
+let React = require('react');
+let Task = require('../models/Task.es6.js');
+
 class TaskItemNewForm extends React.Component {
 	render() {
 		let s = this.state;
@@ -12,7 +15,7 @@ class TaskItemNewForm extends React.Component {
 				<input type="hidden" name="parent_id" value={parentTask.id} />
 			);
 			parentNameField = (
-				<div class="field">
+				<div className="field">
 					Parent: {parentTask.name}
 				</div>
 			);
@@ -22,14 +25,14 @@ class TaskItemNewForm extends React.Component {
 			<form ref="form" onSubmit={this.form_onSubmit.bind(this)} action={url} method="post">
 				{parentIdField}
 				{parentNameField}
-				<div class="field">
+				<div className="field">
 					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="name" value={s.name} /></label>
 				</div>
-				<div class="field">
+				<div className="field">
 					<label>Estimate time: <input onChange={this.estimateTime_onChange.bind(this)} type="number" name="estimate_time" value={s.estimate_time} /></label>
 				</div>
-				<div class="field">
-					<button roll="submit">Submit</button>
+				<div className="field">
+					<button>Submit</button>
 				</div>
 			</form>
 		);
@@ -49,7 +52,7 @@ class TaskItemNewForm extends React.Component {
 		task.save((xhr, event)=>{
 			let responseData = JSON.parse(xhr.responseText);
 			let taskData = responseData.data;
-			task.id = taskData.id;
+			task.set('id', taskData.id);
 			if (callback) {
 				callback(task);
 			}
@@ -89,3 +92,5 @@ TaskItemNewForm.propTypes = {
 	onSave: React.PropTypes.func,
 	parentTask: React.PropTypes.object,
 };
+
+module.exports = TaskItemNewForm;

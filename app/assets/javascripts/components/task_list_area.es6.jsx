@@ -1,11 +1,13 @@
 let React = require('react');
 let Task = require('../models/Task.es6.js');
+let TaskNewItemFormArea = require('./task_new_item_form_area.es6.jsx');
 
 class TaskListArea extends React.Component {
 	render() {
-		let items = this.state.taskData.map(v=><li key={v.id}>{v.name}</li>);
 		return (
-			<ul>{items}</ul>
+			<div>
+				<TaskNewItemFormArea onSave={this.newItemFormArea_onSave.bind(this)} />
+			</div>
 		);
 		// return (
 		// 	<div>
