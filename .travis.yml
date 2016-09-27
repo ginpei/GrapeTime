@@ -1,5 +1,5 @@
 before_script:
-  - rvm use 2.2.3 --install --binary --fuzzy
+  - rvm 2.2.3
   - nvm install 5.7
   - npm install
 script:
