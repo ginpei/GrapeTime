@@ -5,5 +5,5 @@ before_script:
   - nvm install 5.7
   - npm install
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - RAILS_ENV=test bundle exec rake db:migrate test
   - npm test
