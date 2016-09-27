@@ -1,3 +1,5 @@
+let React = require('react');
+
 class TaskProgress extends React.Component {
 	render () {
 		let p = this.props;
@@ -22,3 +24,5 @@ TaskProgress.propTypes = {
 	value: React.PropTypes.number,
 	max: React.PropTypes.number,
 };
+
+module.exports = TaskProgress;

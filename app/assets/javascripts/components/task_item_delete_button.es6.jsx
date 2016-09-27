@@ -1,3 +1,5 @@
+let React = require('react');
+
 class TaskItemDeleteButton extends React.Component {
 	render() {
 		let task = this.state.task;
@@ -48,3 +50,5 @@ TaskItemDeleteButton.propTypes = {
 	onSave: React.PropTypes.func,
 	task: React.PropTypes.object,
 };
+
+module.exports = TaskItemDeleteButton;

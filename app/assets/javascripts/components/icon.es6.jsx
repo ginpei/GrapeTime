@@ -1,3 +1,5 @@
+let React = require('react');
+
 class Icon extends React.Component {
 	render () {
 		return (
@@ -10,3 +12,5 @@ Icon.propTypes = {
 	className: React.PropTypes.string,
 	name: React.PropTypes.string,
 };
+
+module.exports = Icon;
