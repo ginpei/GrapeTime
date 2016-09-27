@@ -1,4 +1,7 @@
 language:
   - node_js
+  - ruby
 node_js:
   - "5.7"
+rvm:
+  - 2.2.3
