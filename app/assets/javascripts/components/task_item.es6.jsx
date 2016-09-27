@@ -1,5 +1,15 @@
+let React = require('react');
+let Task = require('../models/Task.es6.js');
+let TaskItemBody = require('./task_item_body.es6.jsx');
+let TaskItemNewForm = require('./task_item_new_form.es6.jsx');
+let TaskItemDeleteButton = require('./task_item_delete_button.es6.jsx');
+let TaskItemEditForm = require('./task_item_edit_form.es6.jsx');
+// let TaskList = require('./task_list.es6.jsx');  // recursive!
+
 class TaskItem extends React.Component {
 	render() {
+		let TaskList = require('./task_list.es6.jsx');
+
 		let task = this.state.task;
 
 		let itemClassName = this._getItemClassName();
@@ -121,3 +131,5 @@ class TaskItem extends React.Component {
 TaskItem.propTypes = {
 	task: React.PropTypes.object,
 };
+
+module.exports = TaskItem;

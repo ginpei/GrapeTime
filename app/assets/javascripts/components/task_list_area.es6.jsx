@@ -1,3 +1,7 @@
+let React = require('react');
+let TaskNewItemFormArea = require('./task_new_item_form_area.es6.jsx');
+let TaskList = require('./task_list.es6.jsx');
+
 class TaskListArea extends React.Component {
 	render() {
 		return (
@@ -11,7 +15,7 @@ class TaskListArea extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			taskData: props.taskData, 
+			taskData: props.taskData,
 		};
 	}
 
@@ -25,3 +29,5 @@ class TaskListArea extends React.Component {
 TaskListArea.propTypes = {
 	taskData: React.PropTypes.array,
 };
+
+module.exports = TaskListArea;

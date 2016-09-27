@@ -1,3 +1,8 @@
+let React = require('react');
+let Icon = require('./icon.es6.jsx');
+let TaskItemWorkButton = require('./task_item_work_button.es6.jsx');
+let TaskProgress = require('./task_progress.es6.jsx');
+
 class TaskItemBody extends React.Component {
 	render() {
 		let task = this.props.task;
@@ -63,8 +68,10 @@ class TaskItemBody extends React.Component {
 	}
 }
 
-TaskItem.propTypes = {
+TaskItemBody.propTypes = {
 	onToggle: React.PropTypes.func,
 	onToggleWorking: React.PropTypes.func,
 	task: React.PropTypes.object,
 };
+
+module.exports = TaskItemBody;

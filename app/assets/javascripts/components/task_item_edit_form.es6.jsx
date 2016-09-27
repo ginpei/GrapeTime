@@ -1,3 +1,5 @@
+let React = require('react');
+
 class TaskItemEditForm extends React.Component {
 	render() {
 		let task = this.props.task;
@@ -7,17 +9,17 @@ class TaskItemEditForm extends React.Component {
 
 		return (
 			<form ref="form" onSubmit={this.form_onSubmit.bind(this)} action={url} method="patch">
-				<div class="field">
+				<div className="field">
 					<label>Name: <input onChange={this.name_onChange.bind(this)} type="text" name="task[name]" value={s.name} /></label>
 				</div>
-				<div class="field">
+				<div className="field">
 					<label>Spent time: <input onChange={this.spent_time_onChange.bind(this)} type="number" name="task[spent_time]" value={s.spent_time} /></label>
 				</div>
-				<div class="field">
+				<div className="field">
 					<label>Necessary time: <input onChange={this.necessary_time_onChange.bind(this)} type="number" name="task[necessary_time]" value={s.necessary_time} /></label>
 				</div>
-				<div class="field">
-					<button roll="submit">Submit</button>
+				<div className="field">
+					<button>Submit</button>
 				</div>
 			</form>
 		);
@@ -79,3 +81,5 @@ TaskItemEditForm.propTypes = {
 	onSave: React.PropTypes.func,
 	task: React.PropTypes.object,
 };
+
+module.exports = TaskItemEditForm;

@@ -1,3 +1,6 @@
+let React = require('react');
+let Icon = require('./icon.es6.jsx');
+
 class TaskItemWorkButton extends React.Component {
 	render() {
 		let task = this.props.task;
@@ -20,3 +23,5 @@ TaskItemWorkButton.propTypes = {
 	onToggle: React.PropTypes.func,
 	task: React.PropTypes.object,
 };
+
+module.exports = TaskItemWorkButton;

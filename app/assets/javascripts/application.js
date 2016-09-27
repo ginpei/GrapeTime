@@ -14,11 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jade/runtime
-//= require react
-//= require react_ujs
-//= require components
-//= require_tree ./bases
 //= require_tree .
+
+let Task = require('./models/Task.es6.js');
+let React = require('react');
+let ReactDOM = require('react-dom');
 
 window.Rails = {
 	http_status: {
@@ -100,5 +100,17 @@ window.Rails = {
 		let el = document.querySelector('meta[name=csrf-token]');
 		let token = el.getAttribute('content');
 		return token;
+	},
+
+	tasks: {
+		index: function() {
+			let TaskListArea = require('./components/task_list_area.es6.jsx');
+
+			let json = document.querySelector('#tasks_data').text;
+			let data = JSON.parse(json);
+			let container = document.querySelector('#TaskListArea');
+
+			ReactDOM.render(<TaskListArea taskData={data} />, container);
+		},
 	},
 };

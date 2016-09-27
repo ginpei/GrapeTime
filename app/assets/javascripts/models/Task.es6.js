@@ -1,3 +1,5 @@
+let Model = require('../bases/Model.es6.js');
+
 class Task extends Model {
 	/**
 	 * @param {object} [attributes]
@@ -147,3 +149,5 @@ Task.createAttributesFromForm = function(elForm) {
 	attributes.necessary_time = attributes.estimate_time;
 	return attributes;
 };
+
+module.exports = Task;

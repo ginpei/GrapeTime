@@ -1,3 +1,6 @@
+let React = require('react');
+let TaskItem = require('./task_item.es6.jsx');
+
 class TaskList extends React.Component {
 	render() {
 		let className = `task-list ${this.props.className || ''}`;
@@ -33,3 +36,5 @@ TaskList.defaultProps = {
 TaskList.propTypes = {
 	tasks: React.PropTypes.array,
 };
+
+module.exports = TaskList;

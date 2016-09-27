@@ -301,3 +301,5 @@ Model.AttributeTypes = {
 if (typeof module !== 'undefined') {
 	module.exports = Model;
 }
+
+module.exports = Model;
