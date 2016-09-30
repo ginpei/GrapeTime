@@ -12,7 +12,12 @@ describe('models/Task', ()=>{
 		});
 	});
 
-	it('is an instance', ()=>{
-		expect(model).to.be.instanceof(Task);
+	describe('constructor', ()=>{
+		describe('has default values', ()=>{
+			it('children', ()=>{
+				expect(model.children).to.be.instanceof(Array);
+				expect(model.children.length).to.equal(0);
+			});
+		});
 	});
 });
