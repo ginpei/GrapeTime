@@ -18,6 +18,14 @@ describe('models/Task', ()=>{
 				expect(model.children).to.be.instanceof(Array);
 				expect(model.children.length).to.equal(0);
 			});
+
+			it('parent_id', ()=>{
+				expect(model.parent_id).to.equal(null);
+			});
+
+			it('spent_time', ()=>{
+				expect(model.spent_time).to.equal(0);
+			});
 		});
 	});
 });
