@@ -36,7 +36,10 @@ class Task extends Model {
 	 */
 	_convertSetValue(name, value) {
 		var result;
-		if (name === 'estimate_time' && typeof value === 'string') {
+		if (name === 'children') {
+			result = value.map(v=>v instanceof Task ? v : new Task(v));
+		}
+		else if (name === 'estimate_time' && typeof value === 'string') {
 			result = Number(value);
 		}
 		else if (name === 'necessary_time' && typeof value === 'string') {
@@ -55,12 +58,14 @@ class Task extends Model {
 	}
 
 	/**
+	 * Import given children making sure all children are Task instances
 	 * @see #children
 	 */
 	_prepareChildren(attributes) {
-		if (attributes.children) {
-			let children = this.get('children');
-			attributes.children.map((v)=>children.push(new Task(v)));
+		let givenChildren = attributes.children;
+		if (givenChildren) {
+			let storage = this.get('children');
+			givenChildren.forEach((v)=>storage.push(new Task(v)));
 		}
 	}
 
