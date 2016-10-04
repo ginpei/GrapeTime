@@ -1,5 +1,5 @@
 let expect = require('chai').expect;
-global.XMLHttpRequest = function(){};  // have sinon find the constructor
+global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;  // have Sinon find the constructor
 let sinon = require('sinon');
 
 import Model from '../../app/assets/javascripts/bases/Model.es6.js';
@@ -140,37 +140,30 @@ describe('bases/Model', ()=>{
 
 	describe('save()', ()=>{
 		describe('options for a new record', ()=>{
+			let spy_sendRequest;
 			let options;
 			let callback;
 
 			beforeEach(()=>{
 				callback = function(){};
 				model.set('id', null);
-				model._sendRequest = (o)=>{
-					options = o;
-					let xhr = {
-						addEventListener: function(type, listener) {
-						},
-					};
-					return xhr;
-				};
-
+				spy_sendRequest = sinon.spy(model, '_sendRequest');
 				model.save(callback);
 			});
 
 			it('sets the specified callback', ()=>{
-				expect(options.callback).to.equal(callback);
+				expect(spy_sendRequest.args[0][0].callback).to.equal(callback);
 			});
 			it('sets model data as parameters', ()=>{
 				let data = {};
 				data.task = model.attributes;
-				expect(options.data).to.eql(data);
+				expect(spy_sendRequest.args[0][0].data).to.eql(data);
 			});
 			it('sets proper method for new model', ()=>{
-				expect(options.method).to.equal('POST');
+				expect(spy_sendRequest.args[0][0].method).to.equal('POST');
 			});
 			it('sets url', ()=>{
-				expect(options.url).to.equal('/test_models');
+				expect(spy_sendRequest.args[0][0].url).to.equal('/test_models');
 			});
 		});
 
