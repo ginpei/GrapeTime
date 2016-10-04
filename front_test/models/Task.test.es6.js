@@ -103,4 +103,30 @@ describe('models/Task', ()=>{
 			expect(model.children).to.equal(model.get('children'));
 		});
 	});
+
+	describe('total_spent_time', ()=>{
+		beforeEach(()=>{
+			model.set('spent_time', 111);
+			model.set('children', [
+				{
+					children: [
+						{
+							estimate_time: 0,
+							name: 'ground child',
+							necessary_time: 0,
+							spent_time: 1,
+						},
+					],
+					estimate_time: 0,
+					name: 'child',
+					necessary_time: 0,
+					spent_time: 11,
+				},
+			]);
+		});
+
+		it('returns the sum of spent_time', ()=>{
+			expect(model.total_spent_time).to.equal(123);
+		});
+	});
 });
