@@ -59,12 +59,24 @@ StrictAttributesModel.allowOmittingAttributes = false;
 
 describe('bases/Model', ()=>{
 	let model;
+	let xhrSpy;
+	let xhrRequests;
 
 	beforeEach(()=>{
+		xhrRequests = [];
+		xhrSpy = sinon.useFakeXMLHttpRequest();
+		xhrSpy.onCreate = (request)=>{
+			xhrRequests.push(request);
+		};
+
 		model = new TestModel();
 		model.getCSRFToken = function() {
 			return '';
 		};
+	});
+
+	afterEach(()=>{
+		xhrSpy.restore();
 	});
 
 	describe('Constructor', ()=>{
@@ -188,18 +200,9 @@ describe('bases/Model', ()=>{
 		});
 
 		describe('data', ()=>{
-			let xhr;
-			let requests;
 			beforeEach(()=>{
-				requests = [];
-				xhr = sinon.useFakeXMLHttpRequest();
-				xhr.onCreate = (request)=>{
-					requests.push(request);
-				};
-
 				model.save();
-
-				requests.shift().respond(200, {}, JSON.stringify({
+				xhrRequests.shift().respond(200, {}, JSON.stringify({
 					data: {
 						id: 123,
 						name: 'foo',
