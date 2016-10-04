@@ -129,4 +129,30 @@ describe('models/Task', ()=>{
 			expect(model.total_spent_time).to.equal(123);
 		});
 	});
+
+	describe('total_necessary_time', ()=>{
+		beforeEach(()=>{
+			model.set('necessary_time', 111);
+			model.set('children', [
+				{
+					children: [
+						{
+							estimate_time: 0,
+							name: 'ground child',
+							necessary_time: 0,
+							necessary_time: 1,
+						},
+					],
+					estimate_time: 0,
+					name: 'child',
+					necessary_time: 0,
+					necessary_time: 11,
+				},
+			]);
+		});
+
+		it('returns the sum of necessary_time', ()=>{
+			expect(model.total_necessary_time).to.equal(123);
+		});
+	});
 });
