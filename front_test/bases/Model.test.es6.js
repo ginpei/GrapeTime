@@ -1,4 +1,6 @@
 let expect = require('chai').expect;
+global.XMLHttpRequest = function(){};  // have sinon find the constructor
+let sinon = require('sinon');
 
 import Model from '../../app/assets/javascripts/bases/Model.es6.js';
 
@@ -60,6 +62,9 @@ describe('bases/Model', ()=>{
 
 	beforeEach(()=>{
 		model = new TestModel();
+		model.getCSRFToken = function() {
+			return '';
+		};
 	});
 
 	describe('Constructor', ()=>{
@@ -183,24 +188,23 @@ describe('bases/Model', ()=>{
 		});
 
 		describe('data', ()=>{
+			let xhr;
+			let requests;
 			beforeEach(()=>{
-				model._sendRequest = (o)=>{
-					let xhr = {
-						addEventListener: function(type, listener) {
-							xhr.responseText = JSON.stringify({
-								data: {
-									id: 123,
-									name: 'foo',
-								},
-							});
-
-							let event = {};
-							listener(event);
-						},
-					};
-					return xhr;
+				requests = [];
+				xhr = sinon.useFakeXMLHttpRequest();
+				xhr.onCreate = (request)=>{
+					requests.push(request);
 				};
+
 				model.save();
+
+				requests.shift().respond(200, {}, JSON.stringify({
+					data: {
+						id: 123,
+						name: 'foo',
+					},
+				}));
 			});
 
 			it('updates model attributes according to the response', ()=>{
