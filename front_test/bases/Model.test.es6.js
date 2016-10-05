@@ -168,27 +168,20 @@ describe('bases/Model', ()=>{
 		});
 
 		describe('options for an existing record', ()=>{
-			let options;
+			let spy_sendRequest;
 
 			beforeEach(()=>{
 				model.set('id', 123);
-				model._sendRequest = (o)=>{
-					options = o;
-					let xhr = {
-						addEventListener: function(type, listener) {
-						},
-					};
-					return xhr;
-				};
+				spy_sendRequest = sinon.spy(model, '_sendRequest');
 				model.save();
 			});
 
 			it('sets proper method for existing model', ()=>{
-				expect(options.method).to.equal('PATCH');
+				expect(spy_sendRequest.args[0][0].method).to.equal('PATCH');
 			});
 
 			it('sets url', ()=>{
-				expect(options.url).to.equal('/test_models/123');
+				expect(spy_sendRequest.args[0][0].url).to.equal('/test_models/123');
 			});
 		});
 
