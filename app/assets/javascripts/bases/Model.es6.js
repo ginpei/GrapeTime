@@ -184,10 +184,6 @@ class Model {
 	save(callback) {
 		let options = this._createSaveOptions(callback);
 		let xhr = this._sendRequest(options);
-		xhr.addEventListener('load', (event)=>{
-			let attr = JSON.parse(xhr.responseText).data;
-			this.set(attr);
-		});
 	}
 
 	/**
@@ -219,12 +215,14 @@ class Model {
 
 		let xhr = this._createXhr();
 
-		xhr.onload = function(event) {
+		xhr.addEventListener('load', (event)=>{
+			let attr = JSON.parse(xhr.responseText).data;
+			this.set(attr);
 			options.callback(xhr, event);
-		};
-		xhr.onerror = function(event) {
+		});
+		xhr.addEventListener('error', (event)=>{
 			options.callback(xhr, event);
-		};
+		});
 
 		xhr.open(options.method, options.url);
 		xhr.setRequestHeader('Content-Type', 'application/json');

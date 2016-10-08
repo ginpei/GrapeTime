@@ -186,8 +186,11 @@ describe('bases/Model', ()=>{
 		});
 
 		describe('data', ()=>{
+			let updatedId;
 			beforeEach(()=>{
-				model.save();
+				model.save((xhr, event)=>{
+					updatedId = model.id;
+				});
 				xhrRequests.shift().respond(200, {}, JSON.stringify({
 					data: {
 						id: 123,
@@ -196,8 +199,8 @@ describe('bases/Model', ()=>{
 				}));
 			});
 
-			it('updates model attributes according to the response', ()=>{
-				expect(model.attributes.id).to.equal(123);
+			it('updates model attributes according to the response before calling the callback', ()=>{
+				expect(updatedId).to.equal(123);
 				expect(model.attributes.name).to.equal('foo');
 			});
 		});
