@@ -118,7 +118,7 @@ class TaskItem extends React.Component {
 		});
 	}
 
-	taskNewChildForm_onSave(child) {
+	taskNewChildForm_onSave(event, child) {
 		let task = this.state.task;
 		task.children.push(child);
 		this.setState({
