@@ -1,5 +1,9 @@
 class MiscController < ApplicationController
   def home
+    if login_user
+      @tasks = login_user.tasks.select{|t|not t.parent_id}
+      @tasks_json = @tasks.map{|t|t.to_family}.to_json
+    end
   end
 
   def login

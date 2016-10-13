@@ -1,9 +1,20 @@
 h1 GrapeTime
 
+p#notice = notice
+
 - if login_user
 	p Welcome #{login_user.name}!
 	p
 		= link_to 'Log out', logout_path
+
+	h2 Listing tasks
+
+	div#TaskListArea
+
+	script#tasks_data(type="text/x-json")
+		= @tasks_json.html_safe
+	script
+		| window.Rails.tasks.index();
 - else
 	p
 		a(href="#{login_path}") Log in
