@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   # Make sure the user is logged in
   def auth
     unless login_user
+      # TODO: support JSON format
       render status: :unauthorized, text: 'Need to log in'
     end
   end
