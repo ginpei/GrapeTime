@@ -134,6 +134,7 @@ Task.attributeTypes = {
 	parent_id: Model.AttributeTypes.any,  // FIXME: to accept undefined or number
 	spent_time: Model.AttributeTypes.number,
 	updated_at: Model.AttributeTypes.instanceOf(Date, { optional: true }),
+	user_id: Model.AttributeTypes.number.optional,
 };
 
 Task.allowUndefinedAttributes = false;

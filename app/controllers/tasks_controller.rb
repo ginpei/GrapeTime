@@ -17,6 +17,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = login_user.id
 
     if @task.save
       render json: { data: @task.to_family }
