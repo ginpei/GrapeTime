@@ -2,7 +2,11 @@ User.create([
   {
     id: 1,
     name: 'Alice',
-  }
+  },
+  {
+    id: 2,
+    name: 'Bob',
+  },
 ])
 
 Task.create([
@@ -80,6 +84,11 @@ Task.create([
     name: 'task 2-2-1',
     parent_id: 220,
     user_id: 1,
+  },
+  {
+    id: 2100,
+    name: 'Bob\'s task',
+    user_id: 2,
   },
 ])
 

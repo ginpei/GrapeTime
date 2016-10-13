@@ -7,7 +7,8 @@ class MiscController < ApplicationController
   end
 
   def login
-    session[:user_id] = 1
+    # FIXME
+    session[:user_id] = params[:id]
     redirect_to root_path
   end
 

@@ -16,5 +16,8 @@ p#notice = notice
 	script
 		| window.Rails.tasks.index();
 - else
-	p
-		a(href="#{login_path}") Log in
+	ul
+		li
+			a(href="#{login_path}?id=1") Log in as Alice
+		li
+			a(href="#{login_path}?id=2") Log in as Bob
