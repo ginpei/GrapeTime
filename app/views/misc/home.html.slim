@@ -1,4 +1,9 @@
 h1 GrapeTime
-ul
-	li
-		= link_to 'Tasks', tasks_path
+
+- if login_user
+	p Welcome #{login_user.name}!
+	p
+		= link_to 'Log out', logout_path
+- else
+	p
+		a(href="#{login_path}") Log in
