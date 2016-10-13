@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :login_user
 
+  # Make sure the user is logged in
+  def auth
+    unless login_user
+      render status: :unauthorized, text: 'Need to log in'
+    end
+  end
+
   def login_user
     @login_user ||= User.find(session[:user_id]) if session[:user_id]
   end
