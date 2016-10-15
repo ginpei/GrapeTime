@@ -1,8 +1,9 @@
 class MiscController < ApplicationController
   def home
     if login_user
-      @tasks = login_user.tasks.select{|t|not t.parent_id}
-      @tasks_json = @tasks.map{|t|t.to_family}.to_json
+      @tasks = login_user.tasks
+      @tasks_json = @tasks.select{|t|not t.parent_id}.map{|t|t.to_family}.to_json
+      @work_periods = @tasks.map{|t|t.work_periods}.flatten
     end
   end
 

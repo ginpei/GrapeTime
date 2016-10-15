@@ -7,6 +7,13 @@ p#notice = notice
 	p
 		= link_to 'Log out', logout_path
 
+	h2 Listing work periods
+
+	ul
+		- @work_periods.each do |w|
+			li
+				= "#{w.note} (#{w.task.name}) for #{w.duration}m"
+
 	h2 Listing tasks
 
 	div#TaskListArea

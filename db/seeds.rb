@@ -25,7 +25,7 @@ Task.create([
     id: 111,
     name: 'task 1-1-1',
     parent_id: 110,
-    spent_time: 1800,
+    spent_time: 1500,
     user_id: 1,
     estimate_time: 1800,
   },
@@ -47,6 +47,7 @@ Task.create([
     name: 'task 1-2-1',
     parent_id: 120,
     user_id: 1,
+    estimate_time: 1800,
   },
   {
     id: 200,
@@ -96,7 +97,19 @@ WorkPeriod.create([
   {
     task_id: 111,
     started_at: '2000-01-01 00:00:00',
-    finished_at: '2000-01-01 00:30:00',
+    finished_at: '2000-01-01 00:05:00',
     note: 'My first working',
+  },
+  {
+    task_id: 111,
+    started_at: '2000-01-01 00:10:00',
+    finished_at: '2000-01-01 00:30:00',
+    note: 'My second working',
+  },
+  {
+    task_id: 121,
+    started_at: '2000-01-01 00:30:00',
+    finished_at: '2000-01-01 01:00:00',
+    note: '',
   },
 ])
