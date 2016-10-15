@@ -2,6 +2,7 @@ require 'test_helper'
 
 class TasksControllerTest < ActionController::TestCase
   setup do
+    session[:user_id] = users(:one).id
     @task = tasks(:task_1)
   end
 
