@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
+  before_action :auth
   before_action :set_task, only: [:show, :edit, :update, :destroy, :start, :stop]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.where(parent_id: nil)
+    @tasks = login_user.tasks.select{|t|not t.parent_id}
     @tasks_json = @tasks.map{|t|t.to_family}.to_json
   end
 
@@ -17,6 +18,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = login_user.id
 
     if @task.save
       render json: { data: @task.to_family }

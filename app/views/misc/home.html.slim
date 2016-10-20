@@ -1,4 +1,30 @@
 h1 GrapeTime
-ul
-	li
-		= link_to 'Tasks', tasks_path
+
+p#notice = notice
+
+- if login_user
+	p Welcome #{login_user.name}!
+	p
+		= link_to 'Log out', logout_path
+
+	h2 Listing work periods
+
+	ul
+		- @work_periods.each do |w|
+			li
+				= "#{w.note} (#{w.task.name}) for #{w.duration}m"
+
+	h2 Listing tasks
+
+	div#TaskListArea
+
+	script#tasks_data(type="text/x-json")
+		= @tasks_json.html_safe
+	script
+		| window.Rails.tasks.index();
+- else
+	ul
+		li
+			a(href="#{login_path}?id=1") Log in as Alice
+		li
+			a(href="#{login_path}?id=2") Log in as Bob

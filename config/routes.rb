@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  # resources :users
   root 'misc#home'
+
+  get 'login' => 'misc#login'
+  get 'logout' => 'misc#logout'
 
   resources :work_periods
   resources :tasks, except: [:new, :edit] do
